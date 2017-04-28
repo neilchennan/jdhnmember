@@ -18,6 +18,8 @@ use frontend\models\ContactForm;
  */
 class SiteController extends Controller
 {
+    //chage default layout
+    //public $layout = "newlayout";
     /**
      * @inheritdoc
      */

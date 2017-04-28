@@ -3,9 +3,11 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
+            //changed it by neil
+            'dsn' => 'mysql:host=localhost;dbname=jdhnmember',
             'username' => 'root',
-            'password' => '',
+            //default pass for phpstudy mysql is root
+            'password' => 'root',
             'charset' => 'utf8',
         ],
         'mailer' => [

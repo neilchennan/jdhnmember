@@ -12,7 +12,7 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     //localization by Neil
-    'language'=>'zh-CN',
+    //'language'=>'zh-CN',
 
     'components' => [
         'request' => [
@@ -40,7 +40,7 @@ return [
             'errorAction' => 'site/error',
         ],
 
-        //modified by Neil,¿ªÆôurlÓÅ»¯
+        //modified by Neil,å¼€å¯urlä¼˜åŒ–
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

@@ -1,9 +1,9 @@
 RewriteEngine on
 
- # 如果是一个目录或者文件，就访问目录或文件
- RewriteCond %{REQUEST_FILENAME} !-D
+# 濡傛灉鏄竴涓洰褰曟垨鑰呮枃浠讹紝灏辫闂洰褰曟垨鏂囦欢
+RewriteCond %{REQUEST_FILENAME} !-d
 
- # 如果文件存在，就直接访问文件，不进行下面的RewriteRule
- RewriteCond %{REQUEST_FILENAME} !-F
+# 濡傛灉鏂囦欢瀛樺湪锛屽氨鐩存帴璁块棶鏂囦欢锛屼笉杩涜涓嬮潰鐨凴ewriteRule
+RewriteCond %{REQUEST_FILENAME} !-f
 
- RewriteRule . index.php
+RewriteRule . index.php

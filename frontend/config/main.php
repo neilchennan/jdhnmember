@@ -62,4 +62,21 @@ return [
         ],
     ],
     'params' => $params,
+
+    //added by Neil
+    'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+            'layout' => 'left-menu',//yii2-admin的导航菜单
+        ],
+    ],
+
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'site/*',//允许所有人访问 site 节点及其子节点
+            'admin/*',//允许所有人访问 admin 节点及其子节点
+            'gii/*',//允许所有人访问 gii 节点及其子节点
+        ]
+    ],
 ];

@@ -37,14 +37,25 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
+        //url优化
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+
     ],
     'params' => $params,
+
+    //added by Neil
+    'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+//            'layout' => 'left-menu',//yii2-admin的导航菜单
+        ],
+    ],
+
+
 ];

@@ -6,19 +6,26 @@
  * Time: 9:33
  */
 return [
-    'txt_yes' => 'ÊÇ',
-    'txt_no' => '·ñ',
-    'txt_sorry' => '¶Ô²»Æð',
-    'txt_company' => 'jdhn',
-    'txt_cn_website' => 'www.jdhn.top',
-    'txt_home' => 'Ö÷Ò³',
-    'txt_platform' => 'Æ½Ì¨',
-    'txt_description' => 'ÃèÊö',
-    'txt_platforms' => 'Æ½Ì¨ÁÐ±í',
+    'Home' => 'ä¸»é¡µ',
+    'About' => 'å…³äºŽ',
+    'Contact' => 'è”ç³»',
+    'Signup' => 'æ³¨å†Œ',
+    'Login' => 'ç™»å½•',
 
-    'txt_create' => 'ÐÂ½¨',
-    'txt_commit' => 'Ìá½»',
-    'txt_modify' => 'ÐÞ¸Ä',
-    'txt_delete' => 'É¾³ý',
-    'txt_update' => '¸üÐÂ',
+    'yes' => 'æ˜¯',
+    'no' => 'å¦',
+    'sorry' => 'å¯¹ä¸èµ·',
+    'company' => 'å…¬å¸',
+    'website' => 'ç½‘å€',
+    'platform' => 'å¹³å°',
+    'description' => 'æè¿°',
+    'platforms' => 'å¹³å°åˆ—è¡¨',
+
+    'jdhn' => 'äº¤å¤§çº¢å¨˜',
+
+    'create' => 'æ–°å»º',
+    'commit' => 'æäº¤',
+    'modify' => 'ä¿®æ”¹',
+    'delete' => 'åˆ é™¤',
+    'update' => 'æ›´æ–°',
 ];

@@ -12,7 +12,7 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     //localization by Neil
-    //'language'=>'zh-CN',
+    'language'=>'zh-CN',
 
     'components' => [
         'request' => [

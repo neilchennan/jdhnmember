@@ -39,14 +39,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
+        //modified by Neil,¿ªÆôurlÓÅ»¯
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            //'suffix' => '.html',
             'rules' => [
             ],
         ],
-        */
         //localization by Neil
         'i18n' => [
             'translations' => [

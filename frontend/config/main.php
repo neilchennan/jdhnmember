@@ -12,7 +12,7 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     //localization by Neil
-    'language'=>'zh-CN',
+//    'language'=>'zh-CN',
 
     'components' => [
         'request' => [
@@ -49,17 +49,18 @@ return [
             ],
         ],
         //localization by Neil
-        'i18n' => [
-            'translations' => [
-                'common' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    //'basePath' => '/messages',
-                    'fileMap' => [
-                        'common' => 'common.php',
-                    ],
-                ],
-            ],
-        ],
+//        'i18n' => [
+//            'translations' => [
+//                'common' => [
+//                    'class' => 'yii\i18n\PhpMessageSource',
+////                    'basePath' => '@common/messages',
+//                    'fileMap' => [
+//                        'common' => 'common.php',
+//                        'app' => 'app.php',
+//                    ],
+//                ],
+//            ],
+//        ],
     ],
     'params' => $params,
 
@@ -77,6 +78,7 @@ return [
             'site/*',//允许所有人访问 site 节点及其子节点
             'admin/*',//允许所有人访问 admin 节点及其子节点
             'gii/*',//允许所有人访问 gii 节点及其子节点
+            'qrxq2017-enroll/*'
         ]
     ],
 ];

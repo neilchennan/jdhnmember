@@ -39,6 +39,7 @@ AppAsset::register($this);
         ['label' => Yii::t('common', 'Home'), 'url' => ['/site/index']],
         ['label' => Yii::t('common', 'About'), 'url' => ['/site/about']],
         ['label' => Yii::t('common', 'Contact'), 'url' => ['/site/contact']],
+        ['label' => Yii::t('common', 'Qrxq2017'), 'url' => ['/qrxq2017-enroll']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => Yii::t('common', 'Signup'), 'url' => ['/site/signup']];
@@ -73,7 +74,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Jdhn <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

@@ -2,12 +2,15 @@
 
 namespace frontend\controllers;
 
+use frontend\models\Qrxq2017EnrollViewModel;
 use Yii;
 use common\models\Qrxq2017Enroll;
 use common\models\Qrxq2017EnrollSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+use common\helper\CommonHelper;
 
 /**
  * Qrxq2017EnrollController implements the CRUD actions for Qrxq2017Enroll model.
@@ -51,8 +54,13 @@ class Qrxq2017EnrollController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
+        $viewModel = new Qrxq2017EnrollViewModel($model);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+//            'model' => $this->findModel($id),
+            'model' => $viewModel
         ]);
     }
 
@@ -64,6 +72,11 @@ class Qrxq2017EnrollController extends Controller
     public function actionCreate()
     {
         $model = new Qrxq2017Enroll();
+        $model->loadDefaultValues();
+
+        $model->id = CommonHelper::createGuid();
+        $model->created_at = time();
+        $model->modified_at =  $model->created_at;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -83,6 +96,8 @@ class Qrxq2017EnrollController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        $model->modified_at = time();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

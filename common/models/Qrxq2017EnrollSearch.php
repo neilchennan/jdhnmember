@@ -18,7 +18,7 @@ class Qrxq2017EnrollSearch extends Qrxq2017Enroll
     public function rules()
     {
         return [
-            [['id', 'name', 'nickname', 'mobile', 'id_card_nun'], 'safe'],
+            [['id', 'name', 'nickname', 'mobile', 'id_card_num'], 'safe'],
             [['age', 'gender', 'created_at', 'modified_at'], 'integer'],
         ];
     }
@@ -69,7 +69,7 @@ class Qrxq2017EnrollSearch extends Qrxq2017Enroll
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'nickname', $this->nickname])
             ->andFilterWhere(['like', 'mobile', $this->mobile])
-            ->andFilterWhere(['like', 'id_card_nun', $this->id_card_nun]);
+            ->andFilterWhere(['like', 'id_card_num', $this->id_card_num]);
 
         return $dataProvider;
     }

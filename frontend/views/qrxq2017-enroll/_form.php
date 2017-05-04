@@ -14,7 +14,8 @@ use yii\widgets\ActiveForm;
 
 <!--    --><?//= $form->field($model, 'id')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+<!--    --><?//= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput() ?>
 
     <?= $form->field($model, 'nickname')->textInput(['maxlength' => true]) ?>
 
@@ -24,7 +25,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'mobile')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'id_card_nun')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'id_card_num')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

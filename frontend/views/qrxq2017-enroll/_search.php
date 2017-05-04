@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'mobile') ?>
 
-    <?php // echo $form->field($model, 'id_card_nun') ?>
+    <?php // echo $form->field($model, 'id_card_num') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 

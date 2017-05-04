@@ -5,6 +5,7 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Qrxq2017Enroll */
+/* @var $model frontend\models\Qrxq2017EnrollViewModel */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Qrxq2017 Enrolls'), 'url' => ['index']];
@@ -28,15 +29,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+//            'id',
             'name',
             'nickname',
             'age',
-            'gender',
+//            'gender',
+            'genderStr',
             'mobile',
-            'id_card_nun',
-            'created_at',
-            'modified_at',
+            'id_card_num',
+//            'created_at',
+//            'modified_at',
+            'createdAtStr',
+            'modifiedAtStr',
         ],
     ]) ?>
 

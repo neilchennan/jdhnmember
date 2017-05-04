@@ -15,9 +15,13 @@ return [
     'age' => '年龄',
     'gender' => '性别',
     'mobile' => '手机号',
-    'id_card_nun' => '身份证号',
+    'id_card_num' => '身份证号',
     'created_at' => '创建时间',
     'modified_at' => '最后修改时间',
+
+    'genderStr' => '性别字符串',
+    'createdAtStr' => '创建时间',
+    'modifiedAtStr' => '最后修改时间',
 
     'Save' => '保存',
 ];

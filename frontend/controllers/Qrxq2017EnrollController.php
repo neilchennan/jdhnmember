@@ -10,7 +10,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-use common\helper\CommonHelper;
+use common\helper\JdhnCommonHelper;
 
 /**
  * Qrxq2017EnrollController implements the CRUD actions for Qrxq2017Enroll model.
@@ -74,7 +74,7 @@ class Qrxq2017EnrollController extends Controller
         $model = new Qrxq2017Enroll();
         $model->loadDefaultValues();
 
-        $model->id = CommonHelper::createGuid();
+        $model->id = JdhnCommonHelper::createGuid();
         $model->created_at = time();
         $model->modified_at =  $model->created_at;
 

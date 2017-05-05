@@ -52,6 +52,9 @@ class Qrxq2017EnrollSearch extends Qrxq2017Enroll4View
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 5,
+            ],
         ]);
 
         $this->load($params);

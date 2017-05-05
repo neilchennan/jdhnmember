@@ -49,4 +49,11 @@ return [
     'Bachelor' => '学士',
 
     'Unknown' => '未知',
+
+    'First' => '首页',
+    'Prev' => '上一页',
+    'Next' => '下一页',
+    'Last' => '尾页',
+
+    'jdhn' => '交大红娘',
 ];

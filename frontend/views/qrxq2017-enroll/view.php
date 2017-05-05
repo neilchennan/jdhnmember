@@ -4,8 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Qrxq2017Enroll */
-/* @var $model frontend\models\Qrxq2017EnrollViewModel */
+/* @var $model common\models\Qrxq2017Enroll4View */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Qrxq2017 Enrolls'), 'url' => ['index']];
@@ -30,17 +29,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
 //            'id',
-            'name',
+            'applicant_role',
             'nickname',
-            'age',
-//            'gender',
-            'genderStr',
+            'gender',
+            'birth_year',
+            'school',
+            'highest_degree',
+            'company_major',
+            'hometown',
+            'height',
+            'contact',
+
+            'name',
             'mobile',
-            'id_card_num',
-//            'created_at',
-//            'modified_at',
-            'createdAtStr',
-            'modifiedAtStr',
+            'weixin_id',
+
+            'created_at',
+            'modified_at',
         ],
     ]) ?>
 

@@ -2,7 +2,8 @@
 
 namespace frontend\controllers;
 
-use frontend\models\Qrxq2017EnrollViewModel;
+use common\models\Qrxq2017Enroll4View;
+use common\models\Qrxq2017Enroll4ViewSearch;
 use Yii;
 use common\models\Qrxq2017Enroll;
 use common\models\Qrxq2017EnrollSearch;
@@ -39,6 +40,7 @@ class Qrxq2017EnrollController extends Controller
     public function actionIndex()
     {
         $searchModel = new Qrxq2017EnrollSearch();
+//        $searchModel = new Qrxq2017Enroll4ViewSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -56,7 +58,7 @@ class Qrxq2017EnrollController extends Controller
     {
         $model = $this->findModel($id);
 
-        $viewModel = new Qrxq2017EnrollViewModel($model);
+        $viewModel = new Qrxq2017Enroll4View($model);
 
         return $this->render('view', [
 //            'model' => $this->findModel($id),

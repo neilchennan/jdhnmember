@@ -24,41 +24,37 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
 //            'id',
-            'name',
+            'applicant_role',
+//            'name',
             'nickname',
-            'age',
-            [
-                //gender 格式化
-                //'class' => 'yii\grid\DataColumn',
-                'attribute' => 'gender',
-                'value' => function($model){
-                    return $model->gender == '1' ? Yii::t('common', 'Male'):Yii::t('common', 'Female');
-                },
-            ],
-             'mobile',
-             'id_card_num',
-            [
-                //created_at 格式化
-                //'class' => 'yii\grid\DataColumn',
-                'attribute' => 'created_at',
-                'value' => function($model){
-                    $dateStr = date("Y-m-d H:i:s",$model->created_at);
-                    return $dateStr;
-                },
-            ],
-            [
-                //created_at 格式化
-                //'class' => 'yii\grid\DataColumn',
-                'attribute' => 'modified_at',
-                'value' => function($model){
-                    $dateStr = date("Y-m-d H:i:s",$model->modified_at);
-                    return $dateStr;
-                },
-            ],
-
+            'gender',
+            'birth_year',
+            'school',
+            'hometown',
+            'highest_degree',
+//            'company_major',
+            'mobile',
+//            'weixin_id',
+            'created_at',
+            'modified_at',
             ['class' => 'yii\grid\ActionColumn'],
+//            [
+//                'class' => 'yii\grid\ActionColumn',
+//                'header' => Yii::t('app', 'Action'),
+//                'template' => '{view}{update}{password}{delete}',
+////                'headerOptions' => ['width' => '128', 'class' => 'padding-left-5px',],
+////                'contentOptions' => ['class' => 'padding-left-5px'],
+//                'buttons' => [
+//                    'password' => function ($url, $model, $key) {
+//                        return Html::a('<span class="glyphicon glyphicon-edit"></span>', $url, [
+//                            'title' => '修改密码',
+//                            'data-method' => 'post',
+//                            'data-pjax' => '0',
+//                        ]);
+//                    },
+//                ],
+//            ],
         ],
     ]); ?>
 </div>

@@ -94,7 +94,6 @@ class Qrxq2017EnrollViewModel extends Qrxq2017Enroll
     }
 
 //    public function get
-
 //  不需要以下代码，因为yii会自动加载ActiveRecord相关属性
 //    public function __get($property_name)              // 这里$name是属性名
 //    {

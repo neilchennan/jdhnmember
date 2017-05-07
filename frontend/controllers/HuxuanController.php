@@ -126,10 +126,11 @@ class HuxuanController extends Controller
         }
     }
 
-    protected function deteleHuxuanRecords($myNum){
+    protected function deteleHuxuanRecords($myNum, $myGender){
         //如果已存在记录，删除之
         $huxuansInDb = Huxuan::findAll([
             'from_num' => $myNum,
+            'gender' => $myGender,
         ]);
 
         if(sizeof($huxuansInDb) == 0) return;
@@ -213,8 +214,9 @@ class HuxuanController extends Controller
         }
 
         $my_num = $model->my_num;
+        $myGender = $model->my_gender;
 
-        $this->deteleHuxuanRecords($my_num);
+        $this->deteleHuxuanRecords($my_num, $myGender);
 
         $opp1_num = $model->opp_num_order1;
         $result1 = $this->huxuanSave($my_num, $opp1_num, $model->my_gender, 1);

@@ -23,6 +23,8 @@ return [
     'Huxuan {genderStr} from {fromNum} to {toNum} Save Successfully at {timeStr}!' =>  '记录保存成功: {genderStr} {fromNum} 选择了 {toNum} ,时间: {timeStr}',
     'Huxuan Successfully for {0}!' => '{0}选择成功!',
 
+    'TotalCount : {total_count} , Success : {success_count} , Fail : {fail_count} .' => '总计 : {total_count} , 成功 : {success_count} , 失败 : {fail_count} .',
+
     'Huxuans' => '互选列表',
     'Create Huxuan' => '新建互选信息',
 
@@ -67,6 +69,11 @@ return [
 
     'Factor' => '因子',
 
+    'Male Num' => '男嘉宾编号',
+    'Female Num' => '女嘉宾编号',
+    'Male Score' => '男选女得分',
+    'Female Score' => '女选男得分',
+    'Total Score' => '总得分',
 
     'Action' => '操作',
 

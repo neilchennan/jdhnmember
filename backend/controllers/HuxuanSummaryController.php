@@ -2,6 +2,9 @@
 
 namespace backend\controllers;
 
+use common\helper\JdhnCommonHelper;
+use common\models\Huxuan;
+use common\result\ActionResult;
 use Yii;
 use common\models\HuxuanSummary;
 use common\models\HuxuanSummarySearch;
@@ -119,6 +122,124 @@ class HuxuanSummaryController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     *
+     */
+    public function actionExecute(){
+        $huxuanList = Huxuan::find()->all();
+
+        $totalResult = new ActionResult();
+
+        foreach($huxuanList as $huxuan){
+            $result = $this->handleHuxuan($huxuan);
+            $totalResult->addSubResult($result);
+        }
+
+        if (!$totalResult->isIsSuccess()){
+            Yii::$app->session->setFlash('error', $totalResult->getMessage());
+        }
+        else {
+            Yii::$app->session->setFlash('success', $totalResult->getMessage());
+        }
+
+        $searchModel = new HuxuanSummarySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    protected function handleHuxuanMale(Huxuan $huxuan){
+        $summaryInDb = HuxuanSummary::findOne([
+            'male_num' => $huxuan->from_num,
+            'female_num' => $huxuan->to_num,
+        ]);
+
+        $nowTime = time();
+        $nowIimeStr = date("Y-m-d H:i:s",$nowTime);
+//        已存在
+        if(isset($summaryInDb)){
+            $summaryInDb->male_score = $huxuan->score;
+            if($summaryInDb->female_score > 0){
+                $summaryInDb->total_score = $summaryInDb->male_score + $summaryInDb->female_score;
+            }
+            else {
+                $summaryInDb->total_score = 0;
+            }
+            $summaryInDb->modified_at = $nowTime;
+
+            if (!$summaryInDb->save()){
+                return new ActionResult(false, Yii::t('app', 'HuxuanSummary update failed.'));
+            }
+            return new ActionResult(true, Yii::t('app', 'HuxuanSummary update successfully!'));
+        }
+
+//        不存在，新建
+        $newSummary = new HuxuanSummary([
+            'id' => JdhnCommonHelper::createGuid(),
+            'male_num' => $huxuan->from_num,
+            'female_num' => $huxuan->to_num,
+            'male_score' => $huxuan->score,
+            'created_at' => $nowTime,
+            'modified_at' => $nowTime,
+        ]);
+        if (!$newSummary->save()){
+            return new ActionResult(false, Yii::t('app', 'HuxuanSummary created failed.'));
+        }
+        return new ActionResult(true, Yii::t('app', 'HuxuanSummary created successfully!'));
+    }
+
+    protected function handleHuxuanFemale(Huxuan $huxuan){
+        $summaryInDb = HuxuanSummary::findOne([
+            'male_num' => $huxuan->to_num,
+            'female_num' => $huxuan->from_num,
+        ]);
+
+        $nowTime = time();
+        $nowIimeStr = date("Y-m-d H:i:s",$nowTime);
+//        已存在
+        if(isset($summaryInDb)){
+            $summaryInDb->female_score = $huxuan->score;
+            if($summaryInDb->male_score > 0){
+                $summaryInDb->total_score = $summaryInDb->male_score + $summaryInDb->female_score;
+            }
+            else {
+                $summaryInDb->total_score = 0;
+            }
+            $summaryInDb->modified_at = $nowTime;
+
+            if (!$summaryInDb->save()){
+                return new ActionResult(false, Yii::t('app', 'HuxuanSummary update failed.'));
+            }
+            return new ActionResult(true, Yii::t('app', 'HuxuanSummary update successfully!'));
+        }
+
+//        不存在，新建
+        $newSummary = new HuxuanSummary([
+            'id' => JdhnCommonHelper::createGuid(),
+            'male_num' => $huxuan->to_num,
+            'female_num' => $huxuan->from_num,
+            'female_score' => $huxuan->score,
+            'created_at' => $nowTime,
+            'modified_at' => $nowTime,
+        ]);
+        if (!$newSummary->save()){
+            return new ActionResult(false, Yii::t('app', 'HuxuanSummary created failed.'));
+        }
+        return new ActionResult(true, Yii::t('app', 'HuxuanSummary created successfully!'));
+    }
+
+    protected function handleHuxuan(Huxuan $huxuan){
+        if ($huxuan->gender == 1){
+            return $this->handleHuxuanMale($huxuan);
+        }
+        else {
+            return $this->handleHuxuanFemale($huxuan);
         }
     }
 }

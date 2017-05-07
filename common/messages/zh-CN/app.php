@@ -13,6 +13,9 @@ return [
     'Huxuan Score Factors' => '互选因子列表',
     'Create Huxuan Score Factor' => '新建互选因子',
 
+    'Huxuan Summaries' => '互选结果汇总列表',
+    'Execute Huxuan Summary' => '执行互选结果统计',
+
     'Find Duplicated Huxuan Score Factor.' => '已有重复的互选因子',
     'Huxuan {0} from {1} to {2} at {3}.' => '{0} {1} 选择了 {2} ,时间: {3}',
     'Huxuan {genderStr} from {fromNum} to {toNum} at {timeStr}.' => '{genderStr} {fromNum} 选择了 {toNum} ,时间: {timeStr}',

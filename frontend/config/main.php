@@ -78,7 +78,8 @@ return [
             'site/*',//允许所有人访问 site 节点及其子节点
             'admin/*',//允许所有人访问 admin 节点及其子节点
             'gii/*',//允许所有人访问 gii 节点及其子节点
-            'qrxq2017-enroll/*'
+            'qrxq2017-enroll/*',
+            'huxuan/*'
         ]
     ],
 ];

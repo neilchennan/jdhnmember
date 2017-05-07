@@ -12,6 +12,7 @@ return [
     'Signup' => '注册',
     'Login' => '登录',
     'Qrxq2017' => '2017千人相亲',
+    'Huxuan' => '互选',
 
     'Male' => '男',
     'Female' => '女',

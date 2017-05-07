@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\CustumerCreateForm */
+/* @var $model frontend\models\CustomerCreateForm */
 
 $this->title = Yii::t('app', 'Input My Favorite');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Huxuans'), 'url' => ['index']];

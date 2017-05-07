@@ -2,6 +2,9 @@
 
 namespace frontend\controllers;
 
+use common\helper\JdhnCommonHelper;
+use common\models\HuxuanScoreFactor;
+use common\result\ActionResult;
 use frontend\models\CustomerCreateForm;
 use Yii;
 use common\models\Huxuan;
@@ -123,27 +126,128 @@ class HuxuanController extends Controller
         }
     }
 
+    protected function deteleHuxuanRecords($myNum){
+        //如果已存在记录，删除之
+        $huxuansInDb = Huxuan::findAll([
+            'from_num' => $myNum,
+        ]);
+
+        if(sizeof($huxuansInDb) == 0) return;
+        foreach($huxuansInDb as $huxuan){
+            $huxuan->delete();
+        }
+    }
+
+    protected function huxuanSave($myNum, $oppNum, $myGender, $order){
+        if (!isset($myNum) || empty($myNum)){
+            return new ActionResult(false, 'from num not set');
+        }
+        if (!isset($oppNum) || empty($oppNum)){
+            return new ActionResult(false, 'to num not set');
+        }
+        if (!isset($myGender) || empty($myGender)){
+            return new ActionResult(false, '$myGender not set');
+        }
+        if (!isset($order) || empty($order)){
+            return new ActionResult(false, '$order not set');
+        }
+        $genderStr = JdhnCommonHelper::getGenderByIntValue($myGender);
+        $nowTime = time();
+        $nowIimeStr = date("Y-m-d H:i:s",$nowTime);
+
+        $factorInDb = HuxuanScoreFactor::findOne([
+            'gender' => $myGender,
+            'order' => $order,
+        ]);
+        if (!isset($factorInDb) || empty($factorInDb)){
+            return new ActionResult(false, Yii::t('app', 'Huxuan Factor not found.'));
+        }
+
+        $my_score_with_opp = $factorInDb->factor;
+
+        $descriptionStr = Yii::t('app', 'Huxuan {genderStr} from {fromNum} to {toNum} at {timeStr}.',[
+            'genderStr' => $genderStr,
+            'fromNum' => $myNum,
+            'toNum' => $oppNum,
+            'timeStr' => $nowIimeStr
+        ]);
+
+        $newHuxuanInstance = new Huxuan([
+            'from_num' => $myNum,
+            'to_num' => $oppNum,
+            'order' => $order,
+            'gender' => $myGender,
+            'score' => $my_score_with_opp,
+            'created_at' => $nowTime,
+            'modified_at' => $nowTime,
+            'description' =>  $descriptionStr,
+        ]);
+        $newHuxuanInstance->id = JdhnCommonHelper::createGuid();
+        if(!$newHuxuanInstance->save()){
+            return new ActionResult(false, Yii::t('app', 'Huxuan {genderStr} from {fromNum} to {toNum} Save Failed at {timeStr}.', [
+                'genderStr' => $genderStr,
+                'fromNum' => $myNum,
+                'toNum' => $oppNum,
+                'timeStr' => $nowIimeStr
+            ]));
+        }
+        return new ActionResult(true, Yii::t('app', 'Huxuan {genderStr} from {fromNum} to {toNum} Save Successfully at {timeStr}!', [
+            'genderStr' => $genderStr,
+            'fromNum' => $myNum,
+            'toNum' => $oppNum,
+            'timeStr' => $nowIimeStr
+        ]));
+    }
+
     /**
      * @return string
      */
     public function actionCustomerCreate(){
         $model = new CustomerCreateForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        //如果不是post方法，返回页面
+        if (!$model->load(Yii::$app->request->post())){
+            return $this->render('customerCreate', [
+                'model' => $model,
+            ]);
+        }
 
+        $my_num = $model->my_num;
 
+        $this->deteleHuxuanRecords($my_num);
 
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+        $opp1_num = $model->opp_num_order1;
+        $result1 = $this->huxuanSave($my_num, $opp1_num, $model->my_gender, 1);
+        if (!$result1){
+            Yii::$app->session->setFlash('error', $result1->getMessage());
+            return $this->render('customerCreate', [
+                'model' => $model,
+            ]);
+        }
 
-                return $this->goHome();
-            } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+        $opp2_num = $model->opp_num_order2;
+        if (isset($opp2_num) && !empty($opp2_num)){
+            $result2 = $this->huxuanSave($my_num, $opp2_num, $model->my_gender, 2);
+            if (!$result2){
+                Yii::$app->session->setFlash('error', $result2->getMessage());
+                return $this->render('customerCreate', [
+                    'model' => $model,
+                ]);
             }
         }
 
-        return $this->render('customerCreate', [
-            'model' => $model,
-        ]);
+        $opp3_num = $model->opp_num_order3;
+        if (isset($opp3_num) && !empty($opp3_num)){
+            $result3 = $this->huxuanSave($my_num, $opp3_num, $model->my_gender, 3);
+            if (!$result3){
+                Yii::$app->session->setFlash('error', $result3->getMessage());
+                return $this->render('customerCreate', [
+                    'model' => $model,
+                ]);
+            }
+        }
+
+        Yii::$app->session->setFlash('success', Yii::t('app', 'Huxuan Successfully for {0}!', $my_num));
+        return $this->redirect(['index']);
     }
 }

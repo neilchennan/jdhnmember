@@ -55,6 +55,7 @@ class CustomerCreateForm extends Model
     {
         return [
             [['my_nickname', 'my_num', 'opp_num_order1', 'my_gender', 'my_mobile_last4'], 'required'],
+            [['opp_num_order1', 'opp_num_order2', 'opp_num_order3'], 'string'],
             [['my_mobile_last4'], 'integer',  'min' => 0001, 'max' => 9999],
         ];
     }

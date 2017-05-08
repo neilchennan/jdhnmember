@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\helper\JdhnCommonHelper;
 use Yii;
 use common\models\Activity;
 use common\models\ActivitySearch;
@@ -65,7 +66,19 @@ class ActivityController extends Controller
     {
         $model = new Activity();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $model->loadDefaultValues();
+        $model->id = JdhnCommonHelper::createGuid();
+        $model->created_at = time();
+        $model->modified_at =  $model->created_at;
+
+        //如果不是post方法，返回页面
+        if (!$model->load(Yii::$app->request->post())) {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+
+        if ($model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -83,6 +96,9 @@ class ActivityController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        $model->start_time = date('Y-m-d H:i', $model->start_time);
+        $model->end_time = date('Y-m-d H:i', $model->end_time);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

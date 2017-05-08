@@ -38,9 +38,19 @@ class Activity extends \yii\db\ActiveRecord
     {
         return [
             [['id'], 'required'],
-            [['start_time', 'end_time', 'is_default', 'created_at', 'modified_at'], 'integer'],
+            [['is_default', 'created_at', 'modified_at'], 'integer'],
             [['id', 'activity_name', 'created_by', 'modified_by'], 'string', 'max' => 45],
             [['activity_description', 'activity_address', 'activity_traffic', 'description'], 'string', 'max' => 255],
+            //do not need check
+//            [['start_time', 'end_time', ], 'date','format' => 'Y-m-d H:i:s'],
+//            [['start_time', 'end_time', ], 'datetime'],
+            //使用filter来处理表单中时间的格式
+            ['start_time',  'filter', 'filter' => function(){
+                return strtotime($this->start_time);
+            }],
+            ['end_time',  'filter', 'filter' => function(){
+                return strtotime($this->end_time);
+            }],
         ];
     }
 

@@ -7,6 +7,16 @@ return [
 
 
     'components' => [
+        //added by Neil, change date format
+        'formatter' => [
+            'dateFormat' => 'yyyy-MM-dd',
+//            'datetimeFormat' => 'yyyy-MM-dd HH:mm:ss',
+            'datetimeFormat' => 'yyyy-MM-dd HH:mm',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+            'currencyCode' => 'CNY',
+        ],
+        //added finish
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],

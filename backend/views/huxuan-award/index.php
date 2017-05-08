@@ -4,20 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\HuxuanSummarySearch */
+/* @var $searchModel common\models\HuxuanAwardSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Huxuan Summaries');
+$this->title = Yii::t('app', 'Huxuan Awards');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="huxuan-summary-index">
+<div class="huxuan-award-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Execute Huxuan Summary Now'), ['execute'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('app', 'Huxuan Awards'), ['/huxuan-award/index'], ['class' => 'btn btn-primary']) ?>
+<!--        --><?//= Html::a(Yii::t('app', 'Create Huxuan Award'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -28,15 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 //            'id',
             'male_num',
-            'male_order',
-            'male_score',
             'female_num',
-            'female_order',
-            'female_score',
-             'total_score',
-            // 'description',
-            // 'created_at',
-            // 'modified_at',
+            'total_score',
 
             [
                 'class' => 'yii\grid\ActionColumn',

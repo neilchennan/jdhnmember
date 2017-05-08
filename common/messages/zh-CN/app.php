@@ -14,7 +14,9 @@ return [
     'Create Huxuan Score Factor' => '新建互选因子',
 
     'Huxuan Summaries' => '互选结果汇总列表',
-    'Execute Huxuan Summary' => '执行互选结果统计',
+    'Execute Huxuan Summary Now' => '立即执行互选结果统计',
+
+    'Huxuan Awards' => '互选授奖列表',
 
     'Activities' =>  '活动列表',
     'Create Activity' => '新建活动',
@@ -85,6 +87,8 @@ return [
 
     'Male Num' => '男嘉宾编号',
     'Female Num' => '女嘉宾编号',
+    'Male Order' => '男选女顺位',
+    'Female Order' => '女选男顺位',
     'Male Score' => '男选女得分',
     'Female Score' => '女选男得分',
     'Total Score' => '总得分',

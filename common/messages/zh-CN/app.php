@@ -16,6 +16,9 @@ return [
     'Huxuan Summaries' => '互选结果汇总列表',
     'Execute Huxuan Summary' => '执行互选结果统计',
 
+    'Activities' =>  '活动列表',
+    'Create Activity' => '新建活动',
+
     'Find Duplicated Huxuan Score Factor.' => '已有重复的互选因子',
     'Huxuan {0} from {1} to {2} at {3}.' => '{0} {1} 选择了 {2} ,时间: {3}',
     'Huxuan {genderStr} from {fromNum} to {toNum} at {timeStr}.' => '{genderStr} {fromNum} 选择了 {toNum} ,时间: {timeStr}',
@@ -60,6 +63,17 @@ return [
     'contact' => '愿意让小伙伴知道的联系方式',
     'height' => '身高(cm)',
     'weixin_id' => '微信号',
+
+    'Created By' => '创建者',
+    'Modified By' => '最后修改者',
+
+    'Activity Name' => '活动名称',
+    'Activity Description' => '活动描述',
+    'Start Time' => '开始时间',
+    'End Time' => '结束时间',
+    'Is Default' => '是否默认',
+    'Activity Address' => '活动地址',
+    'Activity Traffic' => '活动交通',
 
     'From Num' => '选择方编号',
     'To Num' => '被选择方编号',

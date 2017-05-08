@@ -18,6 +18,9 @@ return [
 
     'Huxuan Awards' => '互选授奖列表',
 
+    'Huxuan Starts' => '万人迷列表',
+    'Execute Huxuan Starts' => '执行万人迷统计',
+
     'Activities' =>  '活动列表',
     'Create Activity' => '新建活动',
 
@@ -92,6 +95,10 @@ return [
     'Male Score' => '男选女得分',
     'Female Score' => '女选男得分',
     'Total Score' => '总得分',
+
+    'Num' => '编号',
+    'Times' => '次数',
+    'Rank' => '排名',
 
     'Action' => '操作',
 

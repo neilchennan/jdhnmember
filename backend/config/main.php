@@ -57,5 +57,10 @@ return [
         ],
     ],
 
-
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'site/*',//允许所有人访问 site 节点及其子节点
+        ]
+    ],
 ];

@@ -12,21 +12,6 @@ use Yii;
 
 class JdhnCommonHelper
 {
-    public static function getGender_map(){
-        return [
-            1 => Yii::t('app', 'Male'),
-            2 => Yii::t('app', 'Female'),
-        ];
-    }
-
-    public static function getHighestDegree_map(){
-        return [
-            1 => Yii::t('app', 'Doctor'),
-            2 => Yii::t('app', 'Master'),
-            3 => Yii::t('app', 'Bachelor'),
-        ];
-    }
-
     public static function createGuid()
     {
         if (function_exists('com_create_guid')){
@@ -43,76 +28,114 @@ class JdhnCommonHelper
     }
 
     //region 性别int和string值互换查询
+    public static function getGender_map(){
+        return [
+            1 => Yii::t('app', 'Male'),
+            2 => Yii::t('app', 'Female'),
+        ];
+    }
+    public static function getGender_reverse_map(){
+        return [
+            Yii::t('app', 'Male') => 1,
+            Yii::t('app', 'Female') => 2,
+        ];
+    }
     public static function getGenderByIntValue($intValue){
         if (!isset($intValue)){
             return null;
         }
-        $genderArr = [
-            1 => Yii::t('app', 'Male'),
-            2 => Yii::t('app', 'Female'),
-        ];
-        return $genderArr[$intValue];
+        return JdhnCommonHelper::getGender_map()[$intValue];
     }
     public static function getGenderByStrValue($intValue){
         if (!isset($intValue)){
             return null;
         }
-        $genderArr = [
-            Yii::t('app', 'Male') => 1 ,
-            Yii::t('app', 'Female') => 2,
-        ];
-        return $genderArr[$intValue];
+        return JdhnCommonHelper::getGender_reverse_map()[$intValue];
     }
     //endregion
 
     //region 报名者身份int和string值互换查询
-    public static function getApplicantRoleByIntValue($intValue){
-        if (!isset($intValue)){
-            return null;
-        }
-        $applicantRoleArr = [
+    public static function getApplicationRole_map(){
+        return [
             0 => Yii::t('app', 'Volunteer'),
             1 => Yii::t('app', 'Male Customer'),
             2 => Yii::t('app', 'Female Customer'),
         ];
-        return $applicantRoleArr[$intValue];
+    }
+    public static function getApplicationRole_reverse_map(){
+        return [
+            Yii::t('app', 'Volunteer')  => 0,
+            Yii::t('app', 'Male Customer') => 1,
+            Yii::t('app', 'Female Customer') => 2,
+        ];
+    }
+    public static function getApplicantRoleByIntValue($intValue){
+        if (!isset($intValue)){
+            return null;
+        }
+        return JdhnCommonHelper::getApplicationRole_map()[$intValue];
     }
     public static function getApplicantRoleByStrValue($inputVal){
         if (!isset($inputVal) || empty($inputVal)){
             return null;
         }
-
-        $applicantRoleArr = [
-            Yii::t('app', 'Volunteer')  => 0,
-            Yii::t('app', 'Male Customer') => 1,
-            Yii::t('app', 'Female Customer') => 2,
-        ];
-        return $applicantRoleArr[$inputVal];
+        return JdhnCommonHelper::getApplicationRole_reverse_map()[$inputVal];
     }
     //endregion
 
     //region 最高学历int和string值互换查询
-    public static function getHighestDegreeByIntValue($intValue){
-        if (!isset($intValue)){
-            return null;
-        }
-        $highestDegreeArr = [
+    public static function getHighestDegree_map(){
+        return [
             1 => Yii::t('app', 'Doctor'),
             2 => Yii::t('app', 'Master'),
             3 => Yii::t('app', 'Bachelor'),
         ];
-        return $highestDegreeArr[$intValue];
+    }
+    public static function getHighestDegree_reverse_map(){
+        return [
+            Yii::t('app', 'Doctor') => 1,
+            Yii::t('app', 'Master') => 2,
+            Yii::t('app', 'Bachelor') => 3,
+        ];
+    }
+    public static function getHighestDegreeByIntValue($intValue){
+        if (!isset($intValue)){
+            return null;
+        }
+        return JdhnCommonHelper::getHighestDegree_map()[$intValue];
     }
     public static function getHighestDegreeByStrValue($intValue){
         if (!isset($intValue)){
             return null;
         }
-        $highestDegreeArr = [
-            Yii::t('app', 'Doctor') => 1,
-            Yii::t('app', 'Master') => 2,
-            Yii::t('app', 'Bachelor') => 3,
+        return JdhnCommonHelper::getHighestDegree_reverse_map()[$intValue];
+    }
+    //endregion
+
+    //region enroll status 报名状态int和string值互换查询
+    public static function getEnrollStatus_map(){
+        return [
+            1 => Yii::t('app', 'Enroll Success'),
+            2 => Yii::t('app', 'Enroll Fail'),
         ];
-        return $highestDegreeArr[$intValue];
+    }
+    public static function getEnrollStatus_reverse_map(){
+        return [
+            Yii::t('app', 'Enroll Success') => 1,
+            Yii::t('app', 'Enroll Fail') => 2,
+        ];
+    }
+    public static function getEnrollStatusByIntValue($intValue){
+        if (!isset($intValue)){
+            return null;
+        }
+        return JdhnCommonHelper::getEnrollStatus_map()[$intValue];
+    }
+    public static function getEnrollStatusByStrValue($intValue){
+        if (!isset($intValue)){
+            return null;
+        }
+        return JdhnCommonHelper::getEnrollStatus_reverse_map()[$intValue];
     }
     //endregion
 

@@ -33,7 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'activity.activity_name',
                 'label' => Yii::t('app', 'Activity Name'),
             ],
-            'applicant_role',
+            [
+                'attribute' => 'applicant_role',
+                'value' => function ($model, $key, $index, $column) {
+                    return JdhnCommonHelper::getApplicantRoleByIntValue($model->applicant_role);
+                },
+                'filter' => JdhnCommonHelper::getApplicationRole_map(),
+            ],
             'nickname',
             'birth_year',
             // 'gender',
@@ -56,6 +62,13 @@ $this->params['breadcrumbs'][] = $this->title;
 //             'company_major',
              'hometown',
              'height',
+            [
+                'attribute' => 'status',
+                'value' => function ($model, $key, $index, $column) {
+                    return JdhnCommonHelper::getEnrollStatusByIntValue($model->status);
+                },
+                'filter' => JdhnCommonHelper::getEnrollStatus_map(),
+            ],
             // 'contact',
             // 'name',
             // 'mobile',

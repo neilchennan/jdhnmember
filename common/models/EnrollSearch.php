@@ -24,7 +24,7 @@ class EnrollSearch extends Enroll
     {
         return [
             [['id', 'activity_id', 'nickname', 'birth_year', 'school', 'company_major', 'hometown', 'contact', 'name', 'mobile', 'weixin_id', 'id_card_num'], 'safe'],
-            [['applicant_role', 'gender', 'highest_degree', 'height', 'created_at', 'modified_at'], 'integer'],
+            [['applicant_role', 'gender', 'highest_degree', 'height', 'created_at', 'modified_at', 'status'], 'integer'],
             //added by neil
             ['activity_name', 'safe'],
         ];
@@ -82,6 +82,7 @@ class EnrollSearch extends Enroll
             'gender' => $this->gender,
             'highest_degree' => $this->highest_degree,
             'height' => $this->height,
+            'status' => $this->status,
             'created_at' => $this->created_at,
             'modified_at' => $this->modified_at,
         ]);

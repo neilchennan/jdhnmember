@@ -134,4 +134,26 @@ class EnrollController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionSetStatus($id){
+        $model = $this->findModel($id);
+
+        return $this->render('setStatus', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionSetStatusCommit($id, $status){
+        $model = $this->findModel($id);
+        $model->status = $status;
+
+        if (!$model->save()){
+            Yii::$app->session->setFlash('error', Yii::t('app', 'Set Enroll Status Failed.'));
+        }
+        else {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Set Enroll Status Successfully!'));
+        }
+
+        return $this->redirect(['view', 'id' => $id]);
+    }
 }

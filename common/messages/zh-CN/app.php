@@ -137,4 +137,13 @@ return [
 
     'Yes' => '是',
     'No' => '否',
+
+    'Status' => '状态',
+    'Enroll Success' => '报名成功',
+    'Enroll Fail' => '报名失败',
+    'Remark' => '备注',
+    'Set Enroll Status' => '设置报名状态',
+    'Set Enroll Status {modelClass}: ' => '设置报名状态: {modelClass}',
+    'Set Enroll Status Successfully!' => '成功设置报名状态',
+    'Set Enroll Status Failed.' => '设置报名状态失败',
 ];

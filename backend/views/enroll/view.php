@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use common\helper\JdhnCommonHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Enroll */
@@ -23,20 +24,31 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a(Yii::t('app', 'Set Enroll Status'), ['set-status', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Return To List'), ['index'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'activity_id',
-            'applicant_role',
+//            'id',
+            [
+                'attribute' => 'status',
+                'value'=> JdhnCommonHelper::getEnrollStatusByIntValue($model->status),
+            ],
+            'activity.activity_name',
+            [
+                'attribute' => 'applicant_role',
+                'value'=> JdhnCommonHelper::getApplicantRoleByIntValue($model->applicant_role),
+            ],
             'nickname',
             'birth_year',
             'gender',
             'school',
-            'highest_degree',
+            [
+                'attribute' => 'highest_degree',
+                'value'=> JdhnCommonHelper::getHighestDegreeByIntValue($model->highest_degree),
+            ],
             'company_major',
             'hometown',
             'height',
@@ -45,8 +57,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'mobile',
             'weixin_id',
             'id_card_num',
-            'created_at',
-            'modified_at',
+            'created_at:datetime',
+            'modified_at:datetime',
         ],
     ]) ?>
 

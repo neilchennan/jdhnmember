@@ -25,6 +25,7 @@ use Yii;
  * @property string $id_card_num 身份证号
  * @property int $status 状态,1:报名成功,2:报名失败
  * @property string $remark 备注
+ * @property string $num 编号
  * @property int $created_at 创建时间
  * @property int $modified_at 修改时间
  *
@@ -49,7 +50,7 @@ class Enroll extends \yii\db\ActiveRecord
             [['id', 'activity_id', 'applicant_role', 'nickname', 'birth_year', 'gender', 'school', 'highest_degree', 'company_major', 'hometown', 'height', 'contact', 'name', 'mobile', 'weixin_id'], 'required'],
             [['applicant_role', 'gender', 'highest_degree', 'height', 'status', 'created_at', 'modified_at'], 'integer'],
             [['birth_year'], 'integer'],
-            [['id', 'activity_id', 'nickname', 'school', 'company_major', 'hometown', 'contact', 'name', 'mobile', 'weixin_id'], 'string', 'max' => 45],
+            [['id', 'activity_id', 'nickname', 'school', 'company_major', 'hometown', 'contact', 'name', 'mobile', 'weixin_id', 'num'], 'string', 'max' => 45],
             [['id_card_num'], 'string', 'max' => 18],
             [['remark'], 'string', 'max' => 255],
             [['activity_id'], 'exist', 'skipOnError' => true, 'targetClass' => Activity::className(), 'targetAttribute' => ['activity_id' => 'id']],
@@ -82,6 +83,7 @@ class Enroll extends \yii\db\ActiveRecord
             'id_card_num' => Yii::t('app', 'Id Card Num'),
             'status' => Yii::t('app', 'Status'),
             'remark' => Yii::t('app', 'Remark'),
+            'num' => Yii::t('app', 'Num'),
             'created_at' => Yii::t('app', 'Created At'),
             'modified_at' => Yii::t('app', 'Modified At'),
         ];

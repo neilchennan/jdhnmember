@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => JdhnCommonHelper::getGender_map(),
 //                'headerOptions' => ['width' => 100],
             ],
-             'school',
+//             'school',
             [
                 'attribute' => 'highest_degree',
                 'value' => function ($model, $key, $index, $column) {
@@ -74,6 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'mobile',
             // 'weixin_id',
             // 'id_card_num',
+            'num',
             // 'created_at',
             // 'modified_at',
 

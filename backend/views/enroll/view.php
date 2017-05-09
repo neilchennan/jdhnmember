@@ -57,6 +57,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'mobile',
             'weixin_id',
             'id_card_num',
+            [
+                'attribute' => 'status',
+                'value'=> JdhnCommonHelper::getEnrollStatusByIntValue($model->status),
+            ],
+            'remark',
+            'num',
             'created_at:datetime',
             'modified_at:datetime',
         ],

@@ -23,7 +23,7 @@ class EnrollSearch extends Enroll
     public function rules()
     {
         return [
-            [['id', 'activity_id', 'nickname', 'birth_year', 'school', 'company_major', 'hometown', 'contact', 'name', 'mobile', 'weixin_id', 'id_card_num'], 'safe'],
+            [['id', 'activity_id', 'nickname', 'birth_year', 'school', 'company_major', 'hometown', 'contact', 'name', 'mobile', 'weixin_id', 'id_card_num', 'remark', 'num'], 'safe'],
             [['applicant_role', 'gender', 'highest_degree', 'height', 'created_at', 'modified_at', 'status'], 'integer'],
             //added by neil
             ['activity_name', 'safe'],
@@ -98,6 +98,8 @@ class EnrollSearch extends Enroll
             ->andFilterWhere(['like', 'mobile', $this->mobile])
             ->andFilterWhere(['like', 'weixin_id', $this->weixin_id])
             ->andFilterWhere(['like', 'id_card_num', $this->id_card_num])
+            ->andFilterWhere(['like', 'remark', $this->remark])
+            ->andFilterWhere(['like', 'num', $this->num])
             //added by neil
             ->andFilterWhere(['like', 'activity.activity_name', $this->activity_name]);
 

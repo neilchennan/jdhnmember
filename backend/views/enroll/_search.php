@@ -47,6 +47,12 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'id_card_num') ?>
 
+    <?php // echo $form->field($model, 'status') ?>
+
+    <?php // echo $form->field($model, 'remark') ?>
+
+    <?php // echo $form->field($model, 'num') ?>
+
     <?php // echo $form->field($model, 'created_at') ?>
 
     <?php // echo $form->field($model, 'modified_at') ?>

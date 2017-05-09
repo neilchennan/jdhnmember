@@ -39,9 +39,9 @@ AppAsset::register($this);
         ['label' => Yii::t('common', 'Home'), 'url' => ['/site/index']],
         ['label' => Yii::t('common', 'About'), 'url' => ['/site/about']],
         ['label' => Yii::t('common', 'Contact'), 'url' => ['/site/contact']],
-        ['label' => Yii::t('common', 'Qrxq2017'), 'url' => ['/qrxq2017-enroll']],
-        ['label' => Yii::t('common', 'Huxuan'), 'url' => ['/huxuan']],
-        ['label' => Yii::t('app', 'Input My Favorite'), 'url' => ['/huxuan/customer-create']],
+//        ['label' => Yii::t('common', 'Qrxq2017'), 'url' => ['/qrxq2017-enroll']],
+//        ['label' => Yii::t('common', 'Huxuan'), 'url' => ['/huxuan']],
+//        ['label' => Yii::t('app', 'Input My Favorite'), 'url' => ['/huxuan/customer-create']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => Yii::t('common', 'Signup'), 'url' => ['/site/signup']];

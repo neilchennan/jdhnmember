@@ -21,6 +21,9 @@ return [
     'Huxuan Starts' => '万人迷列表',
     'Execute Huxuan Starts' => '执行万人迷统计',
 
+    'Enrolls' => '报名列表',
+    'Create Enroll' => '新建报名信息',
+
     'Activities' =>  '活动列表',
     'Create Activity' => '新建活动',
 
@@ -36,6 +39,8 @@ return [
     'Huxuans' => '互选列表',
     'Create Huxuan' => '新建互选信息',
 
+    'Activity ID' => '活动',
+
     'Input My Favorite' => '输入我的心动嘉宾',
     'My Nickname' => '我的昵称',
     'My Num' => '我的编号',
@@ -48,26 +53,26 @@ return [
     'id' => 'ID号',
     'ID' => 'ID号',
 
-    'name' => '姓名',
-    'nickname' => '昵称',
     'age' => '年龄',
     'gender' => '性别',
     'Gender' => '性别',
-    'school' => '就读或毕业学校',
-    'hometown' => '家乡',
-    'company_major' => '工作单位全称',
-    'mobile' => '手机号',
-    'id_card_num' => '身份证号',
-    'created_at' => '创建时间',
+
     'Created At' => '创建时间',
-    'modified_at' => '最后修改时间',
     'Modified At' => '最后修改时间',
-    'applicant_role' => '报名身份',
-    'highest_degree' => '最高学历',
-    'birth_year' => '出生年份',
-    'contact' => '愿意让小伙伴知道的联系方式',
-    'height' => '身高(cm)',
-    'weixin_id' => '微信号',
+
+    'Applicant Role' => '报名身份',
+    'Nickname' => '昵称',
+    'Highest Degree' => '最高学历',
+    'Birth Year' => '出生年份',
+    'School' => '就读或毕业学校',
+    'Company Major' => '工作单位全称',
+    'Hometown' => '家乡',
+    'Height' => '身高(cm)',
+    'Contact' => '愿意让小伙伴知道的联系方式',
+    'Name' => '姓名',
+    'Weixin ID' => '微信号',
+    'Mobile' => '手机号',
+    'Id Card Num' => '身份证号',
 
     'Created By' => '创建者',
     'Modified By' => '最后修改者',
@@ -106,6 +111,7 @@ return [
     'Update' => '更新',
     'Delete' => '删除',
     'Return To List' => '回到列表',
+    'Give up' => '放弃',
 
     'Male' => '男',
     'Female' => '女',

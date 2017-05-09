@@ -12,6 +12,21 @@ use Yii;
 
 class JdhnCommonHelper
 {
+    public static function getGender_map(){
+        return [
+            1 => Yii::t('app', 'Male'),
+            2 => Yii::t('app', 'Female'),
+        ];
+    }
+
+    public static function getHighestDegree_map(){
+        return [
+            1 => Yii::t('app', 'Doctor'),
+            2 => Yii::t('app', 'Master'),
+            3 => Yii::t('app', 'Bachelor'),
+        ];
+    }
+
     public static function createGuid()
     {
         if (function_exists('com_create_guid')){

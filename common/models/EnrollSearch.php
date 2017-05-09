@@ -96,13 +96,9 @@ class EnrollSearch extends Enroll
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'mobile', $this->mobile])
             ->andFilterWhere(['like', 'weixin_id', $this->weixin_id])
-            ->andFilterWhere(['like', 'id_card_num', $this->id_card_num]);
-
-        //added by neil
-        $query->andFilterWhere([
-            // other params
-            'activity.activity_name' => $this->activity_name,
-        ]);
+            ->andFilterWhere(['like', 'id_card_num', $this->id_card_num])
+            //added by neil
+            ->andFilterWhere(['like', 'activity.activity_name', $this->activity_name]);
 
         return $dataProvider;
     }

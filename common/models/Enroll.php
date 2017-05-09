@@ -48,11 +48,13 @@ class Enroll extends \yii\db\ActiveRecord
         return [
             [['id', 'activity_id', 'applicant_role', 'nickname', 'birth_year', 'gender', 'school', 'highest_degree', 'company_major', 'hometown', 'height', 'contact', 'name', 'mobile', 'weixin_id'], 'required'],
             [['applicant_role', 'gender', 'highest_degree', 'height', 'status', 'created_at', 'modified_at'], 'integer'],
-            [['birth_year'], 'safe'],
+            [['birth_year'], 'integer'],
             [['id', 'activity_id', 'nickname', 'school', 'company_major', 'hometown', 'contact', 'name', 'mobile', 'weixin_id'], 'string', 'max' => 45],
             [['id_card_num'], 'string', 'max' => 18],
             [['remark'], 'string', 'max' => 255],
             [['activity_id'], 'exist', 'skipOnError' => true, 'targetClass' => Activity::className(), 'targetAttribute' => ['activity_id' => 'id']],
+            //检查数据库不重复
+            ['nickname', 'unique', 'targetClass'=>self::className(), 'message' => Yii::t('app', 'This nickname is already used.')],
         ];
     }
 

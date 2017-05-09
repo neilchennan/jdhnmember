@@ -112,6 +112,7 @@ return [
     'Delete' => '删除',
     'Return To List' => '回到列表',
     'Give up' => '放弃',
+    'Submit' => '提交',
 
     'Male' => '男',
     'Female' => '女',
@@ -146,4 +147,11 @@ return [
     'Set Enroll Status {modelClass}: ' => '设置报名状态: {modelClass}',
     'Set Enroll Status Successfully!' => '成功设置报名状态',
     'Set Enroll Status Failed.' => '设置报名状态失败',
+
+    'Create Enroll On Activity {activityName}: ' => '报名 {activityName}',
+    'No Activity is active now.' => '没有找到正在进行中的活动。',
+    'This nickname is already used.' => '此昵称已经被使用',
+
+    'Enroll Record Not Found.' => '报名记录未找到噢',
+    'Enroll Record Found.' => '找到您的报名记录啦！',
 ];

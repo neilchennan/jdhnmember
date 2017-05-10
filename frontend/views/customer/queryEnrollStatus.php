@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <img class="img-responsive center-block" src="../../images/deer_t200.png" alt="deer"/>
+        <img class="img-responsive center-block" src="/images/deer_t200.png" alt="deer"/>
 
         <?= $form->field($model, 'mobile')->textInput()->label(Yii::t('app', 'Please input the mobile when enroll')) ?>
 

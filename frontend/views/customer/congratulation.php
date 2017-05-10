@@ -4,4 +4,4 @@
 
 <h2><?= $message ?></h2>
 
-<img class="img-responsive center-block" src="../../images/deer_t200.png" alt="deer"/>
+<img class="img-responsive center-block" src="/images/deer_t200.png" alt="deer"/>

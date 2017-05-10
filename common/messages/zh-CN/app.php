@@ -116,8 +116,8 @@ return [
 
     'Male' => '男',
     'Female' => '女',
-    'Boy' => '帅哥',
-    'Girl' => '美女',
+    'Boy' => '男生',
+    'Girl' => '女生',
 
     'Male Customer' => '男嘉宾',
     'Female Customer' => '女嘉宾',
@@ -135,9 +135,28 @@ return [
     'Last' => '尾页',
 
     'jdhn' => '交大红娘',
+    'Jdhn' => '交大红娘',
+    'JDHN' => '交大红娘',
+    'Backend Admin System' => '后台管理系统',
+
+    'username' => '用户名',
+    'password' => '密码',
+    'rememberMe' => '记住我',
+
+    'email' => '邮箱',
+    'Email' => '邮箱',
+
+    'Sign in' => '登录',
+
+    'Sign in using Weixin' => '用微信登录',
+    'Forgot Password' => '忘记密码',
+    'Register a new membership' => '注册新账号',
+
+    'Sign in to start your session' => '请输入您的登录信息',
 
     'Yes' => '是',
     'No' => '否',
+    'Query' => '查询',
 
     'Status' => '状态',
     'Enroll Success' => '报名成功',
@@ -154,7 +173,12 @@ return [
 
     'Enroll Record Not Found.' => '报名记录未找到噢',
     'Enroll Record Found.' => '找到您的报名记录啦！',
+    'Enroll Record Found. Please remember your id.' => '找到您的报名记录啦，请记住您的编号噢！它很重要！',
+    'Enroll Record Not Found. Please contact service weixin: jdhn2017.' => '报名记录未找到噢，请立即联系客服微信：jdhn2017',
 
     'Huxuan Successfully!' => '互选成功！',
     'Congratulation! Your action has successfully proceed.' => '恭喜！您的操作已成功！',
+    'Thank you for your selection. System is matching.' => '谢谢您的选择，系统正在匹配中',
+
+    'Please input the mobile when enroll' => '请输入报名时填写的手机号'
 ];

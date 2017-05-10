@@ -11,7 +11,7 @@ $this->title = $model->name;
 ?>
 <div class="enroll-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="jdhntitle"><b><?= Html::encode($this->title) ?></b></div>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -21,20 +21,20 @@ $this->title = $model->name;
                 'attribute' => 'status',
                 'value'=> JdhnCommonHelper::getEnrollStatusByIntValue($model->status),
             ],
-            'activity.activity_name',
+//            'activity.activity_name',
             [
                 'attribute' => 'applicant_role',
                 'value'=> JdhnCommonHelper::getApplicantRoleByIntValue($model->applicant_role),
             ],
             'nickname',
             'num',
-            'birth_year',
-            'gender',
+//            'birth_year',
+//            'gender',
 //            'school',
-            [
-                'attribute' => 'highest_degree',
-                'value'=> JdhnCommonHelper::getHighestDegreeByIntValue($model->highest_degree),
-            ],
+//            [
+//                'attribute' => 'highest_degree',
+//                'value'=> JdhnCommonHelper::getHighestDegreeByIntValue($model->highest_degree),
+//            ],
 //            'company_major',
 //            'hometown',
 //            'height',
@@ -43,7 +43,7 @@ $this->title = $model->name;
 //            'mobile',
 //            'weixin_id',
 //            'id_card_num',
-            'created_at:datetime',
+//            'created_at:datetime',
 //            'modified_at:datetime',
         ],
     ]) ?>

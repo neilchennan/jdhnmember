@@ -13,7 +13,13 @@ use yii\base\Model;
 
 class QueryEnrollStatusForm extends Model
 {
-    public $nickname;
+    /**
+     * @var string
+     */
+    public $activity_name;
+    /**
+     * @var string
+     */
     public $mobile;
 
     /**
@@ -22,7 +28,8 @@ class QueryEnrollStatusForm extends Model
     public function rules()
     {
         return [
-            [['nickname', 'mobile'], 'required'],
+            [['mobile'], 'required'],
+            ['mobile','match','pattern'=>'/^1[0-9]{10}$/','message'=>'手机号格式不正确'],
         ];
     }
     /**

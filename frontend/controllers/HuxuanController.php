@@ -251,8 +251,8 @@ class HuxuanController extends Controller
             }
         }
 
-        Yii::$app->session->setFlash('success', Yii::t('app', 'Huxuan Successfully for {0}!', $my_num));
+//        Yii::$app->session->setFlash('success', Yii::t('app', 'Thank you for your selection. System is matching.'));
 //        return $this->redirect(['/customer/congratulation' , 'message' => Yii::t('app', 'Huxuan Successfully!')]);
-        return $this->redirect(['/customer/congratulation']);
+        return $this->redirect(['/customer/congratulation', 'message' => Yii::t('app', 'Thank you for your selection. System is matching.')]);
     }
 }

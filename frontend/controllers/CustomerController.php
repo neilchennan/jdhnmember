@@ -67,6 +67,10 @@ class CustomerController extends Controller
     public function actionQueryEnrollStatus() {
         $model = new QueryEnrollStatusForm();
 
+        //找到当前的默认活动
+        $activeActivity = Activity::findOne(['is_default' => 1]);
+        $model->activity_name = $activeActivity->activity_name;
+
         if (!$model->load(Yii::$app->request->post())){
             return $this->render('queryEnrollStatus', [
                 'model' => $model,
@@ -74,24 +78,23 @@ class CustomerController extends Controller
         }
 
         $enroll = Enroll::findOne([
-            'nickname' => $model->nickname,
             'mobile' => $model->mobile,
         ]);
 
         if (!isset($enroll) || empty($enroll)){
-            Yii::$app->session->setFlash('error', Yii::t('app', 'Enroll Record Not Found.'));
+            Yii::$app->session->setFlash('error', Yii::t('app', 'Enroll Record Not Found. Please contact service weixin: jdhn2017.'));
             return $this->render('queryEnrollStatus', [
                 'model' => $model,
             ]);
         }
 
-        Yii::$app->session->setFlash('success', Yii::t('app', 'Enroll Record Found.'));
+        Yii::$app->session->setFlash('success', Yii::t('app', 'Enroll Record Found. Please remember your id.'));
         return $this->render('viewEnroll', [
             'model' => $enroll,
         ]);
     }
 
-    public function actionCongratulation($message ='Congratulation! Your action has successfully proceed.'){
+    public function actionCongratulation($message){
         return $this->render('congratulation', [
             'message' => $message
         ]);

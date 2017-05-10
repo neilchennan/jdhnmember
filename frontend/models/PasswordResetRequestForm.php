@@ -66,4 +66,14 @@ class PasswordResetRequestForm extends Model
             ->setSubject('Password reset for ' . Yii::$app->name)
             ->send();
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'email' => Yii::t('app', 'email'),
+        ];
+    }
 }

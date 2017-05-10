@@ -18,6 +18,8 @@ use yii\filters\VerbFilter;
  */
 class HuxuanController extends Controller
 {
+    //chage default layout
+    public $layout = "newlayout";
     /**
      * @inheritdoc
      */
@@ -250,6 +252,7 @@ class HuxuanController extends Controller
         }
 
         Yii::$app->session->setFlash('success', Yii::t('app', 'Huxuan Successfully for {0}!', $my_num));
-        return $this->redirect(['index']);
+//        return $this->redirect(['/customer/congratulation' , 'message' => Yii::t('app', 'Huxuan Successfully!')]);
+        return $this->redirect(['/customer/congratulation']);
     }
 }

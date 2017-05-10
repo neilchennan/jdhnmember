@@ -76,7 +76,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= Yii::t('app', 'jdhn') ?> <?= date('Y') ?></p>
+        <p><?= Yii::t('app', 'jdhn') ?>&nbsp;<?= date('Y') ?></p>
 
 <!--        <p class="pull-right">--><?//= Yii::powered() ?><!--</p>-->
         <p class="pull-right">沪ICPXXXX</p>

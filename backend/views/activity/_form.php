@@ -13,12 +13,10 @@ use kartik\datetime\DateTimePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
-<!--    --><?//= $form->field($model, 'id')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'activity_name')->textInput() ?>
 
     <?= $form->field($model, 'activity_description')->textarea() ?>
 
-<!--    --><?//= $form->field($model, 'start_time')->textInput() ?>
     <?= $form->field($model, 'start_time')->widget(DateTimePicker::classname(), [
         'convertFormat' => true,
         'options' => ['placeholder' => 'Select start time ...'],

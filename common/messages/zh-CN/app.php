@@ -154,4 +154,7 @@ return [
 
     'Enroll Record Not Found.' => '报名记录未找到噢',
     'Enroll Record Found.' => '找到您的报名记录啦！',
+
+    'Huxuan Successfully!' => '互选成功！',
+    'Congratulation! Your action has successfully proceed.' => '恭喜！您的操作已成功！',
 ];

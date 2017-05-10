@@ -90,4 +90,10 @@ class CustomerController extends Controller
             'model' => $enroll,
         ]);
     }
+
+    public function actionCongratulation($message ='Congratulation! Your action has successfully proceed.'){
+        return $this->render('congratulation', [
+            'message' => $message
+        ]);
+    }
 }

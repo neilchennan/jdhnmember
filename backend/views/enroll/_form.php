@@ -14,9 +14,6 @@ use common\helper\JdhnCommonHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-<!--    --><?//= $form->field($model, 'id')->textInput(['maxlength' => true]) ?>
-
-<!--    --><?//= $form->field($model, 'activity_id')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'activity_id')->dropDownList($activities) ?>
 
     <?= $form->field($model, 'applicant_role')->dropDownList(['0'=> Yii::t('app', 'Volunteer'),'1'=>Yii::t('app', 'Male Customer'),'2'=>Yii::t('app', 'Female Customer')]) ?>

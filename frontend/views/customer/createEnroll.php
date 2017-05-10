@@ -45,8 +45,6 @@ $this->title = Yii::t('app', 'Create Enroll On Activity {activityName}: ', [
 
         <?= $form->field($model, 'weixin_id')->textInput(['maxlength' => true]) ?>
 
-<!--        --><?//= $form->field($model, 'id_card_num')->textInput(['maxlength' => true]) ?>
-
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-success btn-block']) ?>
         </div>

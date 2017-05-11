@@ -161,6 +161,8 @@ return [
     'Status' => '状态',
     'Enroll Success' => '报名成功',
     'Enroll Fail' => '报名失败',
+    'Enroll In Process' => '已提交',
+
     'Remark' => '备注',
     'Set Enroll Status' => '设置报名状态',
     'Set Enroll Status {modelClass}: ' => '设置报名状态: {modelClass}',
@@ -174,7 +176,7 @@ return [
 
     'Enroll Record Not Found.' => '报名记录未找到噢',
     'Enroll Record Found.' => '找到您的报名记录啦！',
-    'Enroll Record Found. Please remember your id.' => '找到您的报名记录啦，请记住您的编号噢！它很重要！',
+    'Enroll Record Found. Please remember your id.' => '找到您的报名记录啦，请记住您的编号噢！它很重要！若有疑问请联系客服微信（jdhn2017）',
     'Enroll Record Not Found. Please contact service weixin: jdhn2017.' => '报名记录未找到噢，请立即联系客服微信：jdhn2017',
 
     'Huxuan Successfully!' => '互选成功！',

@@ -117,12 +117,14 @@ class JdhnCommonHelper
         return [
             1 => Yii::t('app', 'Enroll Success'),
             2 => Yii::t('app', 'Enroll Fail'),
+            3 => Yii::t('app', 'Enroll In Process'),
         ];
     }
     public static function getEnrollStatus_reverse_map(){
         return [
             Yii::t('app', 'Enroll Success') => 1,
             Yii::t('app', 'Enroll Fail') => 2,
+            Yii::t('app', 'Enroll In Process') => 3,
         ];
     }
     public static function getEnrollStatusByIntValue($intValue){

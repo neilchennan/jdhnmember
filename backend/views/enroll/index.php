@@ -23,6 +23,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'layout'=> '{summary}{items}<div class="text-right tooltip-demo">{pager}</div>',
+        'pager'=>[
+            //'options'=>['class'=>'hidden']//关闭自带分页
+            'firstPageLabel'=>Yii::t('app', 'First'),
+            'prevPageLabel'=>Yii::t('app', 'Prev'),
+            'nextPageLabel'=>Yii::t('app', 'Next'),
+            'lastPageLabel'=>Yii::t('app', 'Last'),
+        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

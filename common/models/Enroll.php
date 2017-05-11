@@ -55,7 +55,8 @@ class Enroll extends \yii\db\ActiveRecord
             [['remark'], 'string', 'max' => 255],
             [['activity_id'], 'exist', 'skipOnError' => true, 'targetClass' => Activity::className(), 'targetAttribute' => ['activity_id' => 'id']],
             //检查数据库不重复
-            ['nickname', 'unique', 'targetClass'=>self::className(), 'message' => Yii::t('app', 'This nickname is already used.')],
+//            ['nickname', 'unique', 'targetClass'=>self::className(), 'message' => Yii::t('app', 'This nickname is already used.')],
+            ['mobile', 'unique', 'targetClass'=>self::className(), 'message' => Yii::t('app', 'This mobile is already used.')],
         ];
     }
 

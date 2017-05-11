@@ -170,6 +170,7 @@ return [
     'Create Enroll On Activity {activityName}: ' => '报名 {activityName}',
     'No Activity is active now.' => '没有找到正在进行中的活动。',
     'This nickname is already used.' => '此昵称已经被使用',
+    'This mobile is already used.' => '此手机号已经被使用',
 
     'Enroll Record Not Found.' => '报名记录未找到噢',
     'Enroll Record Found.' => '找到您的报名记录啦！',
@@ -180,5 +181,5 @@ return [
     'Congratulation! Your action has successfully proceed.' => '恭喜！您的操作已成功！',
     'Thank you for your selection. System is matching.' => '谢谢您的选择，系统正在匹配中',
 
-    'Please input the mobile when enroll' => '请输入报名时填写的手机号'
+    'Please input the mobile when enroll' => '请输入报名时填写的手机号',
 ];

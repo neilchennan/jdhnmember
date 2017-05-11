@@ -54,6 +54,9 @@ class EnrollSearch extends Enroll
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
         //add related table query
         $query->joinWith('activity');

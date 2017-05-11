@@ -43,7 +43,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'nickname',
             'birth_year',
-            'gender',
+            [
+                'attribute' => 'gender',
+                'value'=> JdhnCommonHelper::getGenderByIntValue($model->gender),
+            ],
             'school',
             [
                 'attribute' => 'highest_degree',

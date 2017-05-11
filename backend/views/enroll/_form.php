@@ -34,9 +34,9 @@ use common\helper\JdhnCommonHelper;
 
     <?= $form->field($model, 'height')->textInput() ?>
 
-    <?= $form->field($model, 'contact')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'contact')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'mobile')->textInput(['maxlength' => true]) ?>
 

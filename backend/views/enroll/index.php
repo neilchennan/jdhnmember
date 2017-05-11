@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 //             'company_major',
              'hometown',
-             'height',
+//             'height',
             [
                 'attribute' => 'status',
                 'value' => function ($model, $key, $index, $column) {
@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             // 'contact',
             // 'name',
-            // 'mobile',
+             'mobile',
             // 'weixin_id',
             // 'id_card_num',
             'num',

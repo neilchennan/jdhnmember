@@ -13,8 +13,9 @@ return [
     'Huxuan Score Factors' => '互选因子列表',
     'Create Huxuan Score Factor' => '新建互选因子',
 
+    'Huxuan Summary' => '互选结果汇总',
     'Huxuan Summaries' => '互选结果汇总列表',
-    'Execute Huxuan Summary Now' => '立即执行互选结果统计',
+    'Execute Huxuan Summary Now' => '立即统计互选结果',
 
     'Huxuan Awards' => '互选授奖列表',
 

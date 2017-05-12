@@ -7,6 +7,7 @@ $params = array_merge(
 );
 
 return [
+    'name' => '交大红娘 管理系统v1.0',
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',

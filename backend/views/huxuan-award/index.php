@@ -12,10 +12,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="huxuan-award-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
+        <?= Html::a(Yii::t('app', 'Huxuan Starts'), ['/huxuan-starts/index'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Huxuan Summary'), ['/huxuan-summary/index'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= GridView::widget([

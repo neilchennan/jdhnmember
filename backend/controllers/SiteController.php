@@ -1,13 +1,17 @@
 <?php
 namespace backend\controllers;
 
+use Yii;
+use yii\base\InvalidParamException;
+use yii\web\BadRequestHttpException;
+use yii\web\Controller;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
-use Yii;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+
+
 
 /**
  * Site controller
@@ -24,18 +28,13 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error', 'request-password-reset', 'reset-password'],
                         'allow' => true,
                     ],
                     [
                         'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
-                    ],
-                    [
-                        'actions' => ['request-password-reset'],
-                        'allow' => true,
-                        'roles' => ['?'],
                     ],
                 ],
             ],
@@ -139,6 +138,8 @@ class SiteController extends Controller
      */
     public function actionResetPassword($token)
     {
+        $this->layout = 'main-login';
+
         try {
             $model = new ResetPasswordForm($token);
         } catch (InvalidParamException $e) {

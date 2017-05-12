@@ -28,7 +28,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+//                only 选项指定这个ACF只能被应用于 logout 和 signup 动作。
                 'only' => ['logout', 'signup'],
+//                roles 选项包含一个问号 ? ，这是一个用来表示“guests”的特殊符号。
+//                允许认证用户来访问注销 ‘logout’ 动作。@ 字符是另一个特殊标识用来表示认证用户。
                 'rules' => [
                     [
                         'actions' => ['signup'],

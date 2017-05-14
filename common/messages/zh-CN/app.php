@@ -158,6 +158,7 @@ return [
     'Yes' => '是',
     'No' => '否',
     'Query' => '查询',
+    'Export' => '导出',
 
     'Status' => '状态',
     'Enroll Success' => '报名成功',

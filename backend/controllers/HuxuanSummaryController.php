@@ -6,6 +6,7 @@ use common\helper\JdhnCommonHelper;
 use common\models\Huxuan;
 use common\models\HuxuanAward;
 use common\result\ActionResult;
+use moonland\phpexcel\Excel;
 use Yii;
 use common\models\HuxuanSummary;
 use common\models\HuxuanSummarySearch;
@@ -311,5 +312,22 @@ class HuxuanSummaryController extends Controller
         else {
             return $this->handleHuxuanFemale($huxuan);
         }
+    }
+
+    public function actionExport(){
+        $data = Yii::$app->request->post();
+        $result = HuxuanSummary::find()->all();
+        if (!$result){
+            return $this->redirect(['site/error']);
+        }
+
+        Excel::export([
+            'models' => $result,
+            'fileName' => date('Ymd').'互选汇总',
+            'columns' => ['male_num', 'male_order', 'female_num', 'female_order', 'male_score', 'female_score',
+                'total_score', 'description', 'created_at:datetime', 'modified_at:datetime'],
+            'headers' => [
+            ],
+        ]);
     }
 }

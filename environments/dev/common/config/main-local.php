@@ -1,13 +1,22 @@
 <?php
 return [
     'components' => [
+//        'db' => [
+//            'class' => 'yii\db\Connection',
+//            //changed it by neil
+//            'dsn' => 'mysql:host=localhost;dbname=jdhnmember',
+//            'username' => 'root',
+//            //default pass for phpstudy mysql is root
+//            'password' => 'root',
+//            'charset' => 'utf8',
+//        ],
         'db' => [
             'class' => 'yii\db\Connection',
             //changed it by neil
-            'dsn' => 'mysql:host=localhost;dbname=jdhnmember',
+            'dsn' => 'mysql:host=5657f5395d07d.sh.cdb.myqcloud.com:4833;dbname=jdhnmember',
             'username' => 'root',
             //default pass for phpstudy mysql is root
-            'password' => 'root',
+            'password' => 'Nihao1111',
             'charset' => 'utf8',
         ],
         'mailer' => [

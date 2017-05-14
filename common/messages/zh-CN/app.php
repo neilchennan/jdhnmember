@@ -22,6 +22,8 @@ return [
     'Huxuan Starts' => '万人迷列表',
     'Execute Huxuan Starts' => '执行万人迷统计',
 
+    'Huxuan Details' => '互选详细',
+
     'Enrolls' => '报名列表',
     'Create Enroll' => '新建报名信息',
 

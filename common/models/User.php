@@ -5,23 +5,28 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\filters\RateLimitInterface;
 use yii\web\IdentityInterface;
 
 /**
  * User model
  *
- * @property integer $id
- * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $email
- * @property string $auth_key
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
+ * @property integer $id 自增ID
+ * @property string $username 用户名
+ * @property string $password_hash 自动登录key
+ * @property string $password_reset_token 重置密码token
+ * @property string $email 邮箱
+ * @property string $auth_key 自动登录key
+ * @property integer $status 状态
+ * @property integer $created_at 创建时间
+ * @property integer $updated_at 更新时间
  * @property string $password write-only password
+ * @property int $role 角色等级
+ * @property string $access_token restful请求token
+ * @property int $allowance restful剩余的允许的请求数
+ * @property int $allowance_updated_at restful请求的时间戳数
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
@@ -69,7 +74,10 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        //findIdentityByAccessToken()方法的实现是系统定义的
+        //例如，一个简单的场景，当每个用户只有一个access token, 可存储access token 到user表的access_token列中， 方法可在User类中简单实现，如下所示：
+        return static::findOne(['access_token' => $token, 'status' => self::STATUS_ACTIVE]);
+//        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
     }
 
     /**
@@ -185,5 +193,43 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    // 返回在单位时间内允许的请求的最大数目，例如，[10, 60] 表示在60秒内最多请求10次。
+    public function getRateLimit($request, $action)
+    {
+        return [1, 10];
+    }
+
+    // 返回剩余的允许的请求数。
+    public function loadAllowance($request, $action)
+    {
+        return [$this->allowance, $this->allowance_updated_at];
+    }
+
+    // 保存请求时的UNIX时间戳。
+    public function saveAllowance($request, $action, $allowance, $timestamp)
+    {
+        $this->allowance = $allowance;
+        $this->allowance_updated_at = $timestamp;
+        $this->save();
+    }
+
+    public function attributeLabels(){
+        return [
+            'id' =>  Yii::t('app', 'ID'),
+            'username' => 'Username',
+            'auth_key' => 'Auth Key',
+            'password_hash' => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'email' => 'Email',
+            'role' => 'Role',
+            'status' => Yii::t('app', 'Status'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'modified_at' => Yii::t('app', 'Modified At'),
+            'access_token' => 'Access Token',
+            'allowance' => 'Allowance',
+            'allowance_updated_at' => 'Allowance Updated At',
+        ];
     }
 }

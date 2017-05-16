@@ -188,4 +188,18 @@ return [
     'Thank you for your selection. System is matching.' => '谢谢您的选择，系统正在匹配中',
 
     'Please input the mobile when enroll' => '请输入报名时填写的手机号',
+
+    'Success 200' => '操作成功',
+    'Fail 500' => '内部错误',
+    'Fail 400' => '错误请求',
+    'Fail 401' => '未授权错误',
+    'Fail 403' => '禁止',
+    'Fail 404' => '未找到',
+    'Fail 405' => '方法禁用',
+    'Fail 406' => '不接受',
+    'Fail 408' => '超时',
+    'Fail 410' => '资源已删除',
+    'Fail 415' => '媒体类型不支持',
+
+    'Status Code Not Found' => '状态码未找到',
 ];

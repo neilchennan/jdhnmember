@@ -35,9 +35,13 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
                         'v1/huxuans',
-                        'v1/sites',
+                        'v1/users',
                     ],
                     'pluralize' => true,
+                    'extraPatterns' => [
+                        'POST login' => 'login',
+                        'GET user-profile' => 'user-profile',
+                    ]
                 ],
             ],
         ],
@@ -47,4 +51,5 @@ return [
             'class' => 'api\modules\v1\Module',
         ],
     ],
+    'params' => $params,
 ];

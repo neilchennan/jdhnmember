@@ -1,12 +1,13 @@
 <?php
 namespace common\models;
 
+use common\service\UserService;
 use Yii;
-use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\filters\RateLimitInterface;
 use yii\web\IdentityInterface;
+use yii\web\UnauthorizedHttpException;
 
 /**
  * User model
@@ -74,6 +75,10 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
+        // 如果token无效的话，
+        if(!UserService::accessTokenIsValid($token)) {
+            throw new UnauthorizedHttpException("token is invalid.");
+        }
         //findIdentityByAccessToken()方法的实现是系统定义的
         //例如，一个简单的场景，当每个用户只有一个access token, 可存储access token 到user表的access_token列中， 方法可在User类中简单实现，如下所示：
         return static::findOne(['access_token' => $token, 'status' => self::STATUS_ACTIVE]);

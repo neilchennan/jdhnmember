@@ -2,6 +2,8 @@
 
 namespace api\modules\v1\controllers;
 
+use common\models\Enroll;
+use yii\data\ActiveDataProvider;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\QueryParamAuth;
 use yii\filters\RateLimiter;
@@ -38,10 +40,26 @@ class HuxuansController extends ActiveController
         return $behaviors;
     }
 
-    public function actionIndex()
-    {
-        return $this->render('index');
+    public function actions() {
+        $actions = parent::actions();
+        // 禁用""index,delete" 和 "create" 操作
+//        unset($actions['index'],$actions['delete'], $actions['create']);
+        unset($actions['index']);
+        return $actions;
     }
 
-
+    /**
+     * @return ActiveDataProvider
+     * 重写index的业务实现
+     */
+    public function actionIndex()
+    {
+        $modelClass = $this->modelClass;
+        return new ActiveDataProvider([
+            'query' => $modelClass::find()->where([
+                'gender' => 1,
+            ]),
+            'pagination' => false,
+        ]);
+    }
 }

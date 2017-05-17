@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\helper\JdhnCommonHelper;
 use Yii;
 
 /**
@@ -74,5 +75,23 @@ class Activity extends \yii\db\ActiveRecord
             'created_by' => Yii::t('app', 'Created By'),
             'modified_by' => Yii::t('app', 'Modified By'),
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getEnrollsStr()
+    {
+        $count =  count(Enroll::findAll(['activity_id' => $this->id]));
+        $returnStr = Yii::t('app', '{0} person has enrolled.', $count);
+
+        return $returnStr;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortName(){
+        return JdhnCommonHelper::cut_utf8($this->activity_name, 10, '...');
     }
 }

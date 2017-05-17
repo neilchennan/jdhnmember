@@ -137,4 +137,26 @@ class ActivityController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionIndexMobile(){
+        $this->layout = 'main-mobile';
+
+        $searchModel = new ActivitySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $activityList = $dataProvider->getModels();
+
+        return $this->render('indexMobile', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'activityList' => $activityList,
+        ]);
+    }
+
+    public function actionViewMobile($id){
+        $this->layout = 'main-mobile';
+
+        return $this->render('viewMobile', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 }

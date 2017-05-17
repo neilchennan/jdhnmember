@@ -202,4 +202,5 @@ return [
     'Fail 415' => '媒体类型不支持',
 
     'Status Code Not Found' => '状态码未找到',
+    '{0} person has enrolled.' => '{0} 人已报名',
 ];

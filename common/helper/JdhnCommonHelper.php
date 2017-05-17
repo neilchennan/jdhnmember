@@ -225,4 +225,12 @@ class JdhnCommonHelper
         $birth_year = $yearNow - $intValue;
         return $birth_year;
     }
+
+    public static function cut_utf8($str, $max_length = 5, $suffix)
+    {
+        $strLength = mb_strlen($str, 'utf-8');
+        if ( $strLength <= $max_length)
+            return mb_substr($str, 0, $strLength, 'utf-8');
+        return mb_substr($str, 0, $max_length, 'utf-8') . $suffix;
+    }
 }

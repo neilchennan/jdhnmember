@@ -203,4 +203,5 @@ return [
 
     'Status Code Not Found' => '状态码未找到',
     '{0} person has enrolled.' => '{0} 人已报名',
+    ' Num{from} selected Num{to} in order{order}, score:{score} .' => '{from}号第{order}顺位选择{to}号,得分:{score}',
 ];

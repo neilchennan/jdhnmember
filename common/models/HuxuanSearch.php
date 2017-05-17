@@ -18,7 +18,7 @@ class HuxuanSearch extends Huxuan
     public function rules()
     {
         return [
-            [['id', 'from_num', 'to_num', 'description'], 'safe'],
+            [['id', 'activity_id', 'from_num', 'to_num', 'description'], 'safe'],
             [['order', 'gender', 'score', 'created_at', 'modified_at'], 'integer'],
         ];
     }
@@ -67,6 +67,7 @@ class HuxuanSearch extends Huxuan
         ]);
 
         $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'activity_id', $this->activity_id])
             ->andFilterWhere(['like', 'from_num', $this->from_num])
             ->andFilterWhere(['like', 'to_num', $this->to_num])
             ->andFilterWhere(['like', 'description', $this->description]);

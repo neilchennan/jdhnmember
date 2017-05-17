@@ -94,4 +94,28 @@ class Activity extends \yii\db\ActiveRecord
     public function getShortName(){
         return JdhnCommonHelper::cut_utf8($this->activity_name, 10, '...');
     }
+
+    /**
+     * @return int
+     */
+    public function getHuxuanCount(){
+        $count = count(Huxuan::findAll([
+            'activity_id' => $this->id,
+        ]));
+        return $count;
+    }
+
+    public function getStarsCount(){
+        $count = count(HuxuanStarts::findAll([
+            'activity_id' => $this->id,
+        ]));
+        return $count;
+    }
+
+    public function getAwardCount(){
+        $count = count(HuxuanAward::findAll([
+            'activity_id' => $this->id,
+        ]));
+        return $count;
+    }
 }

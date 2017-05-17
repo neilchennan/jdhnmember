@@ -18,7 +18,7 @@ class HuxuanAwardSearch extends HuxuanAward
     public function rules()
     {
         return [
-            [['id', 'male_num', 'female_num'], 'safe'],
+            [['id', 'activity_id', 'male_num', 'female_num'], 'safe'],
             [['total_score'], 'integer'],
         ];
     }
@@ -63,6 +63,7 @@ class HuxuanAwardSearch extends HuxuanAward
         ]);
 
         $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'activity_id', $this->activity_id])
             ->andFilterWhere(['like', 'male_num', $this->male_num])
             ->andFilterWhere(['like', 'female_num', $this->female_num]);
 

@@ -21,18 +21,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <ul data-role="listview" data-inset="true">
     <li data-icon="star">
-        <a href="/huxuan-award/index">
+        <a href="/huxuan-award/mobile-list-by-activity-id?id=<?= $model->id?>">
             <h2>互选授奖结果</h2>
+            <span class="ui-li-count"><?= $model->getAwardCount()?></span>
         </a>
     </li>
     <li data-icon="heart">
-        <a href="/huxuan-starts/index">
+        <a href="/huxuan-starts/mobile-list-by-activity-id?id=<?= $model->id?>">
             <h2>万人迷</h2>
+            <span class="ui-li-count"><?= $model->getStarsCount()?></span>
         </a>
     </li>
     <li data-icon="mail">
-        <a href="/huxuan/index">
+        <a href="/huxuan/mobile-list-by-activity-id?id=<?= $model->id?>">
             <h2>互选详细结果</h2>
+            <span class="ui-li-count"><?= $model->getHuxuanCount()?></span>
         </a>
     </li>
 </ul>

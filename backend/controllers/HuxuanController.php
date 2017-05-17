@@ -158,4 +158,37 @@ class HuxuanController extends Controller
             ],
         ]);
     }
+
+    /**
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionMobileListByActivityId($id)
+    {
+        $this->layout = 'main-mobile';
+
+        $activity = Activity::findOne([
+            'id' => $id,
+        ]);
+        if (!isset($activity)){
+            throw new NotFoundHttpException('Activity Not Found');
+        }
+
+        $queryParams = [
+            'activity_id' => $activity->id,
+        ];
+
+        $searchModel = new HuxuanSearch();
+        $dataProvider = $searchModel->search($queryParams);
+        $dataProvider->pagination->pageSize = -1;
+
+        $viewList = $dataProvider->getModels();
+
+        return $this->render('indexMobile', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'viewList' => $viewList,
+        ]);
+    }
 }

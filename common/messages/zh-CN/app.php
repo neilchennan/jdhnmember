@@ -167,6 +167,13 @@ return [
     'Enroll Fail' => '报名失败',
     'Enroll In Process' => '已提交',
 
+    'Home' => '主页',
+    'Menu' => '菜单',
+    'Search' => '搜索',
+    'Back' => '后退',
+    'Create' => '创建',
+    'Options' => '选项',
+
     'Remark' => '备注',
     'Set Enroll Status' => '设置报名状态',
     'Set Enroll Status {modelClass}: ' => '设置报名状态: {modelClass}',

@@ -159,4 +159,30 @@ class ActivityController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
+    public function actionCreateMobile(){
+        $this->layout = 'main-mobile';
+
+        $model = new Activity();
+
+        $model->loadDefaultValues();
+        $model->id = JdhnCommonHelper::createGuid();
+        $model->created_at = time();
+        $model->modified_at =  $model->created_at;
+
+        //如果不是post方法，返回页面
+        if (!$model->load(Yii::$app->request->post())) {
+            return $this->render('createMobile', [
+                'model' => $model,
+            ]);
+        }
+
+        if ($model->save()) {
+            return $this->redirect(['viewMobile', 'id' => $model->id]);
+        } else {
+            return $this->render('createMobile', [
+                'model' => $model,
+            ]);
+        }
+    }
 }

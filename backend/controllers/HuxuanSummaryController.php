@@ -127,192 +127,192 @@ class HuxuanSummaryController extends Controller
         }
     }
 
-    /**
-     *
-     */
-    public function actionExecute(){
-        HuxuanSummary::deleteAll();
-        HuxuanAward::deleteAll();
-
-        $huxuanList = Huxuan::find()->all();
-
-        $totalResult = new ActionResult();
-
-        foreach($huxuanList as $huxuan){
-            $result = $this->handleHuxuan($huxuan);
-            $totalResult->addSubResult($result);
-        }
-
-        if (!$totalResult->isIsSuccess()){
-            Yii::$app->session->setFlash('error', $totalResult->getMessage());
-        }
-        else {
-            Yii::$app->session->setFlash('success', $totalResult->getMessage());
-        }
-
-        $hsList = HuxuanSummary::find()->all();
-        foreach($hsList as $hs){
-            //去掉总得分为0的每个组合
-            if ($hs->total_score == 0 || empty($hs->total_score)){
-                $hs->delete();
-            }
-            //如果不为零，更新授奖表
-            else {
-                $male_record = HuxuanAward::findOne([
-                    'male_num' => $hs->male_num,
-                ]);
-                //如果找到了相同的男嘉宾记录
-                if (isset($male_record) && !empty($male_record)){
-                    //找到了比自己分数低的组合
-                    if ($male_record->total_score < $hs->total_score){
-                        //删除之
-                        $male_record->delete();
-                        //加上自己
-                        $newHs = new HuxuanAward([
-                            'id' => $hs->id,
-                            'male_num' => $hs->male_num,
-                            'female_num' => $hs->female_num,
-                            'total_score' => $hs->total_score,
-                        ]);
-                        $newHs->save();
-                    }
-                }
-                else{
-                    $female_record = HuxuanAward::findOne([
-                        'female_num' => $hs->female_num,
-                    ]);
-                    //如果找到了相同的女嘉宾记录
-                    if (isset($female_record) && !empty($female_record)){
-                        //找到了比自己分数低的组合
-                        if ($female_record->total_score < $hs->total_score){
-                            //删除之
-                            $female_record->delete();
-                            //加上自己
-                            $newHs2 = new HuxuanAward([
-                                'id' => $hs->id,
-                                'male_num' => $hs->male_num,
-                                'female_num' => $hs->female_num,
-                                'total_score' => $hs->total_score,
-                            ]);
-                            $newHs2->save();
-                        }
-                    }
-                    else {
-                        //加上自己的记录
-                        $newHsSelf = new HuxuanAward([
-                            'id' => $hs->id,
-                            'male_num' => $hs->male_num,
-                            'female_num' => $hs->female_num,
-                            'total_score' => $hs->total_score,
-                        ]);
-                        $newHsSelf->save();
-                    }
-                }
-            }
-        }
-
-        $searchModel = new HuxuanSummarySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    protected function handleHuxuanMale(Huxuan $huxuan){
-        $summaryInDb = HuxuanSummary::findOne([
-            'male_num' => $huxuan->from_num,
-            'female_num' => $huxuan->to_num,
-        ]);
-
-        $nowTime = time();
-        $nowIimeStr = date("Y-m-d H:i:s",$nowTime);
-//        已存在
-        if(isset($summaryInDb)){
-            $summaryInDb->male_score = $huxuan->score;
-            if($summaryInDb->female_score > 0){
-                $summaryInDb->total_score = $summaryInDb->male_score + $summaryInDb->female_score;
-            }
-            else {
-                $summaryInDb->total_score = 0;
-            }
-            $summaryInDb->male_order = $huxuan->order;
-            $summaryInDb->modified_at = $nowTime;
-
-            if (!$summaryInDb->save()){
-                return new ActionResult(false, Yii::t('app', 'HuxuanSummary update failed.'));
-            }
-            return new ActionResult(true, Yii::t('app', 'HuxuanSummary update successfully!'));
-        }
-
-//        不存在，新建
-        $newSummary = new HuxuanSummary([
-            'id' => JdhnCommonHelper::createGuid(),
-            'male_num' => $huxuan->from_num,
-            'male_order' => $huxuan->order,
-            'female_num' => $huxuan->to_num,
-            'male_score' => $huxuan->score,
-            'created_at' => $nowTime,
-            'modified_at' => $nowTime,
-        ]);
-        if (!$newSummary->save()){
-            return new ActionResult(false, Yii::t('app', 'HuxuanSummary created failed.'));
-        }
-        return new ActionResult(true, Yii::t('app', 'HuxuanSummary created successfully!'));
-    }
-
-    protected function handleHuxuanFemale(Huxuan $huxuan){
-        $summaryInDb = HuxuanSummary::findOne([
-            'male_num' => $huxuan->to_num,
-            'female_num' => $huxuan->from_num,
-        ]);
-
-        $nowTime = time();
-        $nowIimeStr = date("Y-m-d H:i:s",$nowTime);
-//        已存在
-        if(isset($summaryInDb)){
-            $summaryInDb->female_score = $huxuan->score;
-            if($summaryInDb->male_score > 0){
-                $summaryInDb->total_score = $summaryInDb->male_score + $summaryInDb->female_score;
-            }
-            else {
-                $summaryInDb->total_score = 0;
-            }
-
-            $summaryInDb->female_order = $huxuan->order;
-            $summaryInDb->modified_at = $nowTime;
-
-            if (!$summaryInDb->save()){
-                return new ActionResult(false, Yii::t('app', 'HuxuanSummary update failed.'));
-            }
-            return new ActionResult(true, Yii::t('app', 'HuxuanSummary update successfully!'));
-        }
-
-//        不存在，新建
-        $newSummary = new HuxuanSummary([
-            'id' => JdhnCommonHelper::createGuid(),
-            'male_num' => $huxuan->to_num,
-            'female_num' => $huxuan->from_num,
-            'female_order' => $huxuan->order,
-            'female_score' => $huxuan->score,
-            'created_at' => $nowTime,
-            'modified_at' => $nowTime,
-        ]);
-        if (!$newSummary->save()){
-            return new ActionResult(false, Yii::t('app', 'HuxuanSummary created failed.'));
-        }
-        return new ActionResult(true, Yii::t('app', 'HuxuanSummary created successfully!'));
-    }
-
-    protected function handleHuxuan(Huxuan $huxuan){
-        if ($huxuan->gender == 1){
-            return $this->handleHuxuanMale($huxuan);
-        }
-        else {
-            return $this->handleHuxuanFemale($huxuan);
-        }
-    }
+//    /**
+//     *
+//     */
+//    public function actionExecute(){
+//        HuxuanSummary::deleteAll();
+//        HuxuanAward::deleteAll();
+//
+//        $huxuanList = Huxuan::find()->all();
+//
+//        $totalResult = new ActionResult();
+//
+//        foreach($huxuanList as $huxuan){
+//            $result = $this->handleHuxuan($huxuan);
+//            $totalResult->addSubResult($result);
+//        }
+//
+//        if (!$totalResult->isIsSuccess()){
+//            Yii::$app->session->setFlash('error', $totalResult->getMessage());
+//        }
+//        else {
+//            Yii::$app->session->setFlash('success', $totalResult->getMessage());
+//        }
+//
+//        $hsList = HuxuanSummary::find()->all();
+//        foreach($hsList as $hs){
+//            //去掉总得分为0的每个组合
+//            if ($hs->total_score == 0 || empty($hs->total_score)){
+//                $hs->delete();
+//            }
+//            //如果不为零，更新授奖表
+//            else {
+//                $male_record = HuxuanAward::findOne([
+//                    'male_num' => $hs->male_num,
+//                ]);
+//                //如果找到了相同的男嘉宾记录
+//                if (isset($male_record) && !empty($male_record)){
+//                    //找到了比自己分数低的组合
+//                    if ($male_record->total_score < $hs->total_score){
+//                        //删除之
+//                        $male_record->delete();
+//                        //加上自己
+//                        $newHs = new HuxuanAward([
+//                            'id' => $hs->id,
+//                            'male_num' => $hs->male_num,
+//                            'female_num' => $hs->female_num,
+//                            'total_score' => $hs->total_score,
+//                        ]);
+//                        $newHs->save();
+//                    }
+//                }
+//                else{
+//                    $female_record = HuxuanAward::findOne([
+//                        'female_num' => $hs->female_num,
+//                    ]);
+//                    //如果找到了相同的女嘉宾记录
+//                    if (isset($female_record) && !empty($female_record)){
+//                        //找到了比自己分数低的组合
+//                        if ($female_record->total_score < $hs->total_score){
+//                            //删除之
+//                            $female_record->delete();
+//                            //加上自己
+//                            $newHs2 = new HuxuanAward([
+//                                'id' => $hs->id,
+//                                'male_num' => $hs->male_num,
+//                                'female_num' => $hs->female_num,
+//                                'total_score' => $hs->total_score,
+//                            ]);
+//                            $newHs2->save();
+//                        }
+//                    }
+//                    else {
+//                        //加上自己的记录
+//                        $newHsSelf = new HuxuanAward([
+//                            'id' => $hs->id,
+//                            'male_num' => $hs->male_num,
+//                            'female_num' => $hs->female_num,
+//                            'total_score' => $hs->total_score,
+//                        ]);
+//                        $newHsSelf->save();
+//                    }
+//                }
+//            }
+//        }
+//
+//        $searchModel = new HuxuanSummarySearch();
+//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//
+//        return $this->render('index', [
+//            'searchModel' => $searchModel,
+//            'dataProvider' => $dataProvider,
+//        ]);
+//    }
+//
+//    protected function handleHuxuanMale(Huxuan $huxuan){
+//        $summaryInDb = HuxuanSummary::findOne([
+//            'male_num' => $huxuan->from_num,
+//            'female_num' => $huxuan->to_num,
+//        ]);
+//
+//        $nowTime = time();
+//        $nowIimeStr = date("Y-m-d H:i:s",$nowTime);
+////        已存在
+//        if(isset($summaryInDb)){
+//            $summaryInDb->male_score = $huxuan->score;
+//            if($summaryInDb->female_score > 0){
+//                $summaryInDb->total_score = $summaryInDb->male_score + $summaryInDb->female_score;
+//            }
+//            else {
+//                $summaryInDb->total_score = 0;
+//            }
+//            $summaryInDb->male_order = $huxuan->order;
+//            $summaryInDb->modified_at = $nowTime;
+//
+//            if (!$summaryInDb->save()){
+//                return new ActionResult(false, Yii::t('app', 'HuxuanSummary update failed.'));
+//            }
+//            return new ActionResult(true, Yii::t('app', 'HuxuanSummary update successfully!'));
+//        }
+//
+////        不存在，新建
+//        $newSummary = new HuxuanSummary([
+//            'id' => JdhnCommonHelper::createGuid(),
+//            'male_num' => $huxuan->from_num,
+//            'male_order' => $huxuan->order,
+//            'female_num' => $huxuan->to_num,
+//            'male_score' => $huxuan->score,
+//            'created_at' => $nowTime,
+//            'modified_at' => $nowTime,
+//        ]);
+//        if (!$newSummary->save()){
+//            return new ActionResult(false, Yii::t('app', 'HuxuanSummary created failed.'));
+//        }
+//        return new ActionResult(true, Yii::t('app', 'HuxuanSummary created successfully!'));
+//    }
+//
+//    protected function handleHuxuanFemale(Huxuan $huxuan){
+//        $summaryInDb = HuxuanSummary::findOne([
+//            'male_num' => $huxuan->to_num,
+//            'female_num' => $huxuan->from_num,
+//        ]);
+//
+//        $nowTime = time();
+//        $nowIimeStr = date("Y-m-d H:i:s",$nowTime);
+////        已存在
+//        if(isset($summaryInDb)){
+//            $summaryInDb->female_score = $huxuan->score;
+//            if($summaryInDb->male_score > 0){
+//                $summaryInDb->total_score = $summaryInDb->male_score + $summaryInDb->female_score;
+//            }
+//            else {
+//                $summaryInDb->total_score = 0;
+//            }
+//
+//            $summaryInDb->female_order = $huxuan->order;
+//            $summaryInDb->modified_at = $nowTime;
+//
+//            if (!$summaryInDb->save()){
+//                return new ActionResult(false, Yii::t('app', 'HuxuanSummary update failed.'));
+//            }
+//            return new ActionResult(true, Yii::t('app', 'HuxuanSummary update successfully!'));
+//        }
+//
+////        不存在，新建
+//        $newSummary = new HuxuanSummary([
+//            'id' => JdhnCommonHelper::createGuid(),
+//            'male_num' => $huxuan->to_num,
+//            'female_num' => $huxuan->from_num,
+//            'female_order' => $huxuan->order,
+//            'female_score' => $huxuan->score,
+//            'created_at' => $nowTime,
+//            'modified_at' => $nowTime,
+//        ]);
+//        if (!$newSummary->save()){
+//            return new ActionResult(false, Yii::t('app', 'HuxuanSummary created failed.'));
+//        }
+//        return new ActionResult(true, Yii::t('app', 'HuxuanSummary created successfully!'));
+//    }
+//
+//    protected function handleHuxuan(Huxuan $huxuan){
+//        if ($huxuan->gender == 1){
+//            return $this->handleHuxuanMale($huxuan);
+//        }
+//        else {
+//            return $this->handleHuxuanFemale($huxuan);
+//        }
+//    }
 
     public function actionExport(){
         $data = Yii::$app->request->post();

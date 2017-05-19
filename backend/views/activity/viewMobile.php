@@ -39,3 +39,5 @@ $this->params['breadcrumbs'][] = $this->title;
         </a>
     </li>
 </ul>
+
+<a href="execute-summary?id=<?= $model->id?>" class="ui-btn"><?= Yii::t('app', 'Execute Huxuan Summary Now')?></a>

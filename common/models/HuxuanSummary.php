@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "huxuan_summary".
  *
  * @property string $id uuid
+ * @property string $activity_id 关联活动id
  * @property string $male_num 男嘉宾编号
  * @property int $male_order 男选女顺位
  * @property string $female_num 女嘉宾编号
@@ -18,6 +19,8 @@ use Yii;
  * @property string $description 描述
  * @property int $created_at 创建时间
  * @property int $modified_at 修改时间
+ *
+ * @property Activity $activity
  */
 class HuxuanSummary extends \yii\db\ActiveRecord
 {
@@ -37,8 +40,9 @@ class HuxuanSummary extends \yii\db\ActiveRecord
         return [
             [['id'], 'required'],
             [['male_order', 'female_order', 'male_score', 'female_score', 'total_score', 'created_at', 'modified_at'], 'integer'],
-            [['id', 'male_num', 'female_num'], 'string', 'max' => 45],
+            [['id', 'activity_id', 'male_num', 'female_num'], 'string', 'max' => 45],
             [['description'], 'string', 'max' => 255],
+            [['activity_id'], 'exist', 'skipOnError' => true, 'targetClass' => Activity::className(), 'targetAttribute' => ['activity_id' => 'id']],
         ];
     }
 
@@ -49,6 +53,7 @@ class HuxuanSummary extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'activity_id' => Yii::t('app', 'Activity ID'),
             'male_num' => Yii::t('app', 'Male Num'),
             'male_order' => Yii::t('app', 'Male Order'),
             'female_num' => Yii::t('app', 'Female Num'),
@@ -60,5 +65,13 @@ class HuxuanSummary extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'modified_at' => Yii::t('app', 'Modified At'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getActivity()
+    {
+        return $this->hasOne(Activity::className(), ['id' => 'activity_id']);
     }
 }

@@ -11,149 +11,62 @@ namespace common\result;
 use Yii;
 use yii\base\Object;
 
+/**
+ * @property \Exception $exception 异常
+ * @property array $sub_results 子结果集合
+ * @property boolean $isSuccess 是否成功
+ * @property string $message 消息
+ * @property int $total_count 总记录数
+ * @property int $success_count 成功记录数
+ * @property int $fail_count 失败记录数
+ * @property array $sub_success_results 成功的子结果集合
+ * @property array $sub_fail_results 失败的子结果集合
+ */
 class ActionResult extends Object
 {
     /**
      * @var boolean
      */
-    protected $isSuccess;
+    public $isSuccess;
 
     /**
-     * @return boolean
+     * @var string
      */
-    public function isIsSuccess()
-    {
-        return $this->isSuccess;
-    }
+    public $message;
 
     /**
-     * @param boolean $isSuccess
+     * @var \Exception
      */
-    public function setIsSuccess($isSuccess)
-    {
-        $this->isSuccess = $isSuccess;
-    }
-    /**
-     * @var string;
-     */
-    protected $message;
+    public $exception;
 
     /**
-     * @return int
+     * @var int
      */
-    public function getTotalCount()
-    {
-        return $this->total_count;
-    }
+    public $total_count;
 
     /**
-     * @param int $total_count
+     * @var int
      */
-    public function setTotalCount($total_count)
-    {
-        $this->total_count = $total_count;
-    }
+    public $success_count;
 
-    /**
-     * @return int
-     */
-    public function getSuccessCount()
-    {
-        return $this->success_count;
-    }
-
-    /**
-     * @param int $success_count
-     */
-    public function setSuccessCount($success_count)
-    {
-        $this->success_count = $success_count;
-    }
-
-    /**
-     * @return int
-     */
-    public function getFailCount()
-    {
-        return $this->fail_count;
-    }
-
-    /**
-     * @param int $fail_count
-     */
-    public function setFailCount($fail_count)
-    {
-        $this->fail_count = $fail_count;
-    }
-    /**
-     * @var \yii\base\Exception
-     */
-    protected $exception;
     /**
      * @var array
      */
-    protected $sub_results;
-
+    public $sub_results;
     /**
-     * @return string
+     * @var array
      */
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
+    public $sub_success_results;
     /**
-     * @param string $message
+     * @var array
      */
-    public function setMessage($message)
-    {
-        $this->message = $message;
-    }
-
-    /**
-     * @return \yii\base\Exception
-     */
-    public function getException()
-    {
-        return $this->exception;
-    }
-
-    /**
-     * @param \yii\base\Exception $exception
-     */
-    public function setException($exception)
-    {
-        $this->exception = $exception;
-    }
+    public $sub_fail_results;
 
     /**
      * @var int
      */
-    protected $total_count;
-    /**
-     * @var int
-     */
-    protected $success_count;
-    /**
-     * @var int
-     */
-    protected $fail_count;
+    public $fail_count;
 
-    /**
-     * @return array
-     */
-    public function getSubResults()
-    {
-        return $this->sub_results;
-    }
-
-    /**
-     * @param array $sub_results
-     */
-    public function setSubResults($sub_results)
-    {
-        $this->sub_results = $sub_results;
-    }
 
     /**
      * @param ActionResult $sub_result
@@ -162,31 +75,36 @@ class ActionResult extends Object
         if (!isset($this->sub_results) || sizeof($this->sub_results) == 0){
             $this->sub_results = array();
         }
+        if (!isset($this->sub_success_results) || sizeof($this->sub_success_results) == 0){
+            $this->sub_success_results = array();
+        }
+        if (!isset($this->sub_fail_results) || sizeof($this->sub_fail_results) == 0){
+            $this->sub_fail_results = array();
+        }
+
         if (!isset($sub_result)) return;
         array_push($this->sub_results, $sub_result);
 
-        $this->total_count ++;
+        if ($sub_result->isSuccess){
+            array_push($this->sub_success_results, $sub_result);
+        }
+        if (!$sub_result->isSuccess){
+            array_push($this->sub_fail_results, $sub_result);
+        }
 
         if($this->isSuccess){
             $this->isSuccess = $this->isSuccess && $sub_result->isSuccess;
         }
 
-        if ($sub_result->isSuccess){
-            $this->success_count ++;
-        }
-        else {
-            $this->fail_count ++;
-        }
-
         $this->selfComplete();
     }
 
-    public function __construct($isSuccess = true, $message = '', $exception = null)
+    public function __construct($isSuccess = true, $message = '', \Exception $exception = null)
     {
         parent::__construct();
-        $this->setIsSuccess($isSuccess);
-        $this->setMessage($message);
-        $this->setException($exception);
+        $this->isSuccess = $isSuccess;
+        $this->message = $message;
+        $this->exception = $exception;
 
         $this->selfComplete();
     }
@@ -198,6 +116,10 @@ class ActionResult extends Object
             $this->fail_count = $this->total_count - $this->success_count;
         }
         else {
+            $this->total_count = count($this->sub_results);
+            $this->success_count = count($this->sub_success_results);
+            $this->fail_count = count($this->sub_fail_results);
+
             $this->message = Yii::t('app', 'TotalCount : {total_count} , Success : {success_count} , Fail : {fail_count} .', [
                 'total_count' => $this->total_count,
                 'success_count' => $this->success_count,

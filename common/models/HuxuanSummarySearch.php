@@ -18,7 +18,7 @@ class HuxuanSummarySearch extends HuxuanSummary
     public function rules()
     {
         return [
-            [['id', 'male_num', 'female_num', 'description'], 'safe'],
+            [['id', 'activity_id', 'male_num', 'female_num', 'description'], 'safe'],
             [['male_order', 'female_order', 'male_score', 'female_score', 'total_score', 'created_at', 'modified_at'], 'integer'],
         ];
     }
@@ -69,6 +69,7 @@ class HuxuanSummarySearch extends HuxuanSummary
         ]);
 
         $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'activity_id', $this->activity_id])
             ->andFilterWhere(['like', 'male_num', $this->male_num])
             ->andFilterWhere(['like', 'female_num', $this->female_num])
             ->andFilterWhere(['like', 'description', $this->description]);

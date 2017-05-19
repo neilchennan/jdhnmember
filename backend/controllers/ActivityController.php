@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\helper\JdhnCommonHelper;
+use common\service\HuxuanSummaryService;
 use Yii;
 use common\models\Activity;
 use common\models\ActivitySearch;
@@ -184,5 +185,20 @@ class ActivityController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionExecuteSummary($id){
+        $this->layout = 'main-mobile';
+
+        try {
+            $result = HuxuanSummaryService::executeByActivityId($id);
+            var_dump($result);
+        } catch (Exception $e) {
+            $result = new ActionResult(false, $e->getMessage(), $e);
+        }
+
+        return $this->render('/site/result', [
+            'model' => $result,
+        ]);
     }
 }

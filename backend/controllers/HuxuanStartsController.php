@@ -163,10 +163,11 @@ class HuxuanStartsController extends Controller
         }
 
         $queryParams = [
-            'activity_id' => $activity->id,
+//            'activity_id' => $activity->id,
         ];
 
         $searchModel = new HuxuanStartsSearch();
+        $searchModel->activity_id =  $activity->id;
         $dataProvider = $searchModel->search($queryParams);
         $dataProvider->pagination->pageSize = -1;
         $dataProvider->sort->defaultOrder = [

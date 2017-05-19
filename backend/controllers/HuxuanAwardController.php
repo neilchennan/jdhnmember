@@ -179,10 +179,11 @@ class HuxuanAwardController extends Controller
         }
 
         $queryParams = [
-            'activity_id' => $activity->id,
+//            'activity_id' => $activity->id,
         ];
 
         $searchModel = new HuxuanAwardSearch();
+        $searchModel->activity_id = $activity->id;
         $dataProvider = $searchModel->search($queryParams);
         $dataProvider->pagination->pageSize = -1;
         $dataProvider->sort->defaultOrder = [

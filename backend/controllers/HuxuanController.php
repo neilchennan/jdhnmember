@@ -4,6 +4,9 @@ namespace backend\controllers;
 
 use common\helper\JdhnCommonHelper;
 use common\models\Activity;
+use common\models\CommonEnum;
+use common\models\QueryHuxuanForm;
+use common\service\HuxuanService;
 use moonland\phpexcel\Excel;
 use Yii;
 use common\models\Huxuan;
@@ -190,6 +193,58 @@ class HuxuanController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'viewList' => $viewList,
+        ]);
+    }
+
+    public function actionQueryMobile($activity_id){
+        $this->layout = 'main-mobile';
+
+        $model = new QueryHuxuanForm();
+        $model->gender = CommonEnum::GENDER_MALE;
+        $model->from_or_to = 1;
+        $model->activity_id = $activity_id;
+
+        if ($model->load(Yii::$app->request->post())){
+            if ($model->from_or_to == CommonEnum::HUXUAN_TO){
+                $oppGender = $model->gender == CommonEnum::GENDER_MALE ? CommonEnum::GENDER_FEMALE : CommonEnum::GENDER_MALE;
+                $query = Huxuan::find()->where([
+                    'gender' => $oppGender,
+                    'to_num' => $model->num,
+                ]);
+            }
+            else {
+                $query = Huxuan::find()->where([
+                    'gender' => $model->gender,
+                    'from_num' => $model->num,
+                ]);
+            }
+            $huxuanList = $query->all();
+            $msgList = array();
+
+            $oppGender = $model->gender == CommonEnum::GENDER_MALE ? CommonEnum::GENDER_FEMALE : CommonEnum::GENDER_MALE;
+            foreach($huxuanList as $item){
+                $orderStr = JdhnCommonHelper::getRomaNumberByIntValue($item->order);
+                if ($model->from_or_to == CommonEnum::HUXUAN_TO){
+                    $str = HuxuanService::getNegativeMessage($oppGender, $item->from_num, $orderStr);
+                }
+                else {
+                    $str = HuxuanService::getPositiveMessage($oppGender, $item->to_num, $orderStr);
+                }
+                array_push($msgList, $str);
+            }
+            if (!isset($msgList) || sizeof($msgList) == 0){
+                array_push($msgList, Yii::t('app', 'Record Not Found...'));
+            }
+
+            return $this->render('queryMobile', [
+                'model' => $model,
+                'messages' => $msgList,
+            ]);
+        }
+
+        return $this->render('queryMobile', [
+            'model' => $model,
+            'messages' => null,
         ]);
     }
 }

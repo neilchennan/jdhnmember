@@ -6,6 +6,7 @@ use common\helper\JdhnCommonHelper;
 use common\models\Huxuan;
 use common\models\HuxuanAward;
 use common\result\ActionResult;
+use common\service\HuxuanSummaryService;
 use moonland\phpexcel\Excel;
 use Yii;
 use common\models\HuxuanSummary;
@@ -328,6 +329,15 @@ class HuxuanSummaryController extends Controller
                 'total_score', 'description', 'created_at:datetime', 'modified_at:datetime'],
             'headers' => [
             ],
+        ]);
+    }
+
+    public function actionCleanHuxuan($activity_id){
+        $this->layout = 'main-mobile';
+
+        $result = HuxuanSummaryService::cleanAllHuxuanByActivityId($activity_id);
+        return $this->render('/site/result', [
+            'model' => $result,
         ]);
     }
 }

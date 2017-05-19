@@ -30,6 +30,9 @@ return [
     'Activities' =>  '活动列表',
     'Create Activity' => '新建活动',
 
+    'Stars' => '人气嘉宾',
+    'Pair Results' => '配对结果',
+
     'Find Duplicated Huxuan Score Factor.' => '已有重复的互选因子',
     'Huxuan {0} from {1} to {2} at {3}.' => '{0} {1} 选择了 {2} ,时间: {3}',
     'Huxuan {genderStr} from {fromNum} to {toNum} at {timeStr}.' => '{genderStr} {fromNum} 选择了 {toNum} ,时间: {timeStr}',
@@ -216,4 +219,17 @@ return [
     'Are you sure you want to delete this item?' => '您确定要删除该项目吗？',
     'Congratulations! Enroll successfully!' => '恭喜您成功报名',
     'Activity Not Found.' => '未找到该活动',
+    'Clean All Huxuan Summary Now' => '清除所有互选结果',
+    'Clean Huxuan Record By {activity_name} failed.' => '清除 {activity_name} 相关的所有互选记录失败',
+    'Clean Huxuan Record By {activity_name} successfully!' => '清除 {activity_name} 相关的所有互选记录成功!',
+    'Clean All Huxuan' => '清除所有互选记录',
+    'Male{male_num}({male_order_roma}) <=> Female{female_num}({female_order_roma}), Total Score:{total_score}' =>
+        '男{male_num}({male_order_roma}) <=> 女{female_num}({female_order_roma}), 总得分{total_score}',
+    'Other Huxuan Results' => '其他心动结果',
+    'Query Huxuan From' => '查查我选了谁',
+    'Query Huxuan To' => '查查谁选了我',
+    'From Or To' => '要查什么呢?',
+    'Record Not Found...' => '没有找到记录噢...',
+    'I have interest on {genderStr} {num} ({order})!' => '我对{genderStr}{num}({order})号似乎有好感噢!',
+    '{genderStr} {num} ({order}) has interest on me!' => '{genderStr}{num}({order})号对我感觉不错噢!',
 ];

@@ -107,5 +107,23 @@ class HuxuanService extends Huxuan
         ]));
     }
 
+    public static function getPositiveMessage($oppGender, $num, $order){
+        $oppGenderStr = JdhnCommonHelper::getGenderByIntValue($oppGender);
+        $msgStr = Yii::t('app', 'I have interest on {genderStr} {num} ({order})!', [
+            'genderStr' => $oppGenderStr,
+            'num' => $num,
+            'order' => $order,
+        ]);
+        return $msgStr;
+    }
 
+    public static function getNegativeMessage($oppGender, $num, $order){
+        $oppGenderStr = JdhnCommonHelper::getGenderByIntValue($oppGender);
+        $msgStr = Yii::t('app', '{genderStr} {num} ({order}) has interest on me!', [
+            'genderStr' => $oppGenderStr,
+            'num' => $num,
+            'order' => $order,
+        ]);
+        return $msgStr;
+    }
 }

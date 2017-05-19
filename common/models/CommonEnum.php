@@ -17,4 +17,11 @@ final class CommonEnum
     }
     const GENDER_MALE = 1;
     const GENDER_FEMALE = 2;
+
+    const ROMA_FIRST = 'Ⅰ';
+    const ROMA_SECOND = 'Ⅱ';
+    const ROMA_THIRD = 'Ⅲ';
+
+    const HUXUAN_FROM = 2;
+    const HUXUAN_TO = 1;
 }

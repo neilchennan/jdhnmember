@@ -8,6 +8,7 @@
 
 namespace common\service;
 
+use common\models\Activity;
 use Yii;
 use common\helper\JdhnCommonHelper;
 use common\models\CommonEnum;
@@ -223,7 +224,9 @@ class HuxuanSummaryService extends HuxuanSummary
                             'id' => $hs->id,
                             'activity_id' => $hs->activity_id,
                             'male_num' => $hs->male_num,
+                            'male_order' => $hs->male_order,
                             'female_num' => $hs->female_num,
+                            'female_order' => $hs->female_order,
                             'total_score' => $hs->total_score,
                         ]);
                         if (!$newHs->save()){
@@ -255,7 +258,9 @@ class HuxuanSummaryService extends HuxuanSummary
                                 'id' => $hs->id,
                                 'activity_id' => $hs->activity_id,
                                 'male_num' => $hs->male_num,
+                                'male_order' => $hs->male_order,
                                 'female_num' => $hs->female_num,
+                                'female_order' => $hs->female_order,
                                 'total_score' => $hs->total_score,
                             ]);
                             if (!$newHs2->save()){
@@ -272,7 +277,9 @@ class HuxuanSummaryService extends HuxuanSummary
                             'id' => $hs->id,
                             'activity_id' => $hs->activity_id,
                             'male_num' => $hs->male_num,
+                            'male_order' => $hs->male_order,
                             'female_num' => $hs->female_num,
+                            'female_order' => $hs->female_order,
                             'total_score' => $hs->total_score,
                         ]);
                         if (!$newHsSelf->save()){
@@ -287,5 +294,39 @@ class HuxuanSummaryService extends HuxuanSummary
         }
 
         return $totalResult;
+    }
+
+    /**
+     * @param Activity $activity
+     * @return ActionResult
+     */
+    protected static function cleanHuxuanByActivityId(Activity $activity){
+        if(!Huxuan::deleteAll('activity_id = :activity_id', [':activity_id' => $activity->id,])){
+            return new ActionResult(false, Yii::t('app', 'Clean Huxuan Record By {activity_name} failed.', [
+                'activity_name' => $activity->activity_name,
+            ]));
+        }
+        return new ActionResult(true, Yii::t('app', 'Clean Huxuan Record By {activity_name} successfully!', [
+            'activity_name' => $activity->activity_name,
+        ]));
+    }
+
+    /**
+     * @param $activity_id
+     * @return ActionResult
+     */
+    public static function cleanAllHuxuanByActivityId($activity_id)
+    {
+        if (empty($activity_id)){
+            return new ActionResult(false, Yii::t('app', 'Activity Not Found.'));
+        }
+        $activity = Activity::findOne([
+            'id' => $activity_id,
+        ]);
+        if (!isset($activity)){
+            return new ActionResult(false, Yii::t('app', 'Activity Not Found.'));
+        }
+
+        return self::cleanHuxuanByActivityId($activity);
     }
 }

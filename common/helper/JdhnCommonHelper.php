@@ -8,6 +8,7 @@
 
 namespace common\helper;
 
+use common\models\CommonEnum;
 use Yii;
 
 class JdhnCommonHelper
@@ -26,6 +27,37 @@ class JdhnCommonHelper
             return $uuid;
         }
     }
+
+    //region 我选谁谁选我
+    public static function getHuxuanFromTo_map(){
+        return [
+            CommonEnum::HUXUAN_TO => Yii::t('app', 'Query Huxuan To'),
+            CommonEnum::HUXUAN_FROM => Yii::t('app', 'Query Huxuan From'),
+        ];
+    }
+    public static function getHuxuanFromToByIntValue($intValue){
+        if (!isset($intValue)){
+            return null;
+        }
+        return JdhnCommonHelper::getHuxuanFromTo_map()[$intValue];
+    }
+    //endregion
+
+    //region 数字和罗马数字的转换
+    public static function getRomaNumber_map(){
+        return [
+            1 => CommonEnum::ROMA_FIRST,
+            2 => CommonEnum::ROMA_SECOND,
+            3 => CommonEnum::ROMA_THIRD,
+        ];
+    }
+    public static function getRomaNumberByIntValue($intValue){
+        if (!isset($intValue)){
+            return null;
+        }
+        return JdhnCommonHelper::getRomaNumber_map()[$intValue];
+    }
+    //endregion
 
     //region 性别int和string值互换查询
     public static function getGender_map(){

@@ -44,22 +44,24 @@ $this->params['breadcrumbs'][] = $this->title;
 <ul data-role="listview" data-inset="true">
     <li data-icon="star">
         <a href="/huxuan-award/mobile-list-by-activity-id?id=<?= $model->id?>" data-ajax='false'>
-            <h2>互选授奖结果</h2>
+            <h2><?= Yii::t('app', 'Pair Results')?></h2>
             <span class="ui-li-count"><?= $model->getAwardCount()?></span>
         </a>
     </li>
     <li data-icon="heart">
         <a href="/huxuan-starts/mobile-list-by-activity-id?id=<?= $model->id?>" data-ajax='false'>
-            <h2>万人迷</h2>
+            <h2><?= Yii::t('app', 'Stars')?></h2>
             <span class="ui-li-count"><?= $model->getStarsCount()?></span>
         </a>
     </li>
     <li data-icon="mail">
-        <a href="/huxuan/mobile-list-by-activity-id?id=<?= $model->id?>" data-ajax='false'>
-            <h2>互选详细结果</h2>
+<!--        <a href="/huxuan/mobile-list-by-activity-id?id=--><?//= $model->id?><!--" data-ajax='false'>-->
+            <a href="/huxuan/query-mobile?activity_id=<?= $model->id?>" data-ajax='false'>
+            <h2><?= Yii::t('app', 'Other Huxuan Results')?></h2>
             <span class="ui-li-count"><?= $model->getHuxuanCount()?></span>
         </a>
     </li>
 </ul>
 
-<a href="execute-summary?id=<?= $model->id?>" class="ui-btn" data-ajax='false'><?= Yii::t('app', 'Execute Huxuan Summary Now')?></a>
+<a href="execute-summary?id=<?= $model->id?>" class="ui-btn ui-icon-grid ui-btn-icon-left" data-ajax='false'><?= Yii::t('app', 'Execute Huxuan Summary Now')?></a>
+<a href="/huxuan-summary/clean-huxuan?activity_id=<?= $model->id?>" class="ui-btn ui-icon-delete ui-btn-icon-left" data-ajax='false'><?= Yii::t('app', 'Clean All Huxuan')?></a>

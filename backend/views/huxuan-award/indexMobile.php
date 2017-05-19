@@ -13,7 +13,7 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $activityList array */
 
-$this->title = Yii::t('app', 'Huxuan Awards');
+$this->title = Yii::t('app', 'Pair Results');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

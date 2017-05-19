@@ -26,6 +26,7 @@ class ActivityController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'delete-mobile' => ['POST'],
                 ],
             ],
         ];
@@ -110,6 +111,21 @@ class ActivityController extends Controller
         }
     }
 
+    public function actionUpdateMobile($id)
+    {
+        $this->layout = 'main-mobile';
+
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view-mobile', 'id' => $model->id]);
+        } else {
+            return $this->render('updateMobile', [
+                'model' => $model,
+            ]);
+        }
+    }
+
     /**
      * Deletes an existing Activity model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -121,6 +137,13 @@ class ActivityController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionDeleteMobile($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index-mobile']);
     }
 
     /**
@@ -179,9 +202,9 @@ class ActivityController extends Controller
         }
 
         if ($model->save()) {
-            return $this->redirect(['viewMobile', 'id' => $model->id]);
+            return $this->redirect(['view-mobile', 'id' => $model->id]);
         } else {
-            return $this->render('createMobile', [
+            return $this->render('create-mobile', [
                 'model' => $model,
             ]);
         }

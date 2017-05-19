@@ -212,4 +212,8 @@ return [
     '{0} person has enrolled.' => '{0} 人已报名',
     ' Num{from} selected Num{to} in order{order}, score:{score} .' => '{from}号第{order}顺位选择{to}号,得分:{score}',
     '{gender} {num} is selected {times} times.' => '{gender} {num}号被选择了{times}次',
+    'No any action executed.' => '没有任何可执行的操作',
+    'Are you sure you want to delete this item?' => '您确定要删除该项目吗？',
+    'Congratulations! Enroll successfully!' => '恭喜您成功报名',
+    'Activity Not Found.' => '未找到该活动',
 ];

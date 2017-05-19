@@ -8,6 +8,11 @@ body {
     font-size: large;
     text-align: center;
 }
+.jdhnsubtitle {
+    color: #ce8483;
+    font-size: small;
+    text-align: right;
+}
 .control-label {
     color: #ce8483;
 }

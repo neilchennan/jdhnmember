@@ -16,6 +16,10 @@ class CustomerCreateForm extends Model
     /**
      * @var string
      */
+    public $activity_id;
+    /**
+     * @var string
+     */
     public $my_num;
 
     /**

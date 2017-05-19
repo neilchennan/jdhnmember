@@ -9,12 +9,6 @@ use yii\jui\DatePicker;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<script type="text/javascript">
-    $(function () {
-//        $("#datepicker").datepicker();
-    });
-</script>
-
 <div class="activity-form">
     <?php $form = ActiveForm::begin(); ?>
 
@@ -29,16 +23,6 @@ use yii\jui\DatePicker;
             'data-mini' => true,
         ])
     ?>
-
-    <?= $form->field($model, 'start_time')->widget(DatePicker::classname(), [
-        //'language' => 'ru',
-        //'dateFormat' => 'yyyy-MM-dd',
-    ]) ?>
-
-    <?= $form->field($model, 'end_time')->widget(DatePicker::classname(), [
-        //'language' => 'ru',
-        //'dateFormat' => 'yyyy-MM-dd',
-    ]) ?>
 
     <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
 

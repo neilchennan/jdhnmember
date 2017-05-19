@@ -54,7 +54,9 @@ class CustomerController extends Controller
         ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->render('congratulation');
+            return $this->render('congratulation', [
+                'message' => ''
+            ]);
         } else {
             return $this->render('createEnroll', [
                 'model' => $model,
@@ -96,7 +98,7 @@ class CustomerController extends Controller
 
     public function actionCongratulation($message){
         return $this->render('congratulation', [
-            'message' => $message
+            'message' => $message,
         ]);
     }
 }

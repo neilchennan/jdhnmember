@@ -9,11 +9,13 @@ use yii\bootstrap\ActiveForm;
 
 <ul data-role="listview" data-filter="true" data-autodividers="false" data-inset="true">
     <?php
-    foreach($model->sub_results as $listItem){ ?>
-        <li>
-            <?= $listItem->message?>
-        </li>
-    <?php }
+    if (isset($model->sub_results)){
+        foreach($model->sub_results as $listItem){ ?>
+            <li>
+                <?= $listItem->message?>
+            </li>
+        <?php }
+    }
     ?>
 </ul>
 

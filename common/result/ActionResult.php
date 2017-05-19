@@ -103,7 +103,13 @@ class ActionResult extends Object
     {
         parent::__construct();
         $this->isSuccess = $isSuccess;
-        $this->message = $message;
+        if (empty($message)){
+            $this->message = Yii::t('app', 'No any action executed.');
+        }
+        else {
+            $this->message = $message;
+        }
+
         $this->exception = $exception;
 
         $this->selfComplete();

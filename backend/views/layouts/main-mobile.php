@@ -29,11 +29,11 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 <div data-role="page" id="mainpage">
     <div data-role="header" data-position="fixed"  data-theme="b">
-        <a href="#" id="backBtnOnToolbar" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-left ui-shadow" data-rel="back">
+        <a href="#" id="backBtnOnToolbar" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-left ui-shadow" data-rel="back" data-ajax='false'>
             <?= Yii::t('app', 'Back')?>
         </a>
         <h1><?= Html::encode($this->title) ?></h1>
-        <a href="/activity/index-mobile" id="rightBtnOnToolbar" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-left ui-shadow">
+        <a href="/activity/index-mobile" id="rightBtnOnToolbar" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-left ui-shadow" data-ajax='false'>
             <?= Yii::t('app', 'Home')?>
         </a>
     </div>
@@ -45,9 +45,9 @@ AppAsset::register($this);
     <div data-role="footer" data-position="fixed" >
         <div data-role="navbar">
             <ul>
-                <li><a href="/activity/index-mobile" data-icon="home"><?= Yii::t('app', 'Home')?></a></li>
-                <li><a href="/activity/create-mobile" data-icon="plus"><?= Yii::t('app', 'Create')?></a></li>
-                <li><a href="/huxuan-score-factor/index-mobile" data-icon="gear"><?= Yii::t('app', 'Options')?></a></li>
+                <li><a href="/activity/index-mobile" data-icon="home" data-ajax='false'><?= Yii::t('app', 'Home')?></a></li>
+                <li><a href="/activity/create-mobile" data-icon="plus" data-ajax='false'><?= Yii::t('app', 'Create')?></a></li>
+                <li><a href="/huxuan-score-factor/index-mobile" data-icon="gear" data-ajax='false'><?= Yii::t('app', 'Options')?></a></li>
             </ul>
         </div>
     </div>

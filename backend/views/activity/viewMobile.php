@@ -55,7 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
         </a>
     </li>
     <li data-icon="mail">
-<!--        <a href="/huxuan/mobile-list-by-activity-id?id=--><?//= $model->id?><!--" data-ajax='false'>-->
             <a href="/huxuan/query-mobile?activity_id=<?= $model->id?>" data-ajax='false'>
             <h2><?= Yii::t('app', 'Other Huxuan Results')?></h2>
             <span class="ui-li-count"><?= $model->getHuxuanCount()?></span>

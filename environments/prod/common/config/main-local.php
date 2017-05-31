@@ -10,6 +10,13 @@ return [
             'password' => 'Nihao1111',
             'charset' => 'utf8',
         ],
+        'db2' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=139.196.222.233;dbname=jdhn',     //数据库hyii
+            'username' => 'root',
+            'password' => 'Dear!Love@wsy#0',
+            'charset' => 'utf8',
+        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@common/mail',

@@ -33,6 +33,19 @@ return [
     'Stars' => '人气嘉宾',
     'Pair Results' => '配对结果',
 
+    'Jdhn Keywords' => '关键字',
+    'Create Jdhn Keyword' => '新建关键字',
+    'Kw Group' => '关键字组',
+    'Kw Desc' => '关键字描述',
+    'Kw Time' => '创建时间',
+    'Kw ID' => '关键字ID',
+
+    'Jdhn Activities' => 'app活动列表',
+    'Create Jdhn Activity' => '新建app活动',
+    'Act ID' => '活动编号',
+    'Act Title' => '活动名称',
+    'Act City' => '活动城市',
+
     'Find Duplicated Huxuan Score Factor.' => '已有重复的互选因子',
     'Huxuan {0} from {1} to {2} at {3}.' => '{0} {1} 选择了 {2} ,时间: {3}',
     'Huxuan {genderStr} from {fromNum} to {toNum} at {timeStr}.' => '{genderStr} {fromNum} 选择了 {toNum} ,时间: {timeStr}',

@@ -12,11 +12,14 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="enroll-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-        'activities' => $activities,
-    ]) ?>
-
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title"><? echo Yii::t('app', 'Please fill related information:')?></h3>
+        </div>
+        <div class="box-body">
+            <?= $this->render('_form', [
+                'model' => $model,
+                'activities' => $activities,
+            ]) ?>
+        </div>
 </div>

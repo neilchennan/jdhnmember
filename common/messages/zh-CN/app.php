@@ -232,4 +232,5 @@ return [
     'Record Not Found...' => '没有找到记录噢...',
     'I have interest on {genderStr} {num} ({order})!' => '我对{genderStr}{num}({order})号似乎有好感噢!',
     '{genderStr} {num} ({order}) has interest on me!' => '{genderStr}{num}({order})号对我感觉不错噢!',
+    'Please fill related information:' => '请输入相关信息',
 ];

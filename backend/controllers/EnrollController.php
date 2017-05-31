@@ -156,4 +156,31 @@ class EnrollController extends Controller
 
         return $this->redirect(['view', 'id' => $id]);
     }
+
+    public function actionDindex(){
+        $this->layout = 'main-dynamic';
+
+        return $this->render('dindex', [
+        ]);
+    }
+
+    public function actionDcreate(){
+//        $this->layout = 'main-dynamic';
+        $model = new Enroll();
+
+        $activities = ArrayHelper::map(Activity::find()->all(), 'id', 'activity_name');
+
+        $model->id = JdhnCommonHelper::createGuid();
+        $model->created_at = time();
+        $model->modified_at = $model->created_at;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('dcreate', [
+                'model' => $model,
+                'activities' => $activities,
+            ]);
+        }
+    }
 }

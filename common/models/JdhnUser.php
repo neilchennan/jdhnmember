@@ -36,7 +36,9 @@ use Yii;
  * @property JdhnActComment[] $jdhnActComments
  * @property JdhnEnrollment[] $jdhnEnrollments
  * @property JdhnOrder[] $jdhnOrders
- * @property JdhnKeyword $uGender
+ * @property JdhnKeyword $u_gender_keyword
+ * @property JdhnKeyword $u_academic_keyword
+ * @property JdhnKeyword $u_salary_keyword
  */
 class JdhnUser extends \yii\db\ActiveRecord
 {
@@ -73,6 +75,8 @@ class JdhnUser extends \yii\db\ActiveRecord
             [['u_school', 'u_city'], 'string', 'max' => 60],
             [['u_idCardNo'], 'string', 'max' => 31],
             [['u_gender'], 'exist', 'skipOnError' => true, 'targetClass' => JdhnKeyword::className(), 'targetAttribute' => ['u_gender' => 'kw_id']],
+            [['u_academic'], 'exist', 'skipOnError' => true, 'targetClass' => JdhnKeyword::className(), 'targetAttribute' => ['u_academic' => 'kw_id']],
+            [['u_salary'], 'exist', 'skipOnError' => true, 'targetClass' => JdhnKeyword::className(), 'targetAttribute' => ['u_salary' => 'kw_id']],
         ];
     }
 
@@ -137,8 +141,25 @@ class JdhnUser extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUGender()
+    public function getU_gender_keyword()
     {
         return $this->hasOne(JdhnKeyword::className(), ['kw_id' => 'u_gender']);
+    }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getU_academic_keyword()
+    {
+        return $this->hasOne(JdhnKeyword::className(), ['kw_id' => 'u_academic']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getU_salary_keyword()
+    {
+        return $this->hasOne(JdhnKeyword::className(), ['kw_id' => 'u_salary']);
     }
 }

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\helper\JdhnCommonHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\JdhnUserSearch */
@@ -22,23 +23,45 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pager'=>[
+            //'options'=>['class'=>'hidden']//关闭自带分页
+            'firstPageLabel'=>Yii::t('app', 'First'),
+            'prevPageLabel'=>Yii::t('app', 'Prev'),
+            'nextPageLabel'=>Yii::t('app', 'Next'),
+            'lastPageLabel'=>Yii::t('app', 'Last'),
+        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'u_id',
+//            'u_id',
 //            'u_pwd',
 //            'u_realName',
 //            'u_wechat3',
 //            'u_wechat2',
-            // 'u_nickName',
+             'u_nickName',
             // 'u_portrait',
              'u_mobile',
              'u_regTime',
-             'u_gender',
-             'u_academic',
+            [
+                'attribute' => 'u_gender',
+                'value' => 'u_gender_keyword.kw_desc',
+                'filter' => JdhnCommonHelper::getUGender_map(),
+            ],
+            [
+                'attribute' => 'u_academic',
+                'value' => 'u_academic_keyword.kw_desc',
+                'filter' => JdhnCommonHelper::getUAcademic_map(),
+            ],
             // 'u_school',
              'u_city',
-             'u_state',
+            [
+                'attribute' => 'u_state',
+//                'value' => 'u_state_keyword.kw_desc',
+                'value' => function($model){
+                    return JdhnCommonHelper::getUStateStr($model->u_state);
+                },
+                'filter' => JdhnCommonHelper::getUState_map(),
+            ],
             // 'u_birthday',
             // 'u_salary',
             // 'u_height',

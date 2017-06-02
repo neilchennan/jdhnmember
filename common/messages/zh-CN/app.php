@@ -75,6 +75,9 @@ return [
     'U Worker Img' => '工作证明照片',
     'U Jpush' => 'Jpush',
     'U Comment' => '描述',
+    'User Details' => '用户详细信息',
+
+    'View Pictures' => '查看图片',
 
     'Find Duplicated Huxuan Score Factor.' => '已有重复的互选因子',
     'Huxuan {0} from {1} to {2} at {3}.' => '{0} {1} 选择了 {2} ,时间: {3}',
@@ -253,6 +256,14 @@ return [
     'Fail 408' => '超时',
     'Fail 410' => '资源已删除',
     'Fail 415' => '媒体类型不支持',
+
+    'U State Unauthorized' => '未认证',
+    'U State Authorized' => '已认证',
+    'U State Authorizing' => '认证中',
+    'U State Academic Authorized' => '学历已认证',
+    'U State Identity Authorized' => '身份已认证',
+    'U State Work Authorized' => '工作已认证',
+    'U State In Black List' => '已拉黑',
 
     'Status Code Not Found' => '状态码未找到',
     '{0} person has enrolled.' => '{0} 人已报名',

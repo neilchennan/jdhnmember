@@ -10,7 +10,6 @@ namespace common\helper;
 
 use common\models\CommonEnum;
 use common\models\JdhnKeyword;
-use common\models\JdhnKeywordSearch;
 use Yii;
 
 class JdhnCommonHelper
@@ -270,12 +269,12 @@ class JdhnCommonHelper
 
     //region 得到所有城市键值对
     public static function getCityKeyword_map(){
-        $cities = JdhnKeywordSearch::findAll([
+        $keywords = JdhnKeyword::findAll([
             'kw_group' => 'act_city',
         ]);
         $returnArr = array();
-        foreach($cities as $city){
-            $returnArr[$city->kw_id] = $city->kw_desc;
+        foreach($keywords as $element){
+            $returnArr[$element->kw_id] = $element->kw_desc;
         }
         return $returnArr;
     }
@@ -283,14 +282,85 @@ class JdhnCommonHelper
 
     //region 得到所有活动状态键值对
     public static function getActState_map(){
-        $actStateList = JdhnKeywordSearch::findAll([
+        $keywords = JdhnKeyword::findAll([
             'kw_group' => 'act_state',
         ]);
         $returnArr = array();
-        foreach($actStateList as $actState){
-            $returnArr[$actState->kw_id] = $actState->kw_desc;
+        foreach($keywords as $element){
+            $returnArr[$element->kw_id] = $element->kw_desc;
         }
         return $returnArr;
+    }
+    //endregion
+
+    //region 得到学历键值对
+    public static function getUAcademic_map(){
+        $keywords = JdhnKeyword::findAll([
+            'kw_group' => 'academic',
+        ]);
+        $returnArr = array();
+        foreach($keywords as $element){
+            $returnArr[$element->kw_id] = $element->kw_desc;
+        }
+        return $returnArr;
+    }
+    //endregion
+
+    //region 得到性别键值对
+    public static function getUGender_map(){
+        $keywords = JdhnKeyword::findAll([
+            'kw_group' => 'gender',
+        ]);
+        $returnArr = array();
+        foreach($keywords as $element){
+            $returnArr[$element->kw_id] = $element->kw_desc;
+        }
+        return $returnArr;
+    }
+    //endregion
+
+    //region 得到用户收入区间键值对
+    public static function getUSalary_map(){
+        $keywords = JdhnKeyword::findAll([
+            'kw_group' => 'salary',
+        ]);
+        $returnArr = array();
+        foreach($keywords as $element){
+            $returnArr[$element->kw_id] = $element->kw_desc;
+        }
+        return $returnArr;
+    }
+    //endregion
+
+    //region 得到用户状态int和string键值对
+    public static function getUState_map(){
+        return [
+            1 => Yii::t('app', 'U State Unauthorized'),
+//            14 => Yii::t('app', 'U State Authorized'),
+            2 => Yii::t('app', 'U State Academic Authorized'),
+            4 => Yii::t('app', 'U State Identity Authorized'),
+            8 => Yii::t('app', 'U State Work Authorized'),
+            16 => Yii::t('app', 'U State In Black List'),
+            32 => Yii::t('app', 'U State Authorizing'),
+        ];
+    }
+    public static function getUStatusByIntValue($intValue){
+        if (!isset($intValue)){
+            return null;
+        }
+        return JdhnCommonHelper::getUState_map()[$intValue];
+    }
+    public static function getUStateStr($state){
+        $stateStrArr = array();
+        $map = self::getUState_map();
+        foreach($map as $mKey => $mValue){
+            //此处采用与操作，分别与 1,2,3,8,16,32做与操作，有为true则代表有这个认证
+            if ($state & $mKey){
+                array_push($stateStrArr, $mValue);
+            }
+        }
+        $returnStr = implode('、', $stateStrArr);
+        return $returnStr;
     }
     //endregion
 }

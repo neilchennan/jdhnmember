@@ -9,6 +9,8 @@
 namespace common\helper;
 
 use common\models\CommonEnum;
+use common\models\JdhnKeyword;
+use common\models\JdhnKeywordSearch;
 use Yii;
 
 class JdhnCommonHelper
@@ -265,4 +267,30 @@ class JdhnCommonHelper
             return mb_substr($str, 0, $strLength, 'utf-8');
         return mb_substr($str, 0, $max_length, 'utf-8') . $suffix;
     }
+
+    //region 得到所有城市键值对
+    public static function getCityKeyword_map(){
+        $cities = JdhnKeywordSearch::findAll([
+            'kw_group' => 'act_city',
+        ]);
+        $returnArr = array();
+        foreach($cities as $city){
+            $returnArr[$city->kw_id] = $city->kw_desc;
+        }
+        return $returnArr;
+    }
+    //endregion
+
+    //region 得到所有活动状态键值对
+    public static function getActState_map(){
+        $actStateList = JdhnKeywordSearch::findAll([
+            'kw_group' => 'act_state',
+        ]);
+        $returnArr = array();
+        foreach($actStateList as $actState){
+            $returnArr[$actState->kw_id] = $actState->kw_desc;
+        }
+        return $returnArr;
+    }
+    //endregion
 }

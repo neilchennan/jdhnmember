@@ -34,6 +34,8 @@ use Yii;
  * @property string $act_richText_idx
  * @property string $act_address_idx
  * @property string $act_notice
+ * @property JdhnKeyword $state_keyword
+ * @property JdhnKeyword $city_keyword
  */
 class JdhnActivity extends \yii\db\ActiveRecord
 {
@@ -108,5 +110,21 @@ class JdhnActivity extends \yii\db\ActiveRecord
             'act_address_idx' => Yii::t('app', 'Act Address Idx'),
             'act_notice' => Yii::t('app', 'Act Notice'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getState_keyword()
+    {
+        return $this->hasOne(JdhnKeyword::className(), ['kw_id' => 'act_state']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCity_keyword()
+    {
+        return $this->hasOne(JdhnKeyword::className(), ['kw_id' => 'act_city']);
     }
 }

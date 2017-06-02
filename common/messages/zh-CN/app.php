@@ -45,6 +45,9 @@ return [
     'Act ID' => '活动编号',
     'Act Title' => '活动名称',
     'Act City' => '活动城市',
+    'Act Begin Time' => '活动日期',
+    'Act Create Time' => '发布日期',
+    'Act State' => '活动状态',
 
     'Find Duplicated Huxuan Score Factor.' => '已有重复的互选因子',
     'Huxuan {0} from {1} to {2} at {3}.' => '{0} {1} 选择了 {2} ,时间: {3}',

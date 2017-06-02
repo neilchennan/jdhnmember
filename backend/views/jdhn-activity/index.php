@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use common\helper\JdhnCommonHelper;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\JdhnActivitySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -27,18 +27,29 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'act_id',
             'act_title',
-            'act_detail',
-            'act_richText:ntext',
-            'act_richText_html:ntext',
-            // 'act_city',
+//            'act_detail',
+//            'act_richText:ntext',
+//            'act_richText_html:ntext',
+//             'act_city',
+            [
+                'attribute' => 'act_city',
+                'value' => 'city_keyword.kw_desc',
+                'label' => Yii::t('app', 'Act City'),
+                'filter' => JdhnCommonHelper::getCityKeyword_map(),
+            ],
             // 'act_address',
             // 'act_p_uLimit',
             // 'act_p_dLimit',
-            // 'act_beginTime',
+             'act_beginTime',
             // 'act_endTime',
-            // 'act_createTime',
+             'act_createTime',
             // 'act_type',
-            // 'act_state',
+            [
+                'attribute' => 'act_state',
+                'value' => 'state_keyword.kw_desc',
+                'label' => Yii::t('app', 'Act State'),
+                'filter' => JdhnCommonHelper::getActState_map(),
+            ],
             // 'act_price',
             // 'act_fee',
             // 'act_thumb',

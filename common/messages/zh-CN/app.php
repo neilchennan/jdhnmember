@@ -79,6 +79,10 @@ return [
 
     'View Pictures' => '查看图片',
 
+    'Jdhn Orders' => '订单列表',
+
+    'Jdhn Enrollments' => '报名列表',
+
     'Find Duplicated Huxuan Score Factor.' => '已有重复的互选因子',
     'Huxuan {0} from {1} to {2} at {3}.' => '{0} {1} 选择了 {2} ,时间: {3}',
     'Huxuan {genderStr} from {fromNum} to {toNum} at {timeStr}.' => '{genderStr} {fromNum} 选择了 {toNum} ,时间: {timeStr}',

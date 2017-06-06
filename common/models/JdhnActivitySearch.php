@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\helper\JdhnCommonHelper;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -48,6 +49,10 @@ class JdhnActivitySearch extends JdhnActivity
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => JdhnCommonHelper::DEFAULT_PAGE_SIZE,
+            ],
+            'sort'=> ['defaultOrder' => ['act_createTime'=>SORT_DESC]],
         ]);
 
         $this->load($params);

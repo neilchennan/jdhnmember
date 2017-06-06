@@ -15,17 +15,53 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Jdhn Activity'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="btn-group">
+        <a class="btn btn-app disabled" href="create">
+            <i class="fa fa-plus"></i> <? echo Yii::t('app', 'Create')?>
+        </a>
+        <a class="btn btn-app">
+            <i class="fa fa-edit"></i> <? echo Yii::t('app', 'Edit')?>
+        </a>
+        <a id="deleteBtn" class="btn btn-app" onclick="on_deleteBtnClicked()">
+            <i class="fa fa-minus"></i> <? echo Yii::t('app', 'Delete')?>
+        </a>
+    </div>
+
+    <script type="text/javascript">
+        function on_deleteBtnClicked(){
+//            alert('on_deleteBtnClicked');
+            var keys = $("#jdhnActivityGrid").yiiGridView("getSelectedRows");
+            var str = '您选择了' + keys.length + '条数据，但是删除是不允许的哦！';
+            alert(str);
+        }
+    </script>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pager' => [
+            //'options'=>['class'=>'hidden']//关闭自带分页
+            'firstPageLabel' => Yii::t('app', 'First'),
+            'prevPageLabel' => Yii::t('app', 'Prev'),
+            'nextPageLabel' => Yii::t('app', 'Next'),
+            'lastPageLabel' => Yii::t('app', 'Last'),
+        ],
+        "options" => [
+            // ...其他设置项
+            "id" => "jdhnActivityGrid",
+        ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'act_id',
+//            ['class' => 'yii\grid\SerialColumn'],
+            [
+                "class" => "yii\grid\CheckboxColumn",
+                "name" => "checkbox_id",
+            ],
+            [
+                'attribute' => 'act_id',
+                'label' => Yii::t('app', 'Number'),
+                'headerOptions' => ['width' => '30'],
+            ],
+//            'act_id',
             'act_title',
 //            'act_detail',
 //            'act_richText:ntext',
@@ -49,6 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'state_keyword.kw_desc',
                 'label' => Yii::t('app', 'Act State'),
                 'filter' => JdhnCommonHelper::getActState_map(),
+                'headerOptions' => ['width' => '80'],
             ],
             // 'act_price',
             // 'act_fee',
@@ -63,8 +100,22 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'act_richText_idx:ntext',
             // 'act_address_idx',
             // 'act_notice:ntext',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'format' => 'raw',
+                'value' => function ($data) {
+                    $length = count($data->jdhnEnrollments);
+                    $act_id = $data->act_id;
+                    $act_title = $data->act_title;
+                    $hrefUrl = "/jdhn-enrollment/index?JdhnEnrollmentSearch%5Bact_id%5D={$act_id}&JdhnEnrollmentSearch%5Bactivity_title%5D={$act_title}";
+                    return "<a href={$hrefUrl}>{$length}</a>";
+                },
+                'label' => Yii::t('app', 'Enroll Number'),
+                'headerOptions' => ['width' => '80'],
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}',
+            ],
         ],
     ]); ?>
 </div>

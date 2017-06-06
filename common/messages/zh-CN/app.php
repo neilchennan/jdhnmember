@@ -82,6 +82,16 @@ return [
     'Jdhn Orders' => '订单列表',
 
     'Jdhn Enrollments' => '报名列表',
+    'Enroll ID' => '报名编号',
+    'Enroll Name' => '报名人',
+    'Enroll Gender' => '报名人性别',
+    'Enroll Birthday' => '报名人生日',
+    'Enroll School' => '报名人学校',
+    'Enroll Work' => '报名人工作',
+    'Enroll Height' => '报名人身高',
+    'Enroll Signup Time' => '报名时间',
+    'Enroll State' => '报名状态',
+    'Enroll Cust Form Info' => '报名表单信息',
 
     'Find Duplicated Huxuan Score Factor.' => '已有重复的互选因子',
     'Huxuan {0} from {1} to {2} at {3}.' => '{0} {1} 选择了 {2} ,时间: {3}',
@@ -226,6 +236,17 @@ return [
     'Back' => '后退',
     'Create' => '创建',
     'Options' => '选项',
+    'Birthday' => '生日',
+    'Work' => '工作',
+
+    'App Backend Management' => 'APP后台数据管理',
+    'User' => '用户',
+    'Enroll' => '报名',
+    'Order' => '订单',
+    'Message' => '消息',
+    'Activity' => '活动',
+    'Number' => '编号',
+    'Enroll Number' => '报名人数',
 
     'Remark' => '备注',
     'Set Enroll Status' => '设置报名状态',
@@ -291,4 +312,7 @@ return [
     'I have interest on {genderStr} {num} ({order})!' => '我对{genderStr}{num}({order})号似乎有好感噢!',
     '{genderStr} {num} ({order}) has interest on me!' => '{genderStr}{num}({order})号对我感觉不错噢!',
     'Please fill related information:' => '请输入相关信息',
+
+    'No Record founded' => '找不到记录啦怎么破怎么破。。。',
+    'Activity Name...' => '活动名称...'
 ];

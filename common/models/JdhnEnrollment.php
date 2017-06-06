@@ -24,6 +24,7 @@ use Yii;
  * @property JdhnKeyword $enrollState
  * @property JdhnUser $u
  * @property JdhnOrder[] $jdhnOrders
+ * @property JdhnActivity $jdhnActivity
  */
 class JdhnEnrollment extends \yii\db\ActiveRecord
 {
@@ -113,5 +114,13 @@ class JdhnEnrollment extends \yii\db\ActiveRecord
     public function getJdhnOrders()
     {
         return $this->hasMany(JdhnOrder::className(), ['enroll_id' => 'enroll_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getJdhnActivity()
+    {
+        return $this->hasOne(JdhnActivity::className(), ['act_id' => 'act_id']);
     }
 }

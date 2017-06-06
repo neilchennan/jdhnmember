@@ -36,6 +36,7 @@ use Yii;
  * @property string $act_notice
  * @property JdhnKeyword $state_keyword
  * @property JdhnKeyword $city_keyword
+ * @property JdhnEnrollment[] $jdhnEnrollments
  */
 class JdhnActivity extends \yii\db\ActiveRecord
 {
@@ -126,5 +127,13 @@ class JdhnActivity extends \yii\db\ActiveRecord
     public function getCity_keyword()
     {
         return $this->hasOne(JdhnKeyword::className(), ['kw_id' => 'act_city']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getJdhnEnrollments()
+    {
+        return $this->hasMany(JdhnEnrollment::className(), ['act_id' => 'act_id']);
     }
 }

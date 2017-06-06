@@ -14,6 +14,8 @@ use Yii;
 
 class JdhnCommonHelper
 {
+    const DEFAULT_PAGE_SIZE = 10;
+
     public static function createGuid()
     {
         if (function_exists('com_create_guid')){
@@ -323,6 +325,19 @@ class JdhnCommonHelper
     public static function getUSalary_map(){
         $keywords = JdhnKeyword::findAll([
             'kw_group' => 'salary',
+        ]);
+        $returnArr = array();
+        foreach($keywords as $element){
+            $returnArr[$element->kw_id] = $element->kw_desc;
+        }
+        return $returnArr;
+    }
+    //endregion
+
+    //region 得到报名状态键值对
+    public static function getAppEnrollState_map(){
+        $keywords = JdhnKeyword::findAll([
+            'kw_group' => 'enroll_state',
         ]);
         $returnArr = array();
         foreach($keywords as $element){

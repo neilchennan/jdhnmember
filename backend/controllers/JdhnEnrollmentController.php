@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\JdhnActivity;
 use Yii;
 use common\models\JdhnEnrollment;
 use common\models\JdhnEnrollmentSearch;
@@ -38,9 +39,18 @@ class JdhnEnrollmentController extends Controller
         $searchModel = new JdhnEnrollmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $acvitiyTitles = array();
+        $active_activities = JdhnActivity::find()->where([
+            'in', 'act_state', [250, 251, 252, 253, 254, 255, 256]
+        ])->all();
+        foreach($active_activities as $act){
+            array_push($acvitiyTitles, $act->act_title);
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'acvitiyTitles' => $acvitiyTitles,
         ]);
     }
 

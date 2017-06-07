@@ -33,7 +33,6 @@ if (Yii::$app->controller->action->id === 'login') {
         <meta charset="<?= Yii::$app->charset ?>"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
-        <script src="https://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>

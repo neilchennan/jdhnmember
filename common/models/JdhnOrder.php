@@ -39,6 +39,7 @@ use Yii;
  * @property JdhnKeyword $ordState
  * @property JdhnUser $u
  * @property JdhnOrderComment[] $jdhnOrderComments
+ * @property JdhnActivity $jdhnActivity
  */
 class JdhnOrder extends \yii\db\ActiveRecord
 {
@@ -114,6 +115,9 @@ class JdhnOrder extends \yii\db\ActiveRecord
             'wechat_time_end' => Yii::t('app', 'Wechat Time End'),
             'ord_fee' => Yii::t('app', 'Ord Fee'),
             'ord_detail' => Yii::t('app', 'Ord Detail'),
+            //added by Neil
+            'u' => Yii::t('app', 'U Nick Name'),
+            'jdhnActivity' => Yii::t('app', 'Activity Name'),
         ];
     }
 
@@ -155,5 +159,13 @@ class JdhnOrder extends \yii\db\ActiveRecord
     public function getJdhnOrderComments()
     {
         return $this->hasMany(JdhnOrderComment::className(), ['ord_id' => 'ord_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getJdhnActivity()
+    {
+        return $this->hasOne(JdhnActivity::className(), ['act_id' => 'act_id']);
     }
 }

@@ -13,6 +13,11 @@ use common\models\JdhnOrder;
  */
 class JdhnOrderSearch extends JdhnOrder
 {
+    //add related table Activity's name query
+//    /**
+//     * @var string
+//     */
+//    public $activity_title;
     /**
      * @inheritdoc
      */
@@ -22,6 +27,8 @@ class JdhnOrderSearch extends JdhnOrder
             [['ord_id', 'ord_time', 'ord_payTime', 'ord_refundTime', 'ali_trade_no', 'ali_trade_status', 'ali_buyer_id', 'ali_buyer_email', 'ali_gmt_create', 'ali_gmt_payment', 'ali_refund_status', 'ali_gmt_refund', 'wechat_openid', 'wechat_fee_type', 'wechat_bank_type', 'wechat_transaction_id', 'wechat_time_end', 'ord_detail'], 'safe'],
             [['act_id', 'enroll_id', 'u_id', 'ord_payType', 'ord_state', 'wechat_total_fee'], 'integer'],
             [['ali_total_fee', 'ord_fee'], 'number'],
+            //added by neil
+//            ['activity_title', 'safe'],
         ];
     }
 
@@ -52,7 +59,19 @@ class JdhnOrderSearch extends JdhnOrder
             'pagination' => [
                 'pageSize' => JdhnCommonHelper::DEFAULT_PAGE_SIZE,
             ],
+            'sort'=> ['defaultOrder' => ['ord_time'=>SORT_DESC]],
         ]);
+//        //add related table query
+//        $query->joinWith('jdhnActivity');
+//        $query->select("jdhn_order.*, jdhn_activity.act_title");
+//
+//        //让这个列也支持排序
+//        $sort = $dataProvider->getSort();
+//        $sort->attributes['activity_title'] = [
+//            'asc' => ['{{%jdhnActivity}}.act_title' => SORT_ASC],
+//            'desc' => ['{{%jdhnActivity}}.act_title' => SORT_DESC],
+//        ];
+//        $dataProvider->setSort($sort);
 
         $this->load($params);
 
@@ -64,6 +83,7 @@ class JdhnOrderSearch extends JdhnOrder
 
         // grid filtering conditions
         $query->andFilterWhere([
+//            'jdhn_order.act_id' => $this->act_id,
             'act_id' => $this->act_id,
             'enroll_id' => $this->enroll_id,
             'u_id' => $this->u_id,
@@ -92,6 +112,8 @@ class JdhnOrderSearch extends JdhnOrder
             ->andFilterWhere(['like', 'wechat_transaction_id', $this->wechat_transaction_id])
             ->andFilterWhere(['like', 'wechat_time_end', $this->wechat_time_end])
             ->andFilterWhere(['like', 'ord_detail', $this->ord_detail]);
+            //added by neil
+//            ->andFilterWhere(['like', 'jdhn_activity.act_title', $this->activity_title]);
 
         return $dataProvider;
     }

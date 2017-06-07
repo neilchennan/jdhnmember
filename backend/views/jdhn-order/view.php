@@ -5,14 +5,15 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\JdhnOrder */
+/* @var $title string */
 
-$this->title = $model->ord_id;
+$this->title = $title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Jdhn Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="jdhn-order-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->ord_id], ['class' => 'btn btn-primary']) ?>
@@ -29,14 +30,33 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'ord_id',
-            'act_id',
+            [
+                'attribute' => 'jdhnActivity',
+                'value'=> $model->jdhnActivity->act_title,
+            ],
             'enroll_id',
-            'u_id',
-            'ord_payType',
+            [
+                'format' => 'raw',
+                'attribute' => 'u',
+                'value' => function ($model) {
+                    $user = $model->u;
+                    $userId = $user->u_id;
+                    $userNickName = $user->u_nickName;
+                    $hrefUrl = "/jdhn-user/view?id={$userId}/";
+                    return "<a href={$hrefUrl}>{$userNickName}</a>";
+                },
+            ],
+            [
+                'attribute' => 'ord_payType',
+                'value'=> $model->ordPayType->kw_desc,
+            ],
             'ord_time',
             'ord_payTime',
             'ord_refundTime',
-            'ord_state',
+            [
+                'attribute' => 'ord_state',
+                'value'=> $model->ordState->kw_desc,
+            ],
             'ali_trade_no',
             'ali_trade_status',
             'ali_buyer_id',

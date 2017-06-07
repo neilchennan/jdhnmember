@@ -5,8 +5,11 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\JdhnOrder */
+/* @var $modelClass string */
 
-$this->title = Yii::t('app', 'Create Jdhn Order');
+$this->title = Yii::t('app', 'Create {modelClass}', [
+        'modelClass' => $modelClass,
+    ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Jdhn Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

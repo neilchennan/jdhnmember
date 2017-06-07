@@ -16,6 +16,10 @@ class JdhnCommonHelper
 {
     const DEFAULT_PAGE_SIZE = 10;
 
+    const APP_GENDER_NOT_SET = 1;
+    const APP_GENDER_MALE = 2;
+    const APP_GENDER_FEMALE = 3;
+
     public static function createGuid()
     {
         if (function_exists('com_create_guid')){
@@ -338,6 +342,32 @@ class JdhnCommonHelper
     public static function getAppEnrollState_map(){
         $keywords = JdhnKeyword::findAll([
             'kw_group' => 'enroll_state',
+        ]);
+        $returnArr = array();
+        foreach($keywords as $element){
+            $returnArr[$element->kw_id] = $element->kw_desc;
+        }
+        return $returnArr;
+    }
+    //endregion
+
+    //region 得到支付类别键值对
+    public static function getAppOrderPayType_map(){
+        $keywords = JdhnKeyword::findAll([
+            'kw_group' => 'order_payType',
+        ]);
+        $returnArr = array();
+        foreach($keywords as $element){
+            $returnArr[$element->kw_id] = $element->kw_desc;
+        }
+        return $returnArr;
+    }
+    //endregion
+
+    //region 得到订单状态键值对
+    public static function getAppOrderState_map(){
+        $keywords = JdhnKeyword::findAll([
+            'kw_group' => 'order_state',
         ]);
         $returnArr = array();
         foreach($keywords as $element){

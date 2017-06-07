@@ -6,9 +6,11 @@
  * Time: 14:12
  */
 return [
+    'Update {modelClass}: ' => '更新 {modelClass}:',
+    'Create {modelClass}' => '新建 {modelClass}',
+
     'Qrxq2017 Enrolls' => '2017千人列表',
     'Create Qrxq2017 Enroll' => '新建登记信息',
-    'Update {modelClass}: ' => '更新 :',
 
     'Huxuan Score Factors' => '互选因子列表',
     'Create Huxuan Score Factor' => '新建互选因子',
@@ -79,7 +81,10 @@ return [
 
     'View Pictures' => '查看图片',
 
+    'Jdhn Order' => '订单',
     'Jdhn Orders' => '订单列表',
+    'Fans' => '粉丝',
+    'Query Conditions' => '查询条件',
 
     'Jdhn Enrollments' => '报名列表',
     'Enroll ID' => '报名编号',
@@ -247,6 +252,29 @@ return [
     'Activity' => '活动',
     'Number' => '编号',
     'Enroll Number' => '报名人数',
+
+    'Ord ID' => '订单号',
+    'Ord Pay Type' => '支付类别',
+    'Ord Time' => '订单生产时间',
+    'Ord Pay Time' => '订单支付时间',
+    'Ord Refund Time' => '订单退款时间',
+    'Ord State' => '订单状态',
+    'Ali Trade No' => '支付宝订单号',
+    'Ali Trade Status' => '支付宝订单状态',
+    'Ali Buyer ID' => '支付宝购买账号',
+    'Ali Buyer Email' => '支付宝购买邮箱',
+    'Ali Total Fee' => '支付宝总金额',
+    'Wechat Openid' => '微信用户唯一标识',
+    'Wechat Total Fee' => '微信总金额(分)',
+    'Wechat Fee Type' => '微信支付货币',
+    'Wechat Bank Type' => '微信支付银行',
+    'Wechat Transaction ID' => '微信事务号',
+    'Wechat Time End' => '微信截止时间',
+    'Ord Fee' => '订单费用',
+    'Ord Detail' => '订单详情',
+    'U Nickname' => '用户昵称',
+
+    'Order Id: {orderId}' => '订单号: {orderId}',
 
     'Remark' => '备注',
     'Set Enroll Status' => '设置报名状态',

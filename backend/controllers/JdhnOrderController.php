@@ -2,9 +2,13 @@
 
 namespace backend\controllers;
 
+use common\models\JdhnActivity;
+use common\models\JdhnKeyword;
 use Yii;
 use common\models\JdhnOrder;
 use common\models\JdhnOrderSearch;
+use yii\data\Sort;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -38,9 +42,21 @@ class JdhnOrderController extends Controller
         $searchModel = new JdhnOrderSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $activities = ArrayHelper::map(JdhnActivity::find()->orderBy('act_id desc')->all(), 'act_id', 'act_title');
+
+//        $acvitiyTitles = array();
+//        $active_activities = JdhnActivity::find()->where([
+//            'in', 'act_state', [250, 251, 252, 253, 254, 255, 256]
+//        ])->all();
+//        foreach($active_activities as $act){
+//            array_push($acvitiyTitles, $act->act_title);
+//        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+//            'acvitiyTitles' => $acvitiyTitles,
+            'activities' => $activities,
         ]);
     }
 
@@ -51,8 +67,13 @@ class JdhnOrderController extends Controller
      */
     public function actionView($id)
     {
+        $title = Yii::t('app', 'Order Id: {orderId}', [
+           'orderId' => $id,
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'title' => $title,
         ]);
     }
 
@@ -63,6 +84,7 @@ class JdhnOrderController extends Controller
      */
     public function actionCreate()
     {
+        $modelClass = Yii::t('app', 'Jdhn Order');
         $model = new JdhnOrder();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -70,6 +92,7 @@ class JdhnOrderController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'modelClass' => $modelClass,
             ]);
         }
     }
@@ -82,13 +105,22 @@ class JdhnOrderController extends Controller
      */
     public function actionUpdate($id)
     {
+        $modelClass = Yii::t('app', 'Jdhn Order');
         $model = $this->findModel($id);
+
+        $activities = ArrayHelper::map(JdhnActivity::find()->orderBy('act_id desc')->all(), 'act_id', 'act_title');
+        $ordPayTypes = ArrayHelper::map(JdhnKeyword::findAll(['kw_group' => 'order_payType',]), 'kw_id', 'kw_desc');
+        $ordStates = ArrayHelper::map(JdhnKeyword::findAll(['kw_group' => 'order_state',]), 'kw_id', 'kw_desc');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->ord_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'modelClass' => $modelClass,
+                'activities' => $activities,
+                'ordPayTypes' => $ordPayTypes,
+                'ordStates' => $ordStates,
             ]);
         }
     }

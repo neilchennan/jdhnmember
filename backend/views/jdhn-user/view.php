@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use common\helper\JdhnCommonHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\JdhnUser */
@@ -27,17 +28,39 @@ $this->params['breadcrumbs'][] = $this->title;
         <!-- Add the bg color to the header using any of the bg-* classes -->
         <div class="widget-user-header bg-yellow">
             <div class="widget-user-image">
-                <img class="img-circle" src="<?= $model->u_portrait ?>" alt="User Portrait">
+                <img class="img-circle" src="<?= $model->u_portrait ?>" alt="<? echo Yii::t('app', 'U Portrait')?>">
             </div>
             <!-- /.widget-user-image -->
             <h3 class="widget-user-username"><?= $model->u_nickName ?></h3>
             <h5 class="widget-user-desc"><?= $model->u_realName ?></h5>
+            <h5 class="widget-user-desc">
+                <div class="icon">
+                    <?
+                    $iconClass = 'fa fa-user-secret';
+                    switch ($model->u_gender) {
+                        case JdhnCommonHelper::APP_GENDER_MALE:
+                            $iconClass = 'fa fa-male';
+                            break;
+                        case JdhnCommonHelper::APP_GENDER_FEMALE:
+                            $iconClass = 'fa fa-female';
+                            break;
+                        default:
+                            $iconClass = 'fa fa-user-secret';
+                    }
+                    ?>
+                    <i class="<?= $iconClass ?>"></i>
+                </div>
+            </h5>
         </div>
         <div class="box-footer no-padding">
             <ul class="nav nav-stacked">
-                <li><a href="#">粉丝<span class="pull-right badge bg-red">99</span></a></li>
+                <li><a href="#"><? echo Yii::t('app', 'Fans') ?><span class="pull-right badge bg-red">99</span></a></li>
                 <li><a href=<? echo "tel:".$model->u_mobile ?>><? echo Yii::t('app', 'Mobile') ?>
                         <span class="pull-right"><? echo $model->u_mobile ?></span>
+                    </a>
+                </li>
+                <li><a href="#"><? echo Yii::t('app', 'U Gender') ?>
+                        <span class="pull-right"><? echo $model->u_gender_keyword->kw_desc ?></span>
                     </a>
                 </li>
                 <li><a href="#"><? echo Yii::t('app', 'U Reg Time') ?>

@@ -13,11 +13,11 @@ use common\models\JdhnOrder;
  */
 class JdhnOrderSearch extends JdhnOrder
 {
-    //add related table Activity's name query
-//    /**
-//     * @var string
-//     */
-//    public $activity_title;
+    //add related table User's nickname query
+    /**
+     * @var string
+     */
+    public $u_nickName;
     /**
      * @inheritdoc
      */
@@ -28,7 +28,7 @@ class JdhnOrderSearch extends JdhnOrder
             [['act_id', 'enroll_id', 'u_id', 'ord_payType', 'ord_state', 'wechat_total_fee'], 'integer'],
             [['ali_total_fee', 'ord_fee'], 'number'],
             //added by neil
-//            ['activity_title', 'safe'],
+            ['u_nickName', 'safe'],
         ];
     }
 
@@ -61,17 +61,17 @@ class JdhnOrderSearch extends JdhnOrder
             ],
             'sort'=> ['defaultOrder' => ['ord_time'=>SORT_DESC]],
         ]);
-//        //add related table query
-//        $query->joinWith('jdhnActivity');
-//        $query->select("jdhn_order.*, jdhn_activity.act_title");
-//
-//        //让这个列也支持排序
-//        $sort = $dataProvider->getSort();
-//        $sort->attributes['activity_title'] = [
-//            'asc' => ['{{%jdhnActivity}}.act_title' => SORT_ASC],
-//            'desc' => ['{{%jdhnActivity}}.act_title' => SORT_DESC],
-//        ];
-//        $dataProvider->setSort($sort);
+        //add related table query
+        $query->joinWith('u');
+        $query->select("jdhn_order.*, jdhn_user.u_nickName");
+
+        //让这个列也支持排序
+        $sort = $dataProvider->getSort();
+        $sort->attributes['u_nickName'] = [
+            'asc' => ['{{%jdhn_user}}.u_nickName' => SORT_ASC],
+            'desc' => ['{{%jdhn_user}}.u_nickName' => SORT_DESC],
+        ];
+        $dataProvider->setSort($sort);
 
         $this->load($params);
 
@@ -83,7 +83,7 @@ class JdhnOrderSearch extends JdhnOrder
 
         // grid filtering conditions
         $query->andFilterWhere([
-//            'jdhn_order.act_id' => $this->act_id,
+            'jdhn_user.u_id' => $this->u_id,
             'act_id' => $this->act_id,
             'enroll_id' => $this->enroll_id,
             'u_id' => $this->u_id,
@@ -111,9 +111,9 @@ class JdhnOrderSearch extends JdhnOrder
             ->andFilterWhere(['like', 'wechat_bank_type', $this->wechat_bank_type])
             ->andFilterWhere(['like', 'wechat_transaction_id', $this->wechat_transaction_id])
             ->andFilterWhere(['like', 'wechat_time_end', $this->wechat_time_end])
-            ->andFilterWhere(['like', 'ord_detail', $this->ord_detail]);
+            ->andFilterWhere(['like', 'ord_detail', $this->ord_detail])
             //added by neil
-//            ->andFilterWhere(['like', 'jdhn_activity.act_title', $this->activity_title]);
+            ->andFilterWhere(['like', 'jdhn_user.u_nickName', $this->u_nickName]);
 
         return $dataProvider;
     }

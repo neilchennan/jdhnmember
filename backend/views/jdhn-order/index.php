@@ -113,7 +113,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'enroll_id',
             [
                 'format' => 'raw',
-                'attribute' => 'u_id',
+                'attribute' => 'u_nickName',
                 'value' => function ($data) {
                     $user = $data->u;
                     $userId = $user->u_id;

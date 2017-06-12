@@ -14,16 +14,16 @@ return [
             'class' => 'yii\db\Connection',
             //changed it by neil
             'dsn' => 'mysql:host=5657f5395d07d.sh.cdb.myqcloud.com:4833;dbname=jdhnmember',
-            'username' => 'root',
+            'username' => 'jdhnadmin',
             //default pass for phpstudy mysql is root
-            'password' => 'Nihao1111',
+            'password' => '~!@#asdf',
             'charset' => 'utf8',
         ],
         'db2' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=139.196.222.233;dbname=jdhn',     //数据库hyii
-            'username' => 'root',
-            'password' => 'Dear!Love@wsy#0',
+            'dsn' => 'mysql:host=5657f5395d07d.sh.cdb.myqcloud.com:4833;dbname=jdhn',     //数据库hyii
+            'username' => 'jdhnadmin',
+            'password' => '~!@#asdf',
             'charset' => 'utf8',
         ],
         'mailer' => [

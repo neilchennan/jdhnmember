@@ -340,6 +340,7 @@ return [
     'I have interest on {genderStr} {num} ({order})!' => '我对{genderStr}{num}({order})号似乎有好感噢!',
     '{genderStr} {num} ({order}) has interest on me!' => '{genderStr}{num}({order})号对我感觉不错噢!',
     'Please fill related information:' => '请输入相关信息',
+    'Please Select...' => '请选择...',
 
     'No Record founded' => '找不到记录啦怎么破怎么破。。。',
     'Activity Name...' => '活动名称...'

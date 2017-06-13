@@ -6,6 +6,7 @@ use common\models\JdhnActivity;
 use Yii;
 use common\models\JdhnEnrollment;
 use common\models\JdhnEnrollmentSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -39,18 +40,21 @@ class JdhnEnrollmentController extends Controller
         $searchModel = new JdhnEnrollmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $acvitiyTitles = array();
-        $active_activities = JdhnActivity::find()->where([
-            'in', 'act_state', [250, 251, 252, 253, 254, 255, 256]
-        ])->all();
-        foreach($active_activities as $act){
-            array_push($acvitiyTitles, $act->act_title);
-        }
+//        $acvitiyTitles = array();
+//        $active_activities = JdhnActivity::find()->where([
+//            'in', 'act_state', [250, 251, 252, 253, 254, 255, 256]
+//        ])->all();
+//        foreach($active_activities as $act){
+//            array_push($acvitiyTitles, $act->act_title);
+//        }
+
+        $activities = ArrayHelper::map(JdhnActivity::find()->orderBy('act_id desc')->all(), 'act_id', 'act_title');
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'acvitiyTitles' => $acvitiyTitles,
+//            'acvitiyTitles' => $acvitiyTitles,
+            'activities' => $activities,
         ]);
     }
 

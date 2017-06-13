@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <form class="form-horizontal">
             <div class="box-body">
                 <div class="form-group">
-                    <label for="activityName" class="col-sm-2 control-label"><? echo Yii::t('app', 'Activity Name')?></label>
-                    <div class="col-sm-10">
+                    <label for="activityName" class="col-sm-1 control-label"><? echo Yii::t('app', 'Activity Name')?></label>
+                    <div class="col-sm-11">
                         <?
                         echo Select2::widget([
                             'name' => 'JdhnOrderSearch[act_id]',
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'options' => [
                                 'id' => 'actLikeInput',
                                 'class' => 'form-control',
-                                'placeholder' => Yii::t('app', 'Activity Name...'),
+                                'placeholder' => Yii::t('app', 'Please Select...'),
                             ],
                             'pluginOptions' => [
                                 'allowClear' => true,

@@ -5,11 +5,14 @@ use yii\grid\GridView;
 use common\helper\JdhnCommonHelper;
 use yii\jui\AutoComplete;
 use kartik\select2\Select2;
+use yii\widgets\ActiveForm;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\JdhnEnrollmentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $acvitiyTitles array */
+/* @var $actionModel \common\models\JdhnEnrollmentActionForm */
 
 $this->title = Yii::t('app', 'Jdhn Enrollments');
 $this->params['breadcrumbs'][] = $this->title;
@@ -40,7 +43,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--            </button>-->
 <!--        </span>-->
 <!--    </div>-->
-    <div class="box box-info">
+
+    <?php Pjax::begin(['id' => 'jdhn_enrollments']) ?>
+    <div class="box box-info" id="query_info_div">
         <div class="box-header with-border">
             <h3 class="box-title"><? echo Yii::t('app', 'Query Conditions')?></h3>
         </div>
@@ -79,6 +84,16 @@ $this->params['breadcrumbs'][] = $this->title;
         </form>
     </div>
 
+    <div class="btn-group">
+<!--        <a class="btn btn-app" data-toggle="modal" data-target="#myModal" id="approve_btn" onclick="on_approve_btn_clicked()">-->
+        <a class="btn btn-app" data-toggle="modal" id="approve_btn" onclick="on_approve_btn_clicked()">
+            <i class="fa fa-check"></i> <? echo Yii::t('app', 'Check Approve')?>
+        </a>
+        <a class="btn btn-app" id="deny_btn" onclick="on_deny_btn_clicked()">
+            <i class="fa fa-times"></i> <? echo Yii::t('app', 'Check Fail')?>
+        </a>
+    </div>
+
     <script type="text/javascript">
         function on_searchBtnClicked() {
             var queryParams = window.location.href;
@@ -98,9 +113,125 @@ $this->params['breadcrumbs'][] = $this->title;
         function on_clearBtnClicked(){
             $('#actLikeInput').val('');
         }
+
+        function on_deny_btn_clicked(){
+            $keys = $('#jdhnEnrollmentsGrid').yiiGridView('getSelectedRows');
+            if ($keys.length == 0){
+                WarningDlg.alert('您没有选择任何项噢！');
+                return;
+            }
+
+            $arr4deny = [];
+            $keys.forEach(function(value, index,arr){
+                $arr4deny.push(value);
+            });
+            $arr4denyStr = $arr4deny.join(',');
+
+            $postData = 'JdhnEnrollmentActionForm[ids4Deny]=' + $arr4denyStr;
+
+            krajeeDialog.confirm("您确定要审核失败这些项吗?", function (result) {
+                if (result) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'json-deny',
+                        data: $postData,
+                        success: function(data){
+                            var result = JSON.parse(data);
+                            if (result.code == 200){
+                                SuccessDlg.alert(result.message);
+                                $.pjax.reload({container:"#jdhn_enrollments"});
+                            }
+                            else {
+                                ErrorDlg.alert(result.message);
+                            }
+                        },
+                    });
+                } else {
+                    return;
+                }
+            });
+        }
+
+        function on_approve_btn_clicked(){
+            $keys = $('#jdhnEnrollmentsGrid').yiiGridView('getSelectedRows');
+            if ($keys.length == 0){
+                WarningDlg.alert('您没有选择任何项噢！');
+                return;
+            }
+
+            $arr4approve = [];
+            $keys.forEach(function(value, index,arr){
+                $arr4approve.push(value);
+            });
+            $arr4approveStr = $arr4approve.join(',');
+
+            $postData = 'JdhnEnrollmentActionForm[ids4Approve]=' + $arr4approveStr;
+
+            krajeeDialog.confirm("您确定要审核通过这些项吗?", function (result) {
+                if (result) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'json-approve',
+                        data: $postData,
+                        success: function(data){
+                            var result = JSON.parse(data);
+                            if (result.code == 200){
+                                SuccessDlg.alert(result.message);
+                                $.pjax.reload({container:"#jdhn_enrollments"});
+                            }
+                            else {
+                                ErrorDlg.alert(result.message);
+                            }
+                        },
+                    });
+                } else {
+                    return;
+                }
+            });
+        }
+
+        function on_deleteBtnClicked(){
+            $keys = $('#jdhnEnrollmentsGrid').yiiGridView('getSelectedRows');
+            if ($keys.length == 0){
+                WarningDlg.alert('您没有选择任何项噢！');
+                return;
+            }
+
+            $arr4approve = [];
+            $keys.forEach(function(value, index,arr){
+                $arr4approve.push(value);
+            });
+            $arr4approveStr = $arr4approve.join(',');
+
+            $postData = 'JdhnEnrollmentActionForm[ids4Approve]=' + $arr4approveStr;
+
+            krajeeDialog.confirm("您确定要删除这些项吗?", function (result) {
+                if (result) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'json-delete',
+                        data: $postData,
+                        success: function(data){
+                            var result = JSON.parse(data);
+                            if (result.code == 200){
+                                SuccessDlg.alert(result.message);
+                                $.pjax.reload({container:"#jdhn_enrollments"});
+                            }
+                            else {
+                                ErrorDlg.alert(result.message);
+                            }
+                        },
+                    });
+                } else {
+                    return;
+                }
+            });
+        }
     </script>
 
+
     <?= GridView::widget([
+        'id' => 'jdhnEnrollmentsGrid',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pager' => [
@@ -118,8 +249,7 @@ $this->params['breadcrumbs'][] = $this->title;
         //显示底部（就是多了一栏），默认是关闭的
 //        'showFooter'=>true,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
+            ['class' => 'yii\grid\CheckboxColumn'],
             'enroll_id',
 //            'u_id',
 //            'enroll_name',
@@ -168,4 +298,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    <?php Pjax::end() ?>
 </div>

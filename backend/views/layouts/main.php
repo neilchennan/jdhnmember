@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
-
+use kartik\dialog\Dialog;
+use kartik\dialog\DialogAsset;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -23,6 +24,30 @@ if (Yii::$app->controller->action->id === 'login') {
     }
 
     dmstr\web\AdminLteAsset::register($this);
+    DialogAsset::register($this);
+
+    echo Dialog::widget();
+    echo Dialog::widget([
+        'libName' => 'SuccessDlg', // a custom lib name
+        'options' => [  // customized BootstrapDialog options
+            'size' => Dialog::SIZE_SMALL,
+            'type' => Dialog::TYPE_SUCCESS,
+        ],
+    ]);
+    echo Dialog::widget([
+        'libName' => 'WarningDlg', // a custom lib name
+        'options' => [  // customized BootstrapDialog options
+            'size' => Dialog::SIZE_SMALL,
+            'type' => Dialog::TYPE_WARNING,
+        ],
+    ]);
+    echo Dialog::widget([
+        'libName' => 'ErrorDlg', // a custom lib name
+        'options' => [  // customized BootstrapDialog options
+            'size' => Dialog::SIZE_SMALL,
+            'type' => Dialog::TYPE_DANGER,
+        ],
+    ]);
 
     $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
     ?>

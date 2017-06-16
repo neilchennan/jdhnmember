@@ -87,6 +87,7 @@ return [
     'Query Conditions' => '查询条件',
 
     'Jdhn Enrollments' => '报名列表',
+    'Enrollment' => '报名',
     'Enroll ID' => '报名编号',
     'Enroll Name' => '报名人',
     'Enroll Gender' => '报名人性别',
@@ -97,6 +98,10 @@ return [
     'Enroll Signup Time' => '报名时间',
     'Enroll State' => '报名状态',
     'Enroll Cust Form Info' => '报名表单信息',
+
+    'Ids For Approve' => '需审核通过的报名号',
+    'Ids For Deny' => '需审核失败的报名号',
+    'Ids For Return Fee' => '需退款的报名号',
 
     'Find Duplicated Huxuan Score Factor.' => '已有重复的互选因子',
     'Huxuan {0} from {1} to {2} at {3}.' => '{0} {1} 选择了 {2} ,时间: {3}',
@@ -184,6 +189,9 @@ return [
     'Return To List' => '回到列表',
     'Give up' => '放弃',
     'Submit' => '提交',
+    'Commit' => '提交',
+    'Close' => '关闭',
+    'Save changes' => '保持',
 
     'Male' => '男',
     'Female' => '女',
@@ -234,6 +242,8 @@ return [
     'Enroll Success' => '报名成功',
     'Enroll Fail' => '报名失败',
     'Enroll In Process' => '已提交',
+    'Check Approve' => '审核通过',
+    'Check Fail' => '审核失败',
 
     'Home' => '主页',
     'Menu' => '菜单',
@@ -243,6 +253,7 @@ return [
     'Options' => '选项',
     'Birthday' => '生日',
     'Work' => '工作',
+    'Action' => '操作',
 
     'App Backend Management' => 'APP后台数据管理',
     'User' => '用户',
@@ -297,6 +308,7 @@ return [
     'Thank you for your selection. System is matching.' => '谢谢您的选择，系统正在匹配中',
 
     'Please input the mobile when enroll' => '请输入报名时填写的手机号',
+    'Are you sure to check approve following items?' => '您确定要审核通过以下项目吗？',
 
     'Success 200' => '操作成功',
     'Fail 500' => '内部错误',

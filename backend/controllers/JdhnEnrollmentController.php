@@ -3,6 +3,9 @@
 namespace backend\controllers;
 
 use common\models\JdhnActivity;
+use common\models\JdhnEnrollmentActionForm;
+use common\result\ActionResult;
+use common\service\JdhnEnrollmentService;
 use Yii;
 use common\models\JdhnEnrollment;
 use common\models\JdhnEnrollmentSearch;
@@ -40,22 +43,52 @@ class JdhnEnrollmentController extends Controller
         $searchModel = new JdhnEnrollmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-//        $acvitiyTitles = array();
-//        $active_activities = JdhnActivity::find()->where([
-//            'in', 'act_state', [250, 251, 252, 253, 254, 255, 256]
-//        ])->all();
-//        foreach($active_activities as $act){
-//            array_push($acvitiyTitles, $act->act_title);
-//        }
-
         $activities = ArrayHelper::map(JdhnActivity::find()->orderBy('act_id desc')->all(), 'act_id', 'act_title');
+
+        $actionModel = new JdhnEnrollmentActionForm();
+
+        if (Yii::$app->request->isPost){
+            $post = Yii::$app->request->post();
+            $actionModel->load($post);
+            $ids4Approve = $actionModel->ids4Approve;
+            if (isset($ids4Approve)){
+                $result = JdhnEnrollmentService::approveByIdsStr($ids4Approve);
+            }
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
 //            'acvitiyTitles' => $acvitiyTitles,
             'activities' => $activities,
+            'actionModel' => $actionModel,
         ]);
+    }
+
+    public function actionJsonApprove(){
+        $form = new JdhnEnrollmentActionForm();
+
+        if ($form->load(Yii::$app->request->post())) {
+            $ids4Approve = $form->ids4Approve;
+            $result = JdhnEnrollmentService::approveByIdsStr($ids4Approve);
+            return $result->toJson();
+        } else {
+            $result = new ActionResult(false, 'json-approve fail');
+            return $result->toJson();
+        }
+    }
+
+    public function actionJsonDeny(){
+        $form = new JdhnEnrollmentActionForm();
+
+        if ($form->load(Yii::$app->request->post())) {
+            $ids4Deny = $form->ids4Deny;
+            $result = JdhnEnrollmentService::denyByIdsStr($ids4Deny);
+            return $result->toJson();
+        } else {
+            $result = new ActionResult(false, 'json-deny fail');
+            return $result->toJson();
+        }
     }
 
     /**

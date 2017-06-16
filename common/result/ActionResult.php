@@ -8,6 +8,7 @@
  */
 namespace common\result;
 
+use common\models\StatusCodeEnum;
 use Yii;
 use yii\base\Object;
 
@@ -132,5 +133,14 @@ class ActionResult extends Object
                 'fail_count' => $this->fail_count,
             ]);
         }
+    }
+
+    public function toJson(){
+        $code = $this->isSuccess ? StatusCodeEnum::SUCCESS : StatusCodeEnum::BAD_REQUEST;
+        $returnArr = [
+            'code' => $code,
+            'message' => $this->message,
+        ];
+        return json_encode($returnArr);
     }
 }

@@ -118,9 +118,11 @@ class HuxuanSummaryService extends HuxuanSummary
      */
     protected static function calHuxuanStarByHuxuan(Huxuan $huxuan){
         //找一找被选的记录，是否存在
+        $oppGender = $huxuan->gender == CommonEnum::GENDER_MALE ? CommonEnum::GENDER_FEMALE : CommonEnum::GENDER_MALE;
         $findInStars = HuxuanStarts::findOne([
             'activity_id'=> $huxuan->activity_id,
-            'num' => $huxuan->to_num
+            'num' => $huxuan->to_num,
+            'gender' => $oppGender,
         ]);
         //如果找到记录，加上
         if (isset($findInStars)){
@@ -139,8 +141,8 @@ class HuxuanSummaryService extends HuxuanSummary
             'num' => $huxuan->to_num,
             'times' => 1,
             'score' => $huxuan->score,
+            'gender' => $oppGender,
         ]);
-        $newStar->gender = $huxuan->gender == CommonEnum::GENDER_MALE ? CommonEnum::GENDER_FEMALE : CommonEnum::GENDER_MALE;
 
         if (!$newStar->save()){
             return new ActionResult(false, Yii::t('app', 'HuxuanStarts created failed.'));

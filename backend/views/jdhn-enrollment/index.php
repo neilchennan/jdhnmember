@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 <!--    <div class="input-group">-->
-<!--        --><?//
+<!--        --><?php
 //        echo AutoComplete::widget([
 //            'model' => $searchModel,
 //            'attribute' => 'activity_title',
@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="form-group">
                     <label for="activityName" class="col-sm-1 control-label"><? echo Yii::t('app', 'Activity Name')?></label>
                     <div class="col-sm-11">
-                        <?
+                        <?php
                         echo Select2::widget([
                             'name' => 'JdhnEnrollmentSearch[act_id]',
                             'model' => $searchModel,

@@ -20,7 +20,7 @@ $this->title = Yii::t('app', 'App Backend Management');
 
             <div class="info-box-content">
                 <span class="info-box-text"><?= Html::a(Yii::t('app', 'User'), ['/jdhn-user/index'])?></span>
-                <span class="info-box-number"><? echo number_format($userCount)?></span>
+                <span class="info-box-number"><?php echo number_format($userCount)?></span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -35,7 +35,7 @@ $this->title = Yii::t('app', 'App Backend Management');
 
             <div class="info-box-content">
                 <span class="info-box-text"><?= Html::a(Yii::t('app', 'Activity'), ['/jdhn-activity/index'])?></span>
-                <span class="info-box-number"><? echo number_format($activityCount)?></span>
+                <span class="info-box-number"><?php echo number_format($activityCount)?></span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -50,7 +50,7 @@ $this->title = Yii::t('app', 'App Backend Management');
 
             <div class="info-box-content">
                 <span class="info-box-text"><?= Html::a(Yii::t('app', 'Enroll'), ['/jdhn-enrollment/index'])?></span>
-                <span class="info-box-number"><? echo number_format($enrollmentCount)?></span>
+                <span class="info-box-number"><?php echo number_format($enrollmentCount)?></span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -65,7 +65,7 @@ $this->title = Yii::t('app', 'App Backend Management');
 
             <div class="info-box-content">
                 <span class="info-box-text"><?= Html::a(Yii::t('app', 'Order'), ['/jdhn-order/index'])?></span>
-                <span class="info-box-number"><? echo number_format($orderCount)?></span>
+                <span class="info-box-number"><?php echo number_format($orderCount)?></span>
             </div>
             <!-- /.info-box-content -->
         </div>

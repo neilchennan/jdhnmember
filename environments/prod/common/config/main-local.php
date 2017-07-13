@@ -4,7 +4,7 @@ return [
         'db' => [
             'class' => 'yii\db\Connection',
             //changed it by neil
-            'dsn' => 'mysql:host=5657f5395d07d.sh.cdb.myqcloud.com:4833;dbname=jdhnmember',
+            'dsn' => 'mysql:host=5657f5395d07d.sh.cdb.myqcloud.com;port=4833;dbname=jdhnmember',
             'username' => 'jdhnadmin',
             //default pass for phpstudy mysql is root
             'password' => '~!@#asdf',
@@ -12,7 +12,7 @@ return [
         ],
         'db2' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=5657f5395d07d.sh.cdb.myqcloud.com:4833;dbname=jdhn',     //数据库hyii
+            'dsn' => 'mysql:host=5657f5395d07d.sh.cdb.myqcloud.com;port=4833;dbname=jdhn',     //数据库hyii
             'username' => 'jdhnadmin',
             'password' => '~!@#asdf',
             'charset' => 'utf8',

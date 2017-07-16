@@ -210,12 +210,14 @@ class HuxuanController extends Controller
                 $query = Huxuan::find()->where([
                     'gender' => $oppGender,
                     'to_num' => $model->num,
+                    'activity_id' => $activity_id,
                 ]);
             }
             else {
                 $query = Huxuan::find()->where([
                     'gender' => $model->gender,
                     'from_num' => $model->num,
+                    'activity_id' => $activity_id,
                 ]);
             }
             $huxuanList = $query->all();

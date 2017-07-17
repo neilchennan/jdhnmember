@@ -50,6 +50,7 @@ class CustomerCreateForm extends Model
         return [
             [['my_num', 'opp_num_order1', 'my_gender'], 'required'],
             [['opp_num_order1', 'opp_num_order2', 'opp_num_order3'], 'string'],
+            [['my_num', 'opp_num_order1', 'opp_num_order2', 'opp_num_order3'], 'match','pattern' => '/^[0-9]*$/','message' =>  Yii::t('app', 'Input Format Error: numbers only')],
             [['my_mobile_last4'], 'integer',  'min' => 0001, 'max' => 9999],
         ];
     }

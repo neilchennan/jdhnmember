@@ -355,5 +355,6 @@ return [
     'Please Select...' => '请选择...',
 
     'No Record founded' => '找不到记录啦怎么破怎么破。。。',
-    'Activity Name...' => '活动名称...'
+    'Activity Name...' => '活动名称...',
+    'Input Format Error: numbers only' => '输入格式有误：只接受数字',
 ];

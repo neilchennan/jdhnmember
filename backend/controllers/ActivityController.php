@@ -230,9 +230,13 @@ class ActivityController extends Controller
     public function actionExportResult($id){
         $activity = Activity::findOne($id);
 
-        $result = HuxuanResult::findAll([
-            'activity_id' => $id,
-        ]);
+        $result = HuxuanResult::find()->where([
+            'activity_id' => $id
+        ])->orderBy([
+            'gender' => SORT_DESC,
+            'to_num' => SORT_ASC,
+        ])->all();
+
         if (!$result){
             return $this->redirect(['site/error']);
         }

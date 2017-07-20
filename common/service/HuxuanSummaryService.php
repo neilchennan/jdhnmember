@@ -8,23 +8,30 @@
 
 namespace common\service;
 
-use common\models\Activity;
 use Yii;
+use common\models\Activity;
 use common\helper\JdhnCommonHelper;
 use common\models\CommonEnum;
 use common\models\Huxuan;
 use common\models\HuxuanAward;
 use common\models\HuxuanStarts;
 use common\models\HuxuanSummary;
+use common\models\HuxuanResult;
 use common\result\ActionResult;
 
 class HuxuanSummaryService extends HuxuanSummary
 {
+    /***
+     * 统计男单条互选记录
+     * @param Huxuan $huxuan
+     * @return ActionResult
+     */
     protected static function handleHuxuanMale(Huxuan $huxuan){
         //先找一下是否已经有录入了的数据
         $summaryInDb = HuxuanSummary::findOne([
             'male_num' => $huxuan->from_num,
             'female_num' => $huxuan->to_num,
+            'activity_id' => $huxuan->activity_id,
         ]);
 
         $nowTime = time();
@@ -65,6 +72,11 @@ class HuxuanSummaryService extends HuxuanSummary
         return new ActionResult(true, Yii::t('app', 'HuxuanSummary created successfully!'));
     }
 
+    /**
+     * 统计女单条互选记录
+     * @param Huxuan $huxuan
+     * @return ActionResult
+     */
     protected static function handleHuxuanFemale(Huxuan $huxuan){
         //先找一下是否已经有录入了的数据
         $summaryInDb = HuxuanSummary::findOne([
@@ -150,7 +162,7 @@ class HuxuanSummaryService extends HuxuanSummary
         return new ActionResult(true, Yii::t('app', 'HuxuanStarts created successfully!'));
     }
 
-    protected static function handleHuxuanItem($huxuan){
+    protected static function handleHuxuanItem(Huxuan $huxuan){
         self::calHuxuanStarByHuxuan($huxuan);
         if ($huxuan->gender == CommonEnum::GENDER_MALE){
             return self::handleHuxuanMale($huxuan);
@@ -158,6 +170,56 @@ class HuxuanSummaryService extends HuxuanSummary
         else {
             return self::handleHuxuanFemale($huxuan);
         }
+    }
+
+    /**
+     * 根据单条统计互选结果表
+     * @param $huxuan
+     */
+    protected static function handleHuxuanItem4Result(Huxuan $huxuan){
+        $oppGender = $huxuan->gender == CommonEnum::GENDER_MALE ? CommonEnum::GENDER_FEMALE : CommonEnum::GENDER_MALE;
+        //先找一下是否已经有录入了的数据
+        $resultInDb = HuxuanResult::findOne([
+            'activity_id' => $huxuan->activity_id,
+            'to_num' => $huxuan->to_num,
+            'gender' => $oppGender,
+        ]);
+
+        $resultStr = JdhnCommonHelper::getResultStrByHuxuan($huxuan);
+
+        //已存在
+        if(isset($resultInDb)){
+            $fromNumsArr = explode(',', $resultInDb->from_nums);
+            $isExist = false;
+            //查询是否已经记录，如果没记录，更新记录
+            for($index=0; $index<count($fromNumsArr); $index++){
+                if ($fromNumsArr[$index] == $resultStr){
+                    $isExist = true;
+                    break;
+                }
+            }
+            if (!$isExist){
+                array_push($fromNumsArr, $resultStr);
+                $resultInDb->from_nums = implode(',', $fromNumsArr);
+                if (!$resultInDb->save()){
+                    return new ActionResult(false, Yii::t('app', 'HuxuanResult update failed.'));
+                }
+                return new ActionResult(true, Yii::t('app', 'HuxuanResult update successfully!'));
+            }
+        }
+
+//        不存在，新建
+        $newResult = new HuxuanResult([
+            'id' => JdhnCommonHelper::createGuid(),
+            'activity_id' => $huxuan->activity_id,
+            'to_num' => $huxuan->to_num,
+            'from_nums' => $resultStr,
+            'gender' => $oppGender,
+        ]);
+        if (!$newResult->save()){
+            return new ActionResult(false, Yii::t('app', 'HuxuanResult created failed.'));
+        }
+        return new ActionResult(true, Yii::t('app', 'HuxuanResult created successfully!'));
     }
 
     /**
@@ -178,6 +240,9 @@ class HuxuanSummaryService extends HuxuanSummary
         HuxuanStarts::deleteAll([
             'activity_id' => $activityId,
         ]);
+        HuxuanResult::deleteAll([
+            'activity_id' => $activityId,
+        ]);
         //endregion
 
         $huxuanList = Huxuan::findAll([
@@ -189,6 +254,8 @@ class HuxuanSummaryService extends HuxuanSummary
         foreach($huxuanList as $huxuan){
             $result = self::handleHuxuanItem($huxuan);
             $totalResult->addSubResult($result);
+            $result2 = self::handleHuxuanItem4Result($huxuan);
+            $totalResult->addSubResult($result2);
         }
 
         $hsList = HuxuanSummary::findAll([

@@ -9,6 +9,7 @@
 namespace common\helper;
 
 use common\models\CommonEnum;
+use common\models\Huxuan;
 use common\models\JdhnKeyword;
 use Yii;
 
@@ -408,4 +409,10 @@ class JdhnCommonHelper
         return $returnStr;
     }
     //endregion
+
+    public static function getResultStrByHuxuan(Huxuan $huxuan){
+        $romaStr = self::getRomaNumberByIntValue($huxuan->order);
+        $returnStr = "$huxuan->from_num($romaStr)";
+        return $returnStr;
+    }
 }

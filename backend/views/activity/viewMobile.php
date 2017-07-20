@@ -28,6 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'method' => 'post',
         ],
     ]) ?>
+    <?= Html::a(Yii::t('app', 'Export'), ['export-result', 'id' => $model->id], [
+        'class' => 'ui-btn ui-shadow ui-corner-all ui-icon-action ui-btn-icon-left ui-btn-inline ui-mini',
+        'data-ajax' => 'false',
+    ]) ?>
 </p>
 
 <div>

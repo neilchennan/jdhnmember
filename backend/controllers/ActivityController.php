@@ -3,7 +3,9 @@
 namespace backend\controllers;
 
 use common\helper\JdhnCommonHelper;
+use common\models\HuxuanResult;
 use common\service\HuxuanSummaryService;
+use moonland\phpexcel\Excel;
 use Yii;
 use common\models\Activity;
 use common\models\ActivitySearch;
@@ -222,6 +224,34 @@ class ActivityController extends Controller
 
         return $this->render('/site/result', [
             'model' => $result,
+        ]);
+    }
+
+    public function actionExportResult($id){
+        $activity = Activity::findOne($id);
+
+        $result = HuxuanResult::findAll([
+            'activity_id' => $id,
+        ]);
+        if (!$result){
+            return $this->redirect(['site/error']);
+        }
+
+        Excel::export([
+            'models' => $result,
+            'fileName' => "{$activity->activity_name}_详细互选结果.xlsx",
+            'columns' => [
+                [
+                'attribute' => 'gender',
+//                'header' => 'Content Post',
+                'format' => 'text',
+                'value' => function($model) {
+                    return JdhnCommonHelper::getGenderByIntValue($model->gender);
+                },
+                ],
+                'to_num', 'from_nums',],
+            'headers' => [
+            ],
         ]);
     }
 }

@@ -166,6 +166,7 @@ return [
     'Order' => '顺位',
     'Score' => '得分',
     'Description' => '描述',
+    'From Nums' => '选我的人编号',
 
     'Factor' => '因子',
 

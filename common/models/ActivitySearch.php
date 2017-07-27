@@ -75,6 +75,10 @@ class ActivitySearch extends Activity
             ->andFilterWhere(['like', 'created_by', $this->created_by])
             ->andFilterWhere(['like', 'modified_by', $this->modified_by]);
 
+        $query->orderBy([
+            'created_at' => SORT_DESC,
+        ]);
+
         return $dataProvider;
     }
 }

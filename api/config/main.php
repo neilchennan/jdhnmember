@@ -36,6 +36,7 @@ return [
                     'controller' => [
                         'v1/huxuans',
                         'v1/users',
+                        'v1/activitys',
                     ],
                     'pluralize' => true,
                     'extraPatterns' => [

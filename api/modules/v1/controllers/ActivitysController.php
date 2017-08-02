@@ -15,6 +15,7 @@ use common\models\ResponseData;
 use common\models\StatusCodeEnum;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\RateLimiter;
+use yii\helpers\Json;
 use yii\rest\ActiveController;
 use yii\web\Response;
 
@@ -45,7 +46,7 @@ class ActivitysController extends ActiveController
 //            ],
 //        ];
 
-        $behaviors['contentNegotiator']['formats']['text/html'] =  Response::FORMAT_JSON;
+        $behaviors['contentNegotiator']['formats']['text/html'] =  Response::FORMAT_JSONP;
         return $behaviors;
     }
 
@@ -125,7 +126,6 @@ class ActivitysController extends ActiveController
         } catch (\Exception $e) {
             $responseData = new ResponseData($e->getCode(), null, $e->getMessage(), $e);
         }
-
-        return $responseData->getResultArray();
+        echo $_GET['callback'].'('.Json::encode($responseData->getResultArray()).');';
     }
 }

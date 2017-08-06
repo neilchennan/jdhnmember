@@ -43,6 +43,8 @@ return [
                     'extraPatterns' => [
                         'POST login' => 'login',
                         'GET user-profile' => 'user-profile',
+                        'GET active-list' => 'active-list',
+                        'GET inactive-list' => 'inactive-list',
                     ]
                 ],
             ],

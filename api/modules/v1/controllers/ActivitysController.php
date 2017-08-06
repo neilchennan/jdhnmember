@@ -134,4 +134,81 @@ class ActivitysController extends ActiveController
         }
         echo $_GET['callback'].'('.Json::encode($responseData->getResultArray()).');';
     }
+
+    public function actionActiveList()
+    {
+        try {
+            $activities = JdhnActivity::find()
+                ->where([
+                    'not in', 'act_state', [255, 256]
+                ])
+                ->orderBy([
+                    'act_id'=> SORT_DESC,
+                ])
+                ->all();
+
+            $resultData = [];
+            foreach($activities as $act){
+                $actObj = [];
+                $actObj['id'] = $act['act_id'];
+                $actObj['title'] = $act['act_title'];
+                $actObj['starttime'] = $act['act_beginTime'];
+                $actObj['endtime'] = $act['act_endTime'];
+                $actObj['read'] = $act['act_readCount'];
+                $actObj['numberapplicants'] = $this->countForActivityEnroll($act['act_id']);
+                $actObj['throughnumber'] = $this->countForActivityPass($act['act_id']);
+                $actObj['commentCount'] = $this->countForActivityComment($act['act_id']);
+                $actObj['place'] = $act['act_address'];
+                $actObj['imgurl'] = $act['act_thumb'];
+                $actObj['read'] = $act['act_readCount'];
+
+                array_push($resultData, $actObj);
+            }
+
+            $responseData = new ResponseData(StatusCodeEnum::SUCCESS, $resultData, null, null);
+//            $responseData = new ResponseData(StatusCodeEnum::SUCCESS, $activities, null, null);
+        } catch (\Exception $e) {
+            $responseData = new ResponseData($e->getCode(), null, $e->getMessage(), $e);
+        }
+        echo $_GET['callback'].'('.Json::encode($responseData->getResultArray()).');';
+    }
+
+    public function actionInactiveList($limit, $offset){
+        try {
+            $activities = JdhnActivity::find()
+                ->where([
+                    'in', 'act_state', [255, 256]
+                ])
+                ->orderBy([
+                    'act_id'=> SORT_DESC,
+                ])
+                ->limit($limit)
+                ->offset($offset)
+                ->all();
+
+            $resultData = [];
+            foreach($activities as $act){
+                $actObj = [];
+                $actObj['id'] = $act['act_id'];
+                $actObj['title'] = $act['act_title'];
+                $actObj['starttime'] = $act['act_beginTime'];
+                $actObj['endtime'] = $act['act_endTime'];
+                $actObj['read'] = $act['act_readCount'];
+                $actObj['numberapplicants'] = $this->countForActivityEnroll($act['act_id']);
+                $actObj['throughnumber'] = $this->countForActivityPass($act['act_id']);
+                $actObj['commentCount'] = $this->countForActivityComment($act['act_id']);
+                $actObj['place'] = $act['act_address'];
+                $actObj['imgurl'] = $act['act_thumb'];
+                $actObj['read'] = $act['act_readCount'];
+
+                array_push($resultData, $actObj);
+            }
+
+            $responseData = new ResponseData(StatusCodeEnum::SUCCESS, $resultData, null, null);
+//            $responseData = new ResponseData(StatusCodeEnum::SUCCESS, $activities, null, null);
+        } catch (\Exception $e) {
+            $responseData = new ResponseData($e->getCode(), null, $e->getMessage(), $e);
+        }
+        echo $_GET['callback'].'('.Json::encode($responseData->getResultArray()).');';
+    }
 }

@@ -77,8 +77,8 @@ $this->title = Yii::t('app', 'App Backend Management');
             <span class="info-box-icon bg-red"><i class="fa fa-commenting"></i></span>
 
             <div class="info-box-content">
-                <span class="info-box-text"><?= Html::a(Yii::t('app', 'Message'), ['/jdhn-message/index'])?></span>
-                <span class="info-box-number">93,139</span>
+                <span class="info-box-text"><?= Html::a(Yii::t('app', 'Comment'), ['/jdhn-act-comment/index'])?></span>
+                <span class="info-box-number"><?php echo number_format($commentCount)?></span>
             </div>
             <!-- /.info-box-content -->
         </div>

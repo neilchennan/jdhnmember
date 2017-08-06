@@ -99,6 +99,11 @@ return [
     'Enroll State' => '报名状态',
     'Enroll Cust Form Info' => '报名表单信息',
 
+    'Jdhn Act Comments' => '评价列表',
+    'Acm ID' => '评价号',
+    'Acm Text' => '评价内容',
+    'Acm Time' => '评价时间',
+
     'Ids For Approve' => '需审核通过的报名号',
     'Ids For Deny' => '需审核失败的报名号',
     'Ids For Return Fee' => '需退款的报名号',
@@ -264,6 +269,7 @@ return [
     'Activity' => '活动',
     'Number' => '编号',
     'Enroll Number' => '报名人数',
+    'Comment' => '评价',
 
     'Ord ID' => '订单号',
     'Ord Pay Type' => '支付类别',

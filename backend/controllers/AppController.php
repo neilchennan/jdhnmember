@@ -9,6 +9,7 @@
 namespace backend\controllers;
 
 
+use common\models\JdhnActComment;
 use common\models\JdhnActivity;
 use common\models\JdhnEnrollment;
 use common\models\JdhnOrder;
@@ -23,12 +24,14 @@ class AppController extends Controller
         $activityCount = JdhnActivity::find()->count();
         $enrollmentCount = JdhnEnrollment::find()->count();
         $orderCount = JdhnOrder::find()->count();
+        $commentCount = JdhnActComment::find()->count();
 
         return $this->render('index', [
             'userCount' => $userCount,
             'enrollmentCount' => $enrollmentCount,
             'orderCount' => $orderCount,
             'activityCount' => $activityCount,
+            'commentCount' => $commentCount,
         ]);
     }
 }

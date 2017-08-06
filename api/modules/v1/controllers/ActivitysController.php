@@ -9,6 +9,7 @@
 namespace api\modules\v1\controllers;
 
 
+use common\models\JdhnActComment;
 use common\models\JdhnActivity;
 use common\models\JdhnEnrollment;
 use common\models\ResponseData;
@@ -79,7 +80,12 @@ class ActivitysController extends ActiveController
     }
 
     protected function countForActivityComment($act_id){
-        return 100;
+        $count = JdhnActComment::find()
+            ->where([
+                'act_id' => $act_id
+            ])
+            ->count();
+        return $count;
     }
 
     /**
@@ -113,7 +119,7 @@ class ActivitysController extends ActiveController
                 $actObj['read'] = $act['act_readCount'];
                 $actObj['numberapplicants'] = $this->countForActivityEnroll($act['act_id']);
                 $actObj['throughnumber'] = $this->countForActivityPass($act['act_id']);
-//                $actObj['commentCount'] = $this->countForActivityComment($act['act_id']);
+                $actObj['commentCount'] = $this->countForActivityComment($act['act_id']);
                 $actObj['place'] = $act['act_address'];
                 $actObj['imgurl'] = $act['act_thumb'];
                 $actObj['read'] = $act['act_readCount'];

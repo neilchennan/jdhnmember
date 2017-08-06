@@ -23,7 +23,8 @@ return [
 //            'enableAutoLogin' => false, // API change to false
             'enableAutoLogin' => true,
             'enableSession' => false,  // API ++
-            'loginUrl' => null // API ++
+            'loginUrl' => null, // API ++
+            'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
         ],
         //url优化
         'urlManager' => [

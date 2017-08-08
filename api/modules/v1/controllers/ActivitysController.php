@@ -140,7 +140,7 @@ class ActivitysController extends ActiveController
         try {
             $activities = JdhnActivity::find()
                 ->where([
-                    'not in', 'act_state', [255, 256]
+                    'not in', 'act_state', [251, 255, 256]
                 ])
                 ->orderBy([
                     'act_id'=> SORT_DESC,
@@ -177,7 +177,7 @@ class ActivitysController extends ActiveController
         try {
             $activities = JdhnActivity::find()
                 ->where([
-                    'in', 'act_state', [255, 256]
+                    'in', 'act_state', [251, 255, 256]
                 ])
                 ->orderBy([
                     'act_id'=> SORT_DESC,

@@ -7,7 +7,7 @@ use Yii;
 
 /**
  * This is the model class for table "activity".
- *
+ * tryit
  * @property string $id uuid
  * @property string $activity_name 活动名称
  * @property string $activity_description 活动简介

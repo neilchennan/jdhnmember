@@ -112,10 +112,14 @@ class CustomerController extends Controller
         }
 
         $recordInDB = (new Query())->select([
-            'selfnum' => 'num',
-            'opnum' => 'oopnum',
+            'id' => 'id',
+            'phone' => 'phone',
+            'num' => 'num',
+            'oopnum' => 'oopnum',
             'name' => 'name',
-            'sf' => 'gender',
+            'gender' => 'gender',
+            'oopName' => 'oopName',
+            'oopWechatNum' => 'oopWechatNum',
         ])->from('jdhn_maybe')->where(['phone' => $model->mobile])->one();
 
         if (!$recordInDB){
@@ -125,9 +129,22 @@ class CustomerController extends Controller
             ]);
         }
 
+        $imageName = '';
+        if (( 1 <= $recordInDB['id'] && $recordInDB['id'] <= 80 ) || ( 229 <= $recordInDB['id'] && $recordInDB['id'] <= 308)){
+            $imageName = 'maybe0119_1.png';
+        }
+        if (( 81 <= $recordInDB['id'] && $recordInDB['id'] <= 180 ) || ( 309 <= $recordInDB['id'] && $recordInDB['id'] <= 408)){
+            $imageName = 'maybe0119_2.png';
+        }
+        if (( 181 <= $recordInDB['id'] && $recordInDB['id'] <= 228 ) || ( 409 <= $recordInDB['id'] && $recordInDB['id'] <= 456)){
+            $imageName = 'maybe0119_3.png';
+        }
+
+
         Yii::$app->session->setFlash('success', Yii::t('app', '恭喜您，配对成功！'));
         return $this->render('viewMatchStatus', [
             'model' => $recordInDB,
+            'imageName' => $imageName,
         ]);
     }
 

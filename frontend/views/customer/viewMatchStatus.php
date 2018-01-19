@@ -6,9 +6,15 @@ use common\helper\JdhnCommonHelper;
 
 /* @var $this yii\web\View */
 /* @var $model array */
+/* @var $imageName string */
 
 $this->title = $model['name'];
 ?>
+<style>
+    .div_center_img{
+        text-align:center
+    }
+</style>
 <div class="enroll-view">
 
     <div class="jdhntitle"><b><?= Html::encode($this->title) ?></b></div>
@@ -17,28 +23,46 @@ $this->title = $model['name'];
         'model' => $model,
         'attributes' => [
 //            'id',
+//            [
+//                'label' => '状态',
+//                'value' => '配对成功',
+//                'headerOptions' => ['class' => 'vertical-middle text-center'],
+//                'contentOptions' => ['class' => 'vertical-middle text-center'],
+//            ],
             [
-                'label' => '状态',
-                'value' => '配对成功',
+                'label' => '你的活动昵称',
+                'attribute' => 'name',
                 'headerOptions' => ['class' => 'vertical-middle text-center'],
                 'contentOptions' => ['class' => 'vertical-middle text-center'],
             ],
             [
-                'label' => '身份',
-                'attribute' => 'sf',
-                'value'=> $model['sf'],
+                'label' => '你的活动身份',
+                'attribute' => 'gender',
+                'value'=> $model['gender'],
                 'headerOptions' => ['class' => 'vertical-middle text-center'],
                 'contentOptions' => ['class' => 'vertical-middle text-center'],
             ],
             [
-                'label' => '您的编号',
-                'attribute' => 'selfnum',
+                'label' => '你的活动编号',
+                'attribute' => 'num',
                 'headerOptions' => ['class' => 'vertical-middle text-center'],
                 'contentOptions' => ['class' => 'vertical-middle text-center'],
             ],
             [
-                'label' => '与您配对嘉宾的编号',
-                'attribute' => 'opnum',
+                'label' => '与你配对的小伙伴编号',
+                'attribute' => 'oopnum',
+                'headerOptions' => ['class' => 'vertical-middle text-center'],
+                'contentOptions' => ['class' => 'vertical-middle text-center'],
+            ],
+            [
+                'label' => '与你配对的小伙伴昵称',
+                'attribute' => 'oopName',
+                'headerOptions' => ['class' => 'vertical-middle text-center'],
+                'contentOptions' => ['class' => 'vertical-middle text-center'],
+            ],
+            [
+                'label' => '小伙伴的微信号',
+                'attribute' => 'oopWechatNum',
                 'headerOptions' => ['class' => 'vertical-middle text-center'],
                 'contentOptions' => ['class' => 'vertical-middle text-center'],
             ],
@@ -46,7 +70,13 @@ $this->title = $model['name'];
     ]) ?>
 
     <div>
-        请立即添加交大红娘客服，微信号:jdhn99，并发送“你的编号+手机号码”，待客服核对之后邀请您进入活动群。
+        赶快添加你的小伙伴吧~添加时请务必注明“来自maybe恋人”哦~
     </div>
-
+    
+    <div class="div_center_img">
+        <?= Html::img("@web/images/$imageName", ['width' => '200px', 'height' => '200px']) ?>
+    </div>
+<!--    <div>-->
+<!--        请立即添加交大红娘客服，微信号:jdhn99，并发送“你的编号+手机号码”，待客服核对之后邀请您进入活动群。-->
+<!--    </div>-->
 </div>

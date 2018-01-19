@@ -7,6 +7,7 @@ use common\helper\JdhnCommonHelper;
 /* @var $this yii\web\View */
 /* @var $model array */
 /* @var $imageName string */
+/* @var $imageMsg string */
 
 $this->title = $model['name'];
 ?>
@@ -29,12 +30,12 @@ $this->title = $model['name'];
 //                'headerOptions' => ['class' => 'vertical-middle text-center'],
 //                'contentOptions' => ['class' => 'vertical-middle text-center'],
 //            ],
-            [
-                'label' => '你的活动昵称',
-                'attribute' => 'name',
-                'headerOptions' => ['class' => 'vertical-middle text-center'],
-                'contentOptions' => ['class' => 'vertical-middle text-center'],
-            ],
+//            [
+//                'label' => '你的活动昵称',
+//                'attribute' => 'name',
+//                'headerOptions' => ['class' => 'vertical-middle text-center'],
+//                'contentOptions' => ['class' => 'vertical-middle text-center'],
+//            ],
             [
                 'label' => '你的活动身份',
                 'attribute' => 'gender',
@@ -72,11 +73,12 @@ $this->title = $model['name'];
     <div>
         赶快添加你的小伙伴吧~添加时请务必注明“来自maybe恋人”哦~
     </div>
+    <div>
+        <?= $imageMsg?>
+    </div>
     
     <div class="div_center_img">
         <?= Html::img("@web/images/$imageName", ['width' => '200px', 'height' => '200px']) ?>
     </div>
-<!--    <div>-->
-<!--        请立即添加交大红娘客服，微信号:jdhn99，并发送“你的编号+手机号码”，待客服核对之后邀请您进入活动群。-->
-<!--    </div>-->
+
 </div>

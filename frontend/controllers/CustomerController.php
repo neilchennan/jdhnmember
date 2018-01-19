@@ -130,21 +130,27 @@ class CustomerController extends Controller
         }
 
         $imageName = '';
+        $roomNum = 0;
         if (( 1 <= $recordInDB['id'] && $recordInDB['id'] <= 80 ) || ( 229 <= $recordInDB['id'] && $recordInDB['id'] <= 308)){
             $imageName = 'maybe0119_1.png';
+            $roomNum = 25;
         }
         if (( 81 <= $recordInDB['id'] && $recordInDB['id'] <= 180 ) || ( 309 <= $recordInDB['id'] && $recordInDB['id'] <= 408)){
             $imageName = 'maybe0119_2.png';
+            $roomNum = 61;
         }
         if (( 181 <= $recordInDB['id'] && $recordInDB['id'] <= 228 ) || ( 409 <= $recordInDB['id'] && $recordInDB['id'] <= 456)){
             $imageName = 'maybe0119_3.png';
+            $roomNum = 81;
         }
+        $imageMsg = sprintf('若想进入活动打卡群，请直接扫描下方二维码，进群即可；若无法进群，可主动联系客服，发送暗号“maybe恋人+%d号房间”，即可等待客服邀请进群。客服微信号：jdhn99', $roomNum);
 
 
         Yii::$app->session->setFlash('success', Yii::t('app', '恭喜您，配对成功！'));
         return $this->render('viewMatchStatus', [
             'model' => $recordInDB,
             'imageName' => $imageName,
+            'imageMsg' => $imageMsg
         ]);
     }
 

@@ -7,6 +7,7 @@ use common\helper\JdhnCommonHelper;
 /* @var $this yii\web\View */
 /* @var $model array */
 /* @var $imageName string */
+/* @var $imagePath string */
 /* @var $imageMsg string */
 
 $this->title = $model['name'];
@@ -78,7 +79,7 @@ $this->title = $model['name'];
     </div>
     
     <div class="div_center_img">
-        <?= Html::img("@web/images/$imageName", ['width' => '200px', 'height' => '200px']) ?>
+        <?= Html::img("@web/$imagePath/$imageName", ['width' => '200px', 'height' => '200px']) ?>
     </div>
 
 </div>

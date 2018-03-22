@@ -79,7 +79,11 @@ $this->title = $model['name'];
     </div>
     
     <div class="div_center_img">
-        <?= Html::img("@web/$imagePath/$imageName", ['width' => '200px', 'height' => '200px']) ?>
+        <?= Html::img("@web/images/$imagePath/$imageName", ['width' => '200px', 'height' => '200px']) ?>
+    </div>
+
+    <div>
+        如需咨询，请立即添加交大红娘客服，微信号:jdhn99。
     </div>
 
 </div>

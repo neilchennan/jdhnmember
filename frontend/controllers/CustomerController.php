@@ -138,11 +138,11 @@ class CustomerController extends Controller
             $roomNum = 26;
         }
         if (( 81 <= $recordInDB['id'] && $recordInDB['id'] <= 160 ) || ( 296 <= $recordInDB['id'] && $recordInDB['id'] <= 375)){
-            $imageName = 'maybe0119_2.png';
+            $imageName = 'img2.png';
             $roomNum = 62;
         }
         if (( 161 <= $recordInDB['id'] && $recordInDB['id'] <= 215 ) || ( 376 <= $recordInDB['id'] && $recordInDB['id'] <= 431)){
-            $imageName = 'maybe0119_3.png';
+            $imageName = 'img3.png';
             $roomNum = 82;
         }
         $imageMsg = sprintf('若想进入活动打卡群，请直接扫描下方二维码，进群即可；若无法进群，可主动联系客服，发送暗号“maybe恋人+%d号房间”，即可等待客服邀请进群。客服微信号：jdhn99', $roomNum);

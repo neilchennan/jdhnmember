@@ -6,7 +6,8 @@
  * Time: 14:12
  */
 return [
-    'Update {modelClass}: ' => '更新 {modelClass}:',
+    'Activity' => '活动',
+    'Update {modelClass} : ' => '更新 {modelClass}:',
     'Create {modelClass}' => '新建 {modelClass}',
 
     'Qrxq2017 Enrolls' => '2017千人列表',
